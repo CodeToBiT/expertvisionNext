@@ -1,0 +1,31 @@
+.paragraph {
+  @include typography(1rem, 400, 150%);
+}
+
+.heading-1 {
+  @include typography(2rem, 700, 130%);
+}
+
+.heading-2 {
+  @include typography(1.5rem, 700, 150%);
+}
+
+.heading-3 {
+  @include typography(1.125rem, 500, 150%);
+}
+
+.heading-4 {
+  @include typography(1.5rem, 500, 150%);
+}
+
+.heading-5 {
+  @include typography(1.125rem, 700, 121%);
+}
+
+.heading-6 {
+  @include typography(1rem, 700, 180%);
+}
+
+.link {
+  @include typography(1rem, 500, 180%);
+}

@@ -1,0 +1,44 @@
+//gap
+$custom_gap: (
+  "gap-8": 8px,
+  "gap-16": 16px,
+  "gap-24": 24px,
+  "gap-32": 32px,
+  "gap-64": 64px,
+);
+
+@each $key, $value in $custom_gap {
+  .#{$key} {
+    gap: $value;
+  }
+}
+
+//Border-radius
+$custom_border_radius: (
+  "br-0": 0px,
+  "br-4": 4px,
+  "br-8": 8px,
+  "br-16": 16px,
+  "br-24": 24px,
+  "br-32": 32px,
+);
+
+@each $key, $value in $custom_border_radius {
+  .#{$key} {
+    border-radius: $value;
+  }
+}
+
+//font weight
+$custom_font_weight: (
+  "fw-400": 400,
+  "fw-500": 500,
+  "fw-600": 600,
+  "fw-700": 700,
+);
+
+@each $key, $value in $custom_border_radius {
+  .#{$key} {
+    font-weight: $value;
+  }
+}
