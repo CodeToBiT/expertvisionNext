@@ -1,0 +1,500 @@
+.universities {
+  margin-bottom: 100px !important;
+  .media-wrapper {
+    width: 118px;
+    height: 125px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.services {
+  margin-bottom: 170px !important;
+  &-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+      @include typography(1.5rem, 700, 150%);
+      color: $primary;
+    }
+
+    p {
+      @extend .paragraph;
+      color: $grey;
+    }
+  }
+  .shadow {
+    filter: drop-shadow(8px 8px 32px rgba(0, 0, 0, 0.12));
+    background-color: $white;
+  }
+
+  .media-wrapper {
+    height: 700px;
+    width: 1000px;
+    img {
+      object-fit: fit;
+      overflow: visible;
+    }
+  }
+  @media (max-width: 780px) {
+    .overlay {
+      display: none;
+    }
+  }
+
+  .overlay {
+    z-index: -1;
+    margin-top: 100px;
+    left: 0;
+    width: 100vw;
+    height: 500px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 780px){
+  .services{
+    overflow-x: hidden;
+  }
+}
+
+.countries {
+  margin-bottom: 100px !important;
+  &-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+      @include typography(1.5rem, 700, 150%);
+      color: $primary;
+    }
+
+    p {
+      @extend .paragraph;
+      color: $grey;
+    }
+  }
+}
+.courses {
+  margin-bottom: 100px !important;
+  &-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+      @include typography(1.5rem, 700, 150%);
+      color: $primary;
+    }
+
+    p {
+      @extend .paragraph;
+      color: $grey;
+    }
+  }
+}
+
+.slick-slide {
+  padding: 0 10px;
+}
+
+.testimonial {
+  margin-bottom: 180px !important;
+  .media-wrapper {
+    position: absolute;
+    right: 0 !important;
+    height: 580px;
+    width: 1000px;
+    img {
+      object-fit: fit;
+      overflow: visible;
+    }
+  }
+
+  .overlay {
+    z-index: -1;
+    right: 0;
+    width: 100vw;
+    height: 500px;
+    margin-right: 0px;
+    margin-top: 50px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 780px) {
+    .overlay {
+      display: none;
+    }
+  }
+}
+
+.blogs {
+  margin-bottom: 100px !important;
+  &-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+      @include typography(1.5rem, 700, 150%);
+      color: $primary;
+    }
+
+    p {
+      @extend .paragraph;
+      color: $grey;
+    }
+  }
+}
+
+.about {
+  .content {
+    padding-right: 40px;
+  }
+  h1 {
+    @include typography(2rem, 700, 130%);
+    color: #737373;
+    margin-bottom: 30px;
+  }
+  p {
+    @include typography(1rem, 400, 180%);
+    color: $grey-300;
+  }
+  .media-wrapper {
+    width: 100%;
+    height: 629px;
+  }
+
+  @media (max-width: 800px) {
+    .overlay {
+      display: none;
+    }
+    .media-wrapper {
+      height: 550px;
+    }
+  }
+
+  .overlay {
+    &-right {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+    }
+    &-left {
+      position: absolute;
+      left: 0px;
+      top: 30px;
+    }
+  }
+}
+
+.vision {
+  background: linear-gradient(
+    180deg,
+    rgba(102, 67, 239, 0.78) 0%,
+    #075db9 110.61%
+  );
+  position: relative;
+  .media-wrapper {
+    width: 100%;
+    height: 576px;
+    bottom: -80px;
+    overflow: visible !important;
+  }
+  .content {
+    padding: 0 0 0 60px;
+
+    h2 {
+      @include typography(2rem, 700, 130%);
+      color: $white;
+    }
+    p {
+      @include typography(1rem, 500, 180%);
+      color: $white;
+    }
+  }
+
+  .overlay {
+    &-right {
+      position: absolute;
+      right: 0;
+      bottom: 20px;
+    }
+    &-left {
+      position: absolute;
+      top: 5px;
+    }
+  }
+  @media (max-width: 800px) {
+    .overlay {
+      display: none;
+    }
+    .media-wrapper {
+      top: 30px;
+      height: 550px;
+    }
+  }
+}
+@media (min-width: 1000px) {
+  .vision {
+    margin-bottom: 140px !important;
+  }
+}
+
+.teams {
+  margin-bottom: 40px;
+  &-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+      @include typography(1.5rem, 700, 150%);
+      color: $primary;
+    }
+
+    p {
+      @extend .paragraph;
+      color: $grey;
+    }
+  }
+}
+
+.testimonials {
+  .nav-item {
+    margin: 10px 0px;
+  }
+  .nav-link {
+    font-family: "Manrope", sans-serif;
+    color: #3e66df !important;
+    background-color: $white !important;
+    border-left: 2px solid #3e66df;
+    border-radius: 0;
+    opacity: 0.3;
+    padding: 0 8px 32px 5px;
+    @include typography(12px, 700, 180%);
+  }
+
+  @media (max-width: 767.98px) {
+    .inverted {
+      display: none !important;
+    }
+    .nav {
+      flex-direction: row !important;
+      gap: 16px;
+    }
+
+    .nav-link {
+      padding: 5px 15px !important;
+      color: $white !important;
+      background-color: $primary !important;
+      @include typography(1rem, 500, 180%);
+    }
+  }
+
+  .active {
+    opacity: 1 !important;
+  }
+
+  .media-wrapper {
+    height: 405px;
+    width: 100%;
+  }
+  &-content {
+    p {
+      @include typography(1.5rem, 400, 200%);
+      color: $black-100;
+    }
+
+    h5 {
+      @include typography(1rem, 500, 130%);
+      color: $black-100;
+      font-family: "Manrope", sans-serif;
+    }
+
+    h6 {
+      font-family: "Manrope", sans-serif;
+      @include typography(0.85rem, 400, 150%);
+      color: $grey-200;
+    }
+  }
+}
+
+.testimonial {
+  &-intro {
+    max-width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+    h2 {
+      @include typography(1.5rem, 700, 150%);
+      color: $primary;
+    }
+  }
+}
+
+.single {
+  &-banner {
+    h1 {
+      @include typography(1.5rem, 700, 150%);
+      color: $primary;
+    }
+
+    .media-wrapper {
+      width: 100%;
+      height: 445px;
+      img {
+        border-radius: 16px;
+      }
+    }
+  }
+
+  &-content {
+    font-family: "Poppins", sans-serif;
+    h2 {
+      @include typography(1.5rem, 500, 180%);
+      color: #414141;
+    }
+    p {
+      @include typography(1rem, 500, 180%);
+      color: $grey;
+    }
+
+    .sub {
+      padding: 20px 70px;
+    }
+    .more {
+      position: sticky;
+      top: 20px;
+      margin: 20px 0;
+      box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      font-family: "DM Sans", sans-serif;
+      h3 {
+        color: $primary;
+        @include typography(1.5rem, 700, 150%);
+      }
+
+      ul {
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+        padding: 10px 0;
+      }
+      li:before {
+        background-color: $grey;
+        color: $white;
+        content: "\003E";
+        border-radius: 50%;
+        padding: 0 8px;
+        margin: 0 8px 0 0;
+      }
+      li:hover::before {
+        background-color: $secondary !important;
+      }
+      &-link {
+        @include typography(1rem, 500, 150%);
+        color: $grey;
+      }
+
+      a:hover {
+        color: $secondary;
+      }
+    }
+  }
+}
+
+.contact {
+  &-info {
+    text-align: center;
+    h1 {
+      @include typography(2rem, 700, 120%);
+      color: $primary;
+      margin-bottom: 20px;
+    }
+    p {
+      @include typography(1.5rem, 400, 120%);
+      color: $grey;
+    }
+    a {
+      font-size: 1.5rem;
+    }
+
+    h5 {
+      margin-top: 10px;
+      @include typography(1.5rem, 500, 120%);
+      color: $grey;
+    }
+  }
+
+  &-card {
+    box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
+    padding: 30px 0;
+  }
+
+  &-form {
+    h3 {
+      color: $primary;
+      @include typography(1.5rem, 700, 150%);
+    }
+    p {
+      color: $grey;
+      @include typography(1rem, 400, 180%);
+    }
+
+    label {
+      color: $grey;
+      @include typography(1rem, 500, 150%);
+    }
+
+    input {
+      padding: 8px 12px;
+      border: 1px solid #878787;
+      border-radius: 8px;
+    }
+
+    input::placeholder {
+      color: $grey-200;
+      @include typography(1rem, 500, 150%);
+    }
+
+    textarea {
+      min-height: 150px;
+      @extend input;
+    }
+  }
+
+  &-image {
+    padding: 50px;
+    .overlay {
+      &-right {
+        right: 0px;
+        top: 20px;
+      }
+
+      &-left {
+        left: 50px;
+        bottom: 20px;
+      }
+    }
+    @media (max-width: 767.98px) {
+      .overlay {
+        display: none;
+      }
+    }
+
+    .media-wrapper {
+      width: 100%;
+      height: 612px;
+      margin: 0 30px;
+    }
+  }
+}

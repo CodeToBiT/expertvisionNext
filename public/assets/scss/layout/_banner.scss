@@ -1,0 +1,73 @@
+.banner {
+  &-content {
+    padding: 100px 150px 100px 0;
+    h1 {
+      @include typography(2.25rem, 700, 120%);
+      color: $grey-500;
+      margin-bottom: 30px;
+      padding-right: 40px
+    }
+
+    p {
+      @extend .paragraph;
+      color: $grey-400;
+      margin-bottom: 30px;
+    }
+    .btn-explore {
+      background-color: $secondary;
+      @include typography(1rem, 700, 120%);
+      color: $white;
+      padding: 10px 40px;
+    }
+    .btn-explore:hover {
+      color: $primary;
+    }
+    .btn-contact {
+      @include typography(1rem, 700, 120%);
+      color: $white;
+      border: 1px solid $white;
+      padding: 10px 30px;
+    }
+    .btn-contact:hover {
+      border: 1px solid $secondary;
+      color: $secondary;
+    }
+  }
+  @media (max-width: 767.98px) {
+    &-content {
+      padding: 0;
+    }
+
+    .media-wrapper {
+      height: 420px !important;
+    }
+  }
+  padding: 30px 0;
+  .media-wrapper {
+    height: 664px;
+    width: 100%;
+    img{
+      object-fit: contain;
+    }
+  }
+  @media (max-width: 800px) {
+    .bannerimg {
+      display: none;
+    }
+  }
+  .bannerimg {
+    z-index: -2;
+    width: 100vw;
+    height: 750px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .banner {
+    background-color: $primary;
+  }
+}
