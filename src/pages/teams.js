@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Head from "next/head";
 import TeamsCard from "../components/card/TeamsCard";
 
 import { useAppContext } from "../context/state";
@@ -14,6 +15,10 @@ const Teams = () => {
   }, []);
   return (
     <>
+    <Head>
+        <title>Teams | Expert Vision</title>
+        <meta name="description" content="Home" />
+      </Head>
       <section className="teams">
         <div className="container">
           <div className="teams-intro my-5">

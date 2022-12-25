@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { MdLocationOn } from "react-icons/md";
 import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import { Form } from "react-bootstrap";
@@ -19,12 +20,16 @@ const Contact = () => {
 
   return (
     <>
+    <Head>
+        <title>Contact | Expert Vision</title>
+        <meta name="description" content="Home" />
+      </Head>
       <section className="contact-info">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-7 col-sm-12 my-4">
               <h1>Get in touch!</h1>
-              <p>Contact us for a quote, help ot to join the team</p>
+              <p>{settings && settings.contact_section_description}</p>
             </div>
             <div className="col-md-8 col-sm-12 my-4">
               <div className="row ">
@@ -101,7 +106,7 @@ const Contact = () => {
               </div>
               <div className="media-wrapper position-relative">
                 <Image
-                  src="/images/contact.jpeg"
+                  src={settings && settings.contact_image}
                   alt="loading"
                   priority="false"
                   sizes="(max-height: 612px)"

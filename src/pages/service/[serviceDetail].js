@@ -7,15 +7,15 @@ import { useAppContext } from "../../context/state";
 import Image from "next/image";
 import Link from "next/link";
 
-const blogDetail = () => { 
-  const router = useRouter();
+const serviceDetail = () => {
+    const router = useRouter();
   const context = useAppContext();
-  const blogDetail = router.query.blogDetail;
-  const [blog, setBlog] = useState();
-  const { blogs, fetchBlogs } = context;
-  const fetchBlog = async () => {
+  const serviceDetail = router.query.serviceDetail;
+  const [service, setService] = useState();
+  const { services, fetchServices } = context;
+  const fetchService = async () => {
     const response = await fetch(
-      [`https://admin.evc.edu.np/api/`, `blog/${blogDetail}`].join(""),
+      [`https://admin.evc.edu.np/api/`, `service/${serviceDetail}`].join(""),
       {
         method: "GET",
         headers: {
@@ -26,13 +26,14 @@ const blogDetail = () => {
 
     const json = await response.json();
 
-    setBlog(json.data);
+    setService(json.data);
   };
 
   useEffect(() => {
-    fetchBlog();
-    fetchBlogs();
+    fetchService();
+    fetchServices();
   });
+
 
 
   return (
@@ -40,13 +41,13 @@ const blogDetail = () => {
       <section className="single-banner">
         <div className="container">
           <div className="title">
-            <h1>{blog && blog.title}</h1>
+            <h1>{service && service.title}</h1>
           </div>
           <div className="row">
             <div className="col-md-9 col-sm-12 pe-5">
               <div className="media-wrapper position-relative">
                 <Image
-                  src={blog && blog.image}
+                  src={service && service.image}
                   fill
                   alt="loading"
                   priority="false"
@@ -64,7 +65,9 @@ const blogDetail = () => {
             <div className="col-md-9 col-sm-12 sub">
               <div className="my-3">
                 <div
-                  dangerouslySetInnerHTML={{ __html: blog && blog.description }}
+                  dangerouslySetInnerHTML={{
+                    __html: service && service.description,
+                  }}
                 ></div>
               </div>
             </div>
@@ -72,11 +75,11 @@ const blogDetail = () => {
               <div className="more p-4">
                 <h3>More Content</h3>
                 <ul>
-                  {blogs &&
-                    blogs.map((data, key) => {
+                  {services &&
+                    services.map((data, key) => {
                       return (
                         <li>
-                          <Link href={`/blog/${data.slug}`} className="more-link">
+                          <Link href={`/service/${data.slug}`} className="more-link">
                             {data.title}
                           </Link>
                         </li>
@@ -92,4 +95,4 @@ const blogDetail = () => {
   );
 };
 
-export default blogDetail;
+export default serviceDetail;

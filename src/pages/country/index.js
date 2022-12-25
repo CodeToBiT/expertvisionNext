@@ -1,21 +1,30 @@
 import React from "react";
-import CourseCard from "../../components/card/CourseCard";
+import Head from "next/head";
+import CountriesCard from "../../components/card/CountriesCard";
 
 import { useAppContext } from "../../context/state";
 import { useEffect } from "react";
-const Courses = () => {
-  const context = useAppContext();
-  const {courses, fetchCourses} = context;
 
-  useEffect(()=>{
-    fetchCourses();
-  })
+const Countries = () => {
+
+  const context = useAppContext();
+  const{
+    countries, fetchCountries,
+  } = context;
+
+  useEffect(() => {
+    fetchCountries();
+  }, []);
   return (
-    <div>
+    <>
+    <Head>
+        <title>Countries | Expert Vision</title>
+        <meta name="description" content="Home" />
+      </Head>
       <section className="courses">
         <div className="container">
           <div className="courses-intro my-5">
-            <h2>Our Courses</h2>
+            <h2>Over seven countries to choose from</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
               cursus consectetur duis congue aenean vitae. Egestas vitae
@@ -23,23 +32,23 @@ const Courses = () => {
             </p>
           </div>
           <div className="row">
-            {courses &&
-              courses.map((data, key) => {
+            {countries &&
+              countries.map((data, key) => {
                 return (
                   <div className="col-md-3 col-sm-12" key={key}>
-                    <CourseCard
-                  imagepath={data.image}
-                  course={data.name}
-                  desc={data.description}
-                />
+                    <CountriesCard
+                    slug={data.slug}
+                      imagepath={data.image}
+                      country={data.name}
+                    />
                   </div>
                 );
               })}
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
-export default Courses;
+export default Countries;

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Single = () => {
   return (
-    <div>
+    <>
       <section className="single-banner">
         <div className="container">
           <div className="title">
@@ -90,7 +90,7 @@ const Single = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

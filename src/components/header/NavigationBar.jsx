@@ -63,16 +63,16 @@ const NavigationBar = () => {
                     Our Team
                   </Link>
                 </NavDropdown>
-                <Link className="nav-link" href="/services">
+                <Link className="nav-link" href="/service">
                   Services
                 </Link>
-                <Link className="nav-link" href="/courses">
+                <Link className="nav-link" href="/course">
                   Courses
                 </Link>
                 <Link className="nav-link" href="/blog">
                   Blog
                 </Link>
-                <Link className="nav-link" href="/countries">
+                <Link className="nav-link" href="/country">
                   Countries
                 </Link>
                 <Link className="nav-link" href="/contact">

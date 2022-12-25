@@ -43,7 +43,7 @@ export default function Home() {
     <>
       <Head>
         <title>Home | Expert Vision</title>
-        <meta name="description" content="About" />
+        <meta name="description" content="Home" />
       </Head>
 
       <main>

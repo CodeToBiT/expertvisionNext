@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Head from "next/head";
 import BlogCard from "../../components/card/BlogCard";
 
 import { useAppContext } from "../../context/state";
@@ -14,10 +15,12 @@ const Blog = () => {
   useEffect(()=>{
     fetchBlogs();
   }, []);
-
-  console.log(blogs && blogs[1].slug)
   return (
     <>
+    <Head>
+        <title>Blogs | Expert Vision</title>
+        <meta name="description" content="Blogs" />
+      </Head>
       <section className="blogs my-5">
         <div className="container">
           <div className="blogs-intro my-5">
@@ -37,7 +40,7 @@ const Blog = () => {
                     clsa="col-md-4 col-xs-12"
                     title={data.title}
                     imagepath={data.image}
-                    content={data.description}
+                    content={data.short_description}
                   />
                 );
               })}

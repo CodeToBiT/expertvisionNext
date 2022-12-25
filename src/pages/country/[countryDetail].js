@@ -7,15 +7,15 @@ import { useAppContext } from "../../context/state";
 import Image from "next/image";
 import Link from "next/link";
 
-const blogDetail = () => { 
+const countryDetail = () => {
   const router = useRouter();
   const context = useAppContext();
-  const blogDetail = router.query.blogDetail;
-  const [blog, setBlog] = useState();
-  const { blogs, fetchBlogs } = context;
-  const fetchBlog = async () => {
+  const countryDetail = router.query.countryDetail;
+  const [country, setCountry] = useState();
+  const {countries, fetchCountries} = context
+  const fetchCountry = async () => {
     const response = await fetch(
-      [`https://admin.evc.edu.np/api/`, `blog/${blogDetail}`].join(""),
+      [`https://admin.evc.edu.np/api/`, `country/${countryDetail}`].join(""),
       {
         method: "GET",
         headers: {
@@ -26,27 +26,28 @@ const blogDetail = () => {
 
     const json = await response.json();
 
-    setBlog(json.data);
+    setCountry(json.data);
   };
 
   useEffect(() => {
-    fetchBlog();
-    fetchBlogs();
+    fetchCountries();
+    fetchCountry();
+
   });
 
 
   return (
-    <>
-      <section className="single-banner">
+  <>
+  <section className="single-banner">
         <div className="container">
           <div className="title">
-            <h1>{blog && blog.title}</h1>
+            <h1>{country && country.name}</h1>
           </div>
           <div className="row">
             <div className="col-md-9 col-sm-12 pe-5">
               <div className="media-wrapper position-relative">
                 <Image
-                  src={blog && blog.image}
+                  src={country && country.image}
                   fill
                   alt="loading"
                   priority="false"
@@ -64,7 +65,7 @@ const blogDetail = () => {
             <div className="col-md-9 col-sm-12 sub">
               <div className="my-3">
                 <div
-                  dangerouslySetInnerHTML={{ __html: blog && blog.description }}
+                  dangerouslySetInnerHTML={{ __html: country && country.description }}
                 ></div>
               </div>
             </div>
@@ -72,12 +73,12 @@ const blogDetail = () => {
               <div className="more p-4">
                 <h3>More Content</h3>
                 <ul>
-                  {blogs &&
-                    blogs.map((data, key) => {
+                  {countries &&
+                    countries.map((data, key) => {
                       return (
                         <li>
-                          <Link href={`/blog/${data.slug}`} className="more-link">
-                            {data.title}
+                          <Link href={`/country/${data.slug}`} className="more-link">
+                            {data.name}
                           </Link>
                         </li>
                       );
@@ -88,8 +89,8 @@ const blogDetail = () => {
           </div>
         </div>
       </section>
-    </>
+  </>
   );
 };
 
-export default blogDetail;
+export default countryDetail;

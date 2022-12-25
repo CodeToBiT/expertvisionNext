@@ -1,25 +1,26 @@
 import React from "react";
-import CountriesCard from "../../components/card/CountriesCard";
+import Head from "next/head";
+import CourseCard from "../../components/card/CourseCard";
 
 import { useAppContext } from "../../context/state";
 import { useEffect } from "react";
-
-const Countries = () => {
-
+const Courses = () => {
   const context = useAppContext();
-  const{
-    countries, fetchCountries,
-  } = context;
+  const { courses, fetchCourses } = context;
 
   useEffect(() => {
-    fetchCountries();
-  })
+    fetchCourses();
+  });
   return (
-    <div>
+    <>
+      <Head>
+        <title>Courses | Expert Vision</title>
+        <meta name="description" content="Courses" />
+      </Head>
       <section className="courses">
         <div className="container">
           <div className="courses-intro my-5">
-            <h2>Over seven countries to choose from</h2>
+            <h2>Our Courses</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
               cursus consectetur duis congue aenean vitae. Egestas vitae
@@ -27,14 +28,15 @@ const Countries = () => {
             </p>
           </div>
           <div className="row">
-            {countries &&
-              countries.map((data, key) => {
+            {courses &&
+              courses.map((data, key) => {
                 return (
                   <div className="col-md-3 col-sm-12" key={key}>
-                    <CountriesCard
-                    slug={data.slug}
+                    <CourseCard
+                    slug = {data.slug}
                       imagepath={data.image}
-                      country={data.name}
+                      course={data.name}
+                      desc={data.description}
                     />
                   </div>
                 );
@@ -42,8 +44,8 @@ const Countries = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
-export default Countries;
+export default Courses;
