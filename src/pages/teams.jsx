@@ -5,24 +5,25 @@ import TeamsCard from "../components/card/TeamsCard";
 import { useAppContext } from "../context/state";
 import { useEffect } from "react";
 
-
 const Teams = () => {
   const context = useAppContext();
   const { ourteams, fetchOurteams } = context;
 
   useEffect(() => {
-    fetchOurteams();
+    if (ourteams == null) {
+      fetchOurteams();
+    }
   }, []);
   return (
     <>
-    <Head>
+      <Head>
         <title>Teams | Expert Vision</title>
         <meta name="description" content="Home" />
       </Head>
       <section className="teams">
         <div className="container">
           <div className="teams-intro my-5">
-            <h2>Our Team</h2>
+            <h1>Our Team</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
               cursus consectetur duis congue aenean vitae. Egestas vitae

@@ -12,8 +12,11 @@ const About = () => {
   const context = useAppContext();
   const { ourteams, fetchOurteams } = context;
 
+
   useEffect(() => {
-    fetchOurteams();
+    if (ourteams == null) {
+      fetchOurteams();
+    }
   }, []);
 
   return (
@@ -44,14 +47,14 @@ const About = () => {
                       Aliquet ut felis velit interdum auctor quam.
                     </p>
                   </div>
-                  <div className="overlay">
+                  {/* <div className="overlay">
                     <div className="overlay-right">
                       <img src="/images/aboutdots.png" alt="" />
                     </div>
                     <div className="overlay-left">
                       <img src="/images/aboutdots.png" alt="" />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="col-md-6 col-sm-12">
@@ -103,14 +106,14 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="overlay">
+          {/* <div className="overlay">
             <div className="overlay-right">
               <img src="/images/dots.png" alt="" />
             </div>
             <div className="overlay-left">
               <img src="/images/dots.png" alt="" />
             </div>
-          </div>
+          </div> */}
         </section>
 
         <section className="teams">

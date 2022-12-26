@@ -8,23 +8,23 @@ import { useEffect } from "react";
 const Blog = () => {
   const context = useAppContext();
 
-  const {
-    blogs, fetchBlogs,
-  } = context;
+  const { blogs, fetchBlogs } = context;
 
-  useEffect(()=>{
-    fetchBlogs();
+  useEffect(() => {
+    if (blogs == null) {
+      fetchBlogs();
+    }
   }, []);
   return (
     <>
-    <Head>
+      <Head>
         <title>Blogs | Expert Vision</title>
         <meta name="description" content="Blogs" />
       </Head>
       <section className="blogs my-5">
         <div className="container">
           <div className="blogs-intro my-5">
-            <h2>Blogs and updates</h2>
+            <h1>Blogs and updates</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
               cursus consectetur duis congue aenean vitae. Egestas vitae
@@ -36,11 +36,12 @@ const Blog = () => {
               blogs.map((data, key) => {
                 return (
                   <BlogCard
-                    slug= {data.slug}
+                    slug={data.slug}
                     clsa="col-md-4 col-xs-12"
                     title={data.title}
                     imagepath={data.image}
                     content={data.short_description}
+                    key={key}
                   />
                 );
               })}

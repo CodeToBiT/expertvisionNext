@@ -8,28 +8,27 @@ import { useAppContext } from "../../context/state";
 import { useEffect } from "react";
 
 const Testimonials = (props) => {
-
   const context = useAppContext();
-  const {testimonials, fetchTestimonials} = context;
+  const { testimonials, fetchTestimonials } = context;
 
-  useEffect(()=>{
-    fetchTestimonials();
-  })
+  useEffect(() => {
+    if (testimonials == null) {
+      fetchTestimonials();
+    }
+  });
   return (
     <>
       <div className="testimonials">
-        <Tab.Container
-          id="left-tabs-example"
-          defaultActiveKey={1}
-        >
+        <Tab.Container id="left-tabs-example" defaultActiveKey={1}>
           <Row>
-            <Col sm={1}>
+            <Col sm={1} className="order">
               <Nav variant="pills" className="flex-column">
-                {testimonials &&
-                  testimonials.slice(0,4).map((data, key) => {
+                {
+                testimonials &&
+                  testimonials.slice(0, 4).map((data, key) => {
                     return (
                       <Nav.Item key={key}>
-                        <Nav.Link eventKey={key}>0{key}</Nav.Link>
+                        <Nav.Link eventKey={data.id}>0{key+1}</Nav.Link>
                       </Nav.Item>
                     );
                   })}
@@ -49,9 +48,9 @@ const Testimonials = (props) => {
                 <Col sm={11}>
                   <Tab.Content>
                     {testimonials &&
-                      testimonials.map((data, key) => {
+                      testimonials.slice(0, 4).map((data, key) => {
                         return (
-                          <Tab.Pane eventKey={key} key={key}>
+                          <Tab.Pane eventKey={data.id} key={key}>
                             <Row className="align-items-center">
                               <Col sm={12} md={5}>
                                 <div className="media-wrapper position-relative">
@@ -67,7 +66,11 @@ const Testimonials = (props) => {
 
                               <Col sm={12} md={7}>
                                 <div className="testimonials-content">
-                                  <p dangerouslySetInnerHTML={{ __html: data.description}}></p>
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                      __html: data.description,
+                                    }}
+                                  ></p>
                                   <h5>{data.name}</h5>
                                   <h6>{data.position}</h6>
                                 </div>

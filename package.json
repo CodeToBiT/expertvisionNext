@@ -10,6 +10,7 @@
     "compile": "sass --watch --update --style=expanded ./public/assets/scss/main.scss:./public/assets/css/style.css"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "bootstrap": "^5.2.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",

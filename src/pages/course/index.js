@@ -9,7 +9,9 @@ const Courses = () => {
   const { courses, fetchCourses } = context;
 
   useEffect(() => {
-    fetchCourses();
+    if (courses == null) {
+      fetchCourses();
+    }
   });
   return (
     <>
@@ -20,7 +22,7 @@ const Courses = () => {
       <section className="courses">
         <div className="container">
           <div className="courses-intro my-5">
-            <h2>Our Courses</h2>
+            <h1>Our Courses</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
               cursus consectetur duis congue aenean vitae. Egestas vitae
@@ -33,7 +35,7 @@ const Courses = () => {
                 return (
                   <div className="col-md-3 col-sm-12" key={key}>
                     <CourseCard
-                    slug = {data.slug}
+                      slug={data.slug}
                       imagepath={data.image}
                       course={data.name}
                       desc={data.description}

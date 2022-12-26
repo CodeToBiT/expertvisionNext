@@ -8,19 +8,56 @@ import Link from "next/link";
 import Button from "react-bootstrap/Button";
 
 import { useAppContext } from "../context/state";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Contact = () => {
   const context = useAppContext();
   const { settings, fetchSettings } = context;
 
   useEffect(() => {
-    fetchSettings();
+    if (settings == null) {
+      fetchSettings();
+    }
   }, []);
+
+  const [show, setShow] = useState(false);
+
+  const [full_name, setFull_name] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      full_name,
+      email,
+      phone,
+      message,
+    };
+    fetch("https://admin.evc.edu.np/api/inquiries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        res.json();
+        setFull_name("");
+        setEmail("");
+        setPhone("");
+        setMessage("");
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <>
-    <Head>
+      <Head>
         <title>Contact | Expert Vision</title>
         <meta name="description" content="Home" />
       </Head>
@@ -71,24 +108,53 @@ const Contact = () => {
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control type="text" placeholder="name" />
+                  <Form.Control
+                    type="text"
+                    placeholder="name"
+                    name="full_name"
+                    value={full_name}
+                    onChange={(e) => setFull_name(e.target.value)}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="email" />
+                  <Form.Control
+                    type="email"
+                    placeholder="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicphone">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control type="text" placeholder="phone" />
+                  <Form.Label>Phone</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="phone"
+                    name="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicmessage">
                   <Form.Label>Message</Form.Label>
-                  <Form.Control as="textarea" placeholder="message" />
+                  <Form.Control
+                    as="textarea"
+                    placeholder="message"
+                    name="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                  />
                 </Form.Group>
 
                 <Button
                   variant="secondary"
                   type="submit"
+                  onClick={handleSubmit}
                   className="text-white w-100 py-2 heading-6"
                 >
                   Submit

@@ -10,7 +10,9 @@ const Services = () => {
   const { services, fetchServices } = context;
 
   useEffect(() => {
-    fetchServices();
+    if (services == null) {
+      fetchServices();
+    }
   }, []);
 
   return (

@@ -37,11 +37,13 @@ const CountriesSlider = (props) => {
   };
 
   const context = useAppContext();
-  const {countries, fetchCountries} = context;
+  const { countries, fetchCountries } = context;
 
-  useEffect(()=>{
-    fetchCountries();
-  })
+  useEffect(() => {
+    if (countries == null) {
+      fetchCountries();
+    }
+  });
 
   return (
     <>

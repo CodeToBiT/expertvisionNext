@@ -11275,6 +11275,12 @@ a {
   line-height: 150%;
   color: #025DB6;
 }
+.services-intro h1, .services-intro .h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  color: #025DB6;
+}
 .services-intro p {
   color: #696969;
 }
@@ -11326,6 +11332,12 @@ a {
   line-height: 150%;
   color: #025DB6;
 }
+.countries-intro h1, .countries-intro .h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  color: #025DB6;
+}
 .countries-intro p {
   color: #696969;
 }
@@ -11339,6 +11351,12 @@ a {
   text-align: center;
 }
 .courses-intro h2, .courses-intro .h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  color: #025DB6;
+}
+.courses-intro h1, .courses-intro .h1 {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 150%;
@@ -11392,6 +11410,12 @@ a {
   text-align: center;
 }
 .blogs-intro h2, .blogs-intro .h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  color: #025DB6;
+}
+.blogs-intro h1, .blogs-intro .h1 {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 150%;
@@ -11503,10 +11527,21 @@ a {
   line-height: 150%;
   color: #025DB6;
 }
+.teams-intro h1, .teams-intro .h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  color: #025DB6;
+}
 .teams-intro p {
   color: #696969;
 }
 
+@media (max-width: 780px) {
+  .testimonials .order {
+    order: 3 !important;
+  }
+}
 .testimonials .nav-item {
   margin: 10px 0px;
 }
@@ -11573,6 +11608,12 @@ a {
   text-align: center;
 }
 .testimonial-intro h2, .testimonial-intro .h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  color: #025DB6;
+}
+.testimonial-intro h1, .testimonial-intro .h1 {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 150%;

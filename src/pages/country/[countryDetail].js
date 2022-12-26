@@ -12,7 +12,7 @@ const countryDetail = () => {
   const context = useAppContext();
   const countryDetail = router.query.countryDetail;
   const [country, setCountry] = useState();
-  const {countries, fetchCountries} = context
+  const { countries, fetchCountries } = context;
   const fetchCountry = async () => {
     const response = await fetch(
       [`https://admin.evc.edu.np/api/`, `country/${countryDetail}`].join(""),
@@ -30,15 +30,17 @@ const countryDetail = () => {
   };
 
   useEffect(() => {
-    fetchCountries();
-    fetchCountry();
-
+    if (countries == null) {
+      fetchCountries();
+    }
+    if (country == null) {
+      fetchCountry();
+    }
   });
 
-
   return (
-  <>
-  <section className="single-banner">
+    <>
+      <section className="single-banner">
         <div className="container">
           <div className="title">
             <h1>{country && country.name}</h1>
@@ -65,19 +67,24 @@ const countryDetail = () => {
             <div className="col-md-9 col-sm-12 sub">
               <div className="my-3">
                 <div
-                  dangerouslySetInnerHTML={{ __html: country && country.description }}
+                  dangerouslySetInnerHTML={{
+                    __html: country && country.description,
+                  }}
                 ></div>
               </div>
             </div>
             <div className="col-md-3 col-sm-12">
               <div className="more p-4">
-                <h3>More Content</h3>
+                <h3>More Countries</h3>
                 <ul>
                   {countries &&
                     countries.map((data, key) => {
                       return (
                         <li>
-                          <Link href={`/country/${data.slug}`} className="more-link">
+                          <Link
+                            href={`/country/${data.slug}`}
+                            className="more-link"
+                          >
                             {data.name}
                           </Link>
                         </li>
@@ -89,7 +96,7 @@ const countryDetail = () => {
           </div>
         </div>
       </section>
-  </>
+    </>
   );
 };
 

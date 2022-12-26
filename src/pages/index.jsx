@@ -32,11 +32,22 @@ export default function Home() {
     fetchSliders,
   } = context;
   useEffect(() => {
-    fetchServices();
-    fetchBlogs();
-    fetchPartners();
-    fetchSettings();
-    fetchSliders();
+    if(services == null){
+      fetchServices();
+    }
+    if(blogs == null){
+      fetchBlogs();
+    }
+    if(partners == null){
+      fetchPartners();
+    }
+    if(settings == null){
+      fetchSettings();
+    }
+    if(sliders == null){
+      fetchSliders();
+    }
+
   }, []);
 
   return (
@@ -52,23 +63,21 @@ export default function Home() {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-md-6">
-                <div className="banner-content text-align-center">
+                <div className="banner-content text-align-center" >
                   {sliders &&
                     sliders.slice(0, 1).map((data, key) => {
-                      return <h1>{data.title}</h1>;
+                      return <h1 key={key}>{data.title}</h1>;
                     })}
-                  <p>
                     {sliders &&
                       sliders.slice(0, 1).map((data, key) => {
                         return (
-                          <p
+                          <div key={key}
                             dangerouslySetInnerHTML={{
                               __html: data.description,
                             }}
-                          ></p>
+                          ></div>
                         );
                       })}
-                  </p>
 
                   <div className="explore my-4 d-flex gap-32">
                     <Link href="/" className="btn btn-explore">
@@ -91,6 +100,7 @@ export default function Home() {
                           priority="false"
                           fill
                           sizes="(max-height: 664px)"
+                          key={key}
                         />
                       );
                     })}
@@ -112,9 +122,9 @@ export default function Home() {
               <div className="col-md-8 col-sm-12">
                 <div className="d-flex gap-4 justify-content-center">
                   {partners &&
-                    partners.slice(0, 5).map((data) => {
+                    partners.slice(0, 5).map((data, key) => {
                       return (
-                        <div className="media-wrapper position-relative">
+                        <div className="media-wrapper position-relative" key={key}>
                           <Link href="#">
                             <Image
                               src={data.image}
@@ -148,7 +158,7 @@ export default function Home() {
                         <ServiceCard
                           clsa="col-md-4 col-sm-6 col-xs-12"
                           title={data.title}
-                          content={data.description}
+                          content={data.short_description}
                           key={data.id}
                         />
                       );
@@ -222,7 +232,7 @@ export default function Home() {
                       slug={data.slug}
                       title={data.title}
                       imagepath={data.image}
-                      content={data.description}
+                      content={data.short_description}
                       key={data.id}
                     />
                   );

@@ -22,6 +22,7 @@ export function AppWrapper({ children }) {
       method: "GET",
       headers: {
         "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -32,7 +33,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "blogs"].join(""), {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -43,7 +45,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "courses"].join(""), {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -55,6 +58,7 @@ export function AppWrapper({ children }) {
       method: "GET",
       headers: {
         "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -65,7 +69,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "ourteams"].join(""), {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -76,7 +81,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "services"].join(""), {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -87,7 +93,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "faqs"].join(""), {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -98,7 +105,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "pages"].join(""),{
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -109,7 +117,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "socialmedias"].join(""),{
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applicaiton/json",
+        "Accept" : "application/json"
       },
     });
     const json = await response.json();
@@ -120,7 +129,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "sliders"].join(""),{
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "applicaiton/json",
+          "Accept" : "application/json"
         },
     });
     const json = await response.json();
@@ -131,7 +141,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "partners"].join(""),{
         method: "GET",
         headers: {
-            "Content-Type" : "application/json",
+          "Content-Type": "applicaiton/json",
+          "Accept" : "application/json"
         },
     });
     const json = await response.json();
@@ -141,7 +152,8 @@ export function AppWrapper({ children }) {
     const response = await fetch([url, "settings"].join(""),{
         method: "GET",
         headers: {
-            "Content-Type" : "application/json",
+          "Content-Type": "applicaiton/json",
+          "Accept" : "application/json"
         },
     });
     const json = await response.json();

@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const serviceDetail = () => {
-    const router = useRouter();
+  const router = useRouter();
   const context = useAppContext();
   const serviceDetail = router.query.serviceDetail;
   const [service, setService] = useState();
@@ -30,11 +30,13 @@ const serviceDetail = () => {
   };
 
   useEffect(() => {
-    fetchService();
-    fetchServices();
+    if (service == null) {
+      fetchService();
+    }
+    if (services == null) {
+      fetchServices();
+    }
   });
-
-
 
   return (
     <>
@@ -79,7 +81,10 @@ const serviceDetail = () => {
                     services.map((data, key) => {
                       return (
                         <li>
-                          <Link href={`/service/${data.slug}`} className="more-link">
+                          <Link
+                            href={`/service/${data.slug}`}
+                            className="more-link"
+                          >
                             {data.title}
                           </Link>
                         </li>

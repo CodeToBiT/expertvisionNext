@@ -6,11 +6,30 @@ import { useEffect } from "react";
 
 const Footer = () => {
   const context = useAppContext();
-  const { settings, fetchSettings, socialmedias, fetchSocialmedias } = context;
+  const {
+    settings,
+    fetchSettings,
+    socialmedias,
+    fetchSocialmedias,
+    countries,
+    fetchCountries,
+    pages,
+    fetchPages,
+  } = context;
 
   useEffect(() => {
-    fetchSettings();
-    fetchSocialmedias();
+    if (settings == null) {
+      fetchSettings();
+    }
+    if (socialmedias == null) {
+      fetchSocialmedias();
+    }
+    if (countries == null) {
+      fetchCountries();
+    }
+    if (pages == null) {
+      fetchPages();
+    }
   }, []);
   const isFooterImage = settings && settings.site_footer_logo;
   let footerLogo;
@@ -37,7 +56,7 @@ const Footer = () => {
                     <Link href="/about">About</Link>
                   </li>
                   <li className="nav-link">
-                    <Link href="/services">Services</Link>
+                    <Link href="/service">Services</Link>
                   </li>
                   <li className="nav-link">
                     <Link href="/country">Country</Link>
@@ -51,21 +70,16 @@ const Footer = () => {
                 <h2>Countries</h2>
 
                 <ul className="links">
-                  <li className="nav-link">
-                    <Link href="/single">Japan</Link>
-                  </li>
-                  <li className="nav-link">
-                    <Link href="/single">Australia</Link>
-                  </li>
-                  <li className="nav-link">
-                    <Link href="/single">Canada</Link>
-                  </li>
-                  <li className="nav-link">
-                    <Link href="/single">Uk</Link>
-                  </li>
-                  <li className="nav-link">
-                    <Link href="/single">USA</Link>
-                  </li>
+                  {countries &&
+                    countries.slice(0, 5).map((data, key) => {
+                      return (
+                        <li className="nav-link" key={key}>
+                          <Link href={`/country/${data.slug}`}>
+                            {data.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
                 </ul>
               </div>
               <div className="col-md-2 col-sm-12 py-4">
@@ -73,20 +87,19 @@ const Footer = () => {
 
                 <ul className="links">
                   <li className="nav-link">
-                    <Link href="/">FAQ</Link>
+                    <Link href="/faqs">FAQs</Link>{" "}
                   </li>
                   <li className="nav-link">
-                    <Link href="/teams">Teams</Link>
+                    <Link href="/teams">Teams</Link>{" "}
                   </li>
-                  <li className="nav-link">
-                    <Link href="/single">Privacy Policy</Link>
-                  </li>
-                  <li className="nav-link">
-                    <Link href="/single">Terms and conditions</Link>
-                  </li>
-                  <li className="nav-link">
-                    <Link href="/contact">Contact</Link>
-                  </li>
+                  {pages &&
+                    pages.slice(0, 3).map((data, key) => {
+                      return (
+                        <li className="nav-link" key={key}>
+                          <Link href={`/page/${data.slug}`}>{data.title}</Link>
+                        </li>
+                      );
+                    })}
                 </ul>
               </div>
 
@@ -112,8 +125,8 @@ const Footer = () => {
                   {socialmedias &&
                     socialmedias.map((data, key) => {
                       return (
-                        <a href={data.link}>
-                          <i class={data.icon}></i>
+                        <a href={data.link} key={key}>
+                          <i className={data.icon}></i>
                         </a>
                       );
                     })}

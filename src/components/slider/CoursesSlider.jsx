@@ -36,11 +36,13 @@ const CourseSlider = (props) => {
     ],
   };
   const context = useAppContext();
-  const {courses, fetchCourses} = context;
+  const { courses, fetchCourses } = context;
 
-  useEffect(()=>{
-    fetchCourses();
-  })
+  useEffect(() => {
+    if (courses == null) {
+      fetchCourses();
+    }
+  });
 
   return (
     <>
@@ -48,7 +50,7 @@ const CourseSlider = (props) => {
         {courses &&
           courses.map((data, key) => {
             return (
-              <div key={data.key}>
+              <div key={key}>
                 <CourseCard
                   slug={data.slug}
                   imagepath={data.image}
