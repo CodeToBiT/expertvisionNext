@@ -20,6 +20,7 @@ const countryDetail = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Accept" : "application/json"
         },
       }
     );
@@ -49,12 +50,32 @@ const countryDetail = () => {
             <div className="col-md-9 col-sm-12 pe-5">
               <div className="media-wrapper position-relative">
                 <Image
-                  src={country && country.image}
+                  src={country && country.image?country.image:"/images/logo.png"}
                   fill
                   alt="loading"
                   priority="false"
                   sized="(max-height: 445px)"
                 />
+              </div>
+            </div>
+            <div className="col-md-3 col-sm-12">
+              <div className="more p-4">
+                <h3>More Countries</h3>
+                <ul>
+                  {countries &&
+                    countries.map((data, key) => {
+                      return (
+                        <li key={key}>
+                          <Link
+                            href={`/country/${data.slug}`}
+                            className="more-link"
+                          >
+                            {data.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                </ul>
               </div>
             </div>
           </div>
@@ -73,26 +94,7 @@ const countryDetail = () => {
                 ></div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-12">
-              <div className="more p-4">
-                <h3>More Countries</h3>
-                <ul>
-                  {countries &&
-                    countries.map((data, key) => {
-                      return (
-                        <li>
-                          <Link
-                            href={`/country/${data.slug}`}
-                            className="more-link"
-                          >
-                            {data.name}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
-            </div>
+            
           </div>
         </div>
       </section>

@@ -20,7 +20,7 @@ const Faqs = () => {
             {faqs &&
               faqs.map((data, key) => {
                 return (
-                  <Accordion.Item eventKey={data.id}>
+                  <Accordion.Item eventKey={data.id} key={key}>
                     <Accordion.Header>{data.title}</Accordion.Header>
                     <Accordion.Body>
                       <div

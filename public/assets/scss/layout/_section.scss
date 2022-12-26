@@ -37,7 +37,7 @@
   }
 
   .media-wrapper {
-    height: 700px;
+    height: 600px;
     width: 1000px;
     img {
       object-fit: fit;
@@ -369,7 +369,45 @@
 }
 
 .single {
+ 
   &-banner {
+    .more {
+      box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      font-family: "DM Sans", sans-serif;
+      h3 {
+        color: $primary;
+        @include typography(1.5rem, 700, 150%);
+      }
+  
+      ul {
+        padding: 0;
+      }
+  
+      li {
+        list-style: none;
+        padding: 10px 0;
+      }
+      li:before {
+        background-color: $grey;
+        color: $white;
+        content: "\003E";
+        border-radius: 50%;
+        padding: 0 8px;
+        margin: 0 8px 0 0;
+      }
+      li:hover::before {
+        background-color: $secondary !important;
+      }
+      &-link {
+        @include typography(1rem, 500, 150%);
+        color: $grey;
+      }
+  
+      a:hover {
+        color: $secondary;
+      }
+    }
     h1 {
       @include typography(1.5rem, 700, 150%);
       color: $primary;
@@ -398,46 +436,13 @@
     .sub {
       padding: 20px 70px;
     }
-    .more {
-      position: sticky;
-      top: 20px;
-      margin: 20px 0;
-      box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
-      font-family: "DM Sans", sans-serif;
-      h3 {
-        color: $primary;
-        @include typography(1.5rem, 700, 150%);
-      }
 
-      ul {
-        padding: 0;
-      }
-
-      li {
-        list-style: none;
-        padding: 10px 0;
-      }
-      li:before {
-        background-color: $grey;
-        color: $white;
-        content: "\003E";
-        border-radius: 50%;
-        padding: 0 8px;
-        margin: 0 8px 0 0;
-      }
-      li:hover::before {
-        background-color: $secondary !important;
-      }
-      &-link {
-        @include typography(1rem, 500, 150%);
-        color: $grey;
-      }
-
-      a:hover {
-        color: $secondary;
-      }
-    }
+    // @media (min-width: 800px) {
+    //   .more {
+    //     margin-top: -400px;
+    //   }
+    // }
+    
   }
 }
 
@@ -498,6 +503,21 @@
     textarea {
       min-height: 150px;
       @extend input;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    &-image {
+      .media-wrapper {
+        margin: 20px 0px 0 0!important;
+      }
+      padding: 0 !important;
+      left: 0;
+      img {
+        padding: 0 !important;
+        width: 100% !important;
+        left: 0;
+      }
     }
   }
 

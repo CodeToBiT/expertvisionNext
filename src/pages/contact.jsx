@@ -6,53 +6,44 @@ import { Form } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 import { useAppContext } from "../context/state";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+
+const initialState = {
+  full_name: "",
+  email: "",
+  phone: "",
+  message: "",
+};
 
 const Contact = () => {
   const context = useAppContext();
   const { settings, fetchSettings } = context;
+  const [formData, setFormData] = useState(initialState);
+  const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    if (settings == null) {
-      fetchSettings();
-    }
-  }, []);
-
-  const [show, setShow] = useState(false);
-
-  const [full_name, setFull_name] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = (e) => {
+  const { full_name, email, phone, message } = formData;
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const data = {
-      full_name,
-      email,
-      phone,
-      message,
-    };
-    fetch("https://admin.evc.edu.np/api/inquiries", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        res.json();
-        setFull_name("");
-        setEmail("");
-        setPhone("");
-        setMessage("");
+    await axios
+      .post("https://admin.evc.edu.np/api/inquiries", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then((res) => {
-        console.log(res);
+        setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
       });
+    console.log(formData);
   };
 
   return (
@@ -105,6 +96,8 @@ const Contact = () => {
                 cur
               </p>
 
+              <div className="text-grey heading-3">{success}</div>
+
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
@@ -113,7 +106,7 @@ const Contact = () => {
                     placeholder="name"
                     name="full_name"
                     value={full_name}
-                    onChange={(e) => setFull_name(e.target.value)}
+                    onChange={onInputChange}
                     required
                   />
                 </Form.Group>
@@ -124,18 +117,18 @@ const Contact = () => {
                     placeholder="email"
                     name="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={onInputChange}
                     required
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicphone">
                   <Form.Label>Phone</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="number"
                     placeholder="phone"
                     name="phone"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={onInputChange}
                     required
                   />
                 </Form.Group>
@@ -146,7 +139,7 @@ const Contact = () => {
                     placeholder="message"
                     name="message"
                     value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    onChange={onInputChange}
                     required
                   />
                 </Form.Group>
@@ -172,7 +165,11 @@ const Contact = () => {
               </div>
               <div className="media-wrapper position-relative">
                 <Image
-                  src={settings && settings.contact_image}
+                  src={
+                    settings && settings.contact_image
+                      ? settings.contact_image
+                      : "/images/logo.png"
+                  }
                   alt="loading"
                   priority="false"
                   sizes="(max-height: 612px)"

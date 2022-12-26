@@ -20,6 +20,7 @@ const serviceDetail = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Accept" : "application/json"
         },
       }
     );
@@ -49,12 +50,32 @@ const serviceDetail = () => {
             <div className="col-md-9 col-sm-12 pe-5">
               <div className="media-wrapper position-relative">
                 <Image
-                  src={service && service.image}
+                  src={service && service.image?service.image:"/images/logo.png"}
                   fill
                   alt="loading"
                   priority="false"
                   sized="(max-height: 445px)"
                 />
+              </div>
+            </div>
+            <div className="col-md-3 col-sm-12">
+              <div className="more p-4">
+                <h3>More Content</h3>
+                <ul>
+                  {services &&
+                    services.map((data, key) => {
+                      return (
+                        <li key={key}>
+                          <Link
+                            href={`/service/${data.slug}`}
+                            className="more-link"
+                          >
+                            {data.title}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                </ul>
               </div>
             </div>
           </div>
@@ -73,26 +94,7 @@ const serviceDetail = () => {
                 ></div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-12">
-              <div className="more p-4">
-                <h3>More Content</h3>
-                <ul>
-                  {services &&
-                    services.map((data, key) => {
-                      return (
-                        <li>
-                          <Link
-                            href={`/service/${data.slug}`}
-                            className="more-link"
-                          >
-                            {data.title}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
-            </div>
+            
           </div>
         </div>
       </section>

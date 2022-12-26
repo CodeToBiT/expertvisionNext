@@ -11289,7 +11289,7 @@ a {
   background-color: #F1F1F1;
 }
 .services .media-wrapper {
-  height: 700px;
+  height: 600px;
   width: 1000px;
 }
 .services .media-wrapper img {
@@ -11620,6 +11620,44 @@ a {
   color: #025DB6;
 }
 
+.single-banner .more {
+  box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  font-family: "DM Sans", sans-serif;
+}
+.single-banner .more h3, .single-banner .more .h3 {
+  color: #025DB6;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+}
+.single-banner .more ul {
+  padding: 0;
+}
+.single-banner .more li {
+  list-style: none;
+  padding: 10px 0;
+}
+.single-banner .more li:before {
+  background-color: #696969;
+  color: #F1F1F1;
+  content: ">";
+  border-radius: 50%;
+  padding: 0 8px;
+  margin: 0 8px 0 0;
+}
+.single-banner .more li:hover::before {
+  background-color: #FF5151 !important;
+}
+.single-banner .more-link {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+  color: #696969;
+}
+.single-banner .more a:hover {
+  color: #FF5151;
+}
 .single-banner h1, .single-banner .h1 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -11650,47 +11688,6 @@ a {
 }
 .single-content .sub {
   padding: 20px 70px;
-}
-.single-content .more {
-  position: sticky;
-  top: 20px;
-  margin: 20px 0;
-  box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-  font-family: "DM Sans", sans-serif;
-}
-.single-content .more h3, .single-content .more .h3 {
-  color: #025DB6;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 150%;
-}
-.single-content .more ul {
-  padding: 0;
-}
-.single-content .more li {
-  list-style: none;
-  padding: 10px 0;
-}
-.single-content .more li:before {
-  background-color: #696969;
-  color: #F1F1F1;
-  content: ">";
-  border-radius: 50%;
-  padding: 0 8px;
-  margin: 0 8px 0 0;
-}
-.single-content .more li:hover::before {
-  background-color: #FF5151 !important;
-}
-.single-content .more-link {
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 150%;
-  color: #696969;
-}
-.single-content .more a:hover {
-  color: #FF5151;
 }
 
 .contact-info {
@@ -11754,6 +11751,20 @@ a {
 }
 .contact-form textarea {
   min-height: 150px;
+}
+@media (max-width: 767.98px) {
+  .contact-image {
+    padding: 0 !important;
+    left: 0;
+  }
+  .contact-image .media-wrapper {
+    margin: 20px 0px 0 0 !important;
+  }
+  .contact-image img {
+    padding: 0 !important;
+    width: 100% !important;
+    left: 0;
+  }
 }
 .contact-image {
   padding: 50px;
