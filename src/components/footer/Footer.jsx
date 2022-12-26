@@ -34,9 +34,23 @@ const Footer = () => {
   const isFooterImage = settings && settings.site_footer_logo;
   let footerLogo;
   if (isFooterImage) {
-    footerLogo = <img src={settings && settings.site_footer_logo} alt="" />;
+    footerLogo =<Image
+    src={settings && settings.site_footer_logo}
+    width={150}
+    height={61.05}
+    alt="loading"
+    sizes="(max-height: 64.05px)"
+    priority="false"
+  />;
   } else {
-    footerLogo = <img src="/images/logo2.png" alt="" />;
+    footerLogo = <Image
+    src="/images/logo2.png"
+    width={150}
+    height={61.05}
+    alt="loading"
+    sizes="(max-height: 64.05px)"
+    priority="false"
+  />;
   }
 
   return (

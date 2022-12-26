@@ -37,7 +37,7 @@ const CountryDetail = () => {
     if (country == null) {
       fetchCountry();
     }
-  });
+  }, []);
 
   return (
     <>

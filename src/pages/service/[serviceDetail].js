@@ -37,7 +37,7 @@ const ServiceDetail = () => {
     if (services == null) {
       fetchServices();
     }
-  });
+  }, []);
 
   return (
     <>

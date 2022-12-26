@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 const PrivacyPolicy = () => {
     const context = useAppContext();
-    
+    const router = useRouter();
     const privacyDetail = router.query.privacyDetail;
     const [privacy, setPrivacy] = useState();
     const fetchPrivacy = async ()=> {
@@ -31,7 +31,7 @@ const PrivacyPolicy = () => {
         if(privacy == null){
             fetchPrivacy();
         }
-    })
+    }, [])
   return (
     <>
      <section className="single-banner">

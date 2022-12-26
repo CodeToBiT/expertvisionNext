@@ -12,7 +12,7 @@ const Courses = () => {
     if (courses == null) {
       fetchCourses();
     }
-  });
+  }, []);
   return (
     <>
       <Head>

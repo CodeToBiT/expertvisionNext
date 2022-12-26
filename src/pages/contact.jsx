@@ -46,6 +46,12 @@ const Contact = () => {
     console.log(formData);
   };
 
+  useEffect(()=>{
+    if(settings == null){
+      fetchSettings();
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -157,10 +163,27 @@ const Contact = () => {
             <div className="col-md-5 col-sm-12 contact-image position-relative">
               <div className="overlay">
                 <div className="overlay-right position-absolute">
-                  <img src="/images/contactblue.png" alt="" />
+                <Image
+                    src="/images/contactblue.png"
+                    width={250}
+                    height={150}
+                    alt="loading"
+                    sizes="(max-height: 612px)"
+                    priority="false"
+                  />
+                  ;
                 </div>
                 <div className="overlay-left position-absolute">
-                  <img src="/images/contactblue.png" alt="" />
+                  <Image
+                    src="/images/contactblue.png"
+                    width={250}
+                    height={150}
+                    alt="loading"
+                    sizes="(max-height: 612px)"
+                    priority="false"
+                  />
+                  ;
+                 
                 </div>
               </div>
               <div className="media-wrapper position-relative">

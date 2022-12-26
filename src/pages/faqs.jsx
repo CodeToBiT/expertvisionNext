@@ -6,7 +6,9 @@ const Faqs = () => {
   const context = useAppContext();
   const { faqs, fetchFaqs } = context;
   useEffect(() => {
-    fetchFaqs();
+    if (faqs == null) {
+      fetchFaqs();
+    }
   }, []);
 
   return (

@@ -38,7 +38,7 @@ const CourseDetail = () => {
     if (courses == null) {
       fetchCourses();
     }
-  });
+  }, []);
 
   return (
     <>

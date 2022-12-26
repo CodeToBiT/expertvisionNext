@@ -36,7 +36,7 @@ const BlogDetail = () => {
     if (blogs == null) {
       fetchBlogs();
     }
-  });
+  }, []);
 
   return (
     <>

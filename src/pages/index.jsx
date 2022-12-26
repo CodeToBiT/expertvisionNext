@@ -109,7 +109,15 @@ export default function Home() {
             </div>
           </div>
           <div className="bannerimg position-absolute top-0">
-            <img src="/images/banner.png" alt="" />
+          <Image
+                src="/images/banner.png"
+                width={100}
+                height={750}
+                alt="loading"
+                sizes="(max-height: 750px)"
+                priority="false"
+              />
+              ;
           </div>
         </section>
 
@@ -120,9 +128,7 @@ export default function Home() {
             </div>
             <div className="row justify-content-center">
               <div className="col-md-8 col-sm-12">
-                <div
-                  className="d-flex gap-4 justify-content-center"
-                >
+                <div className="d-flex gap-4 justify-content-center">
                   {partners &&
                     partners.slice(0, 5).map((data, key) => {
                       return (
@@ -177,7 +183,15 @@ export default function Home() {
             </div>
             <div className="overlay position-absolute top-0">
               <div className="media-wrapper">
-                <img src="/images/overlay.png" alt="" />
+              <Image
+                src="/images/overlay.png"
+                width={100}
+                height={450}
+                alt="loading"
+                sizes="(max-height: 500px)"
+                priority="false"
+              />
+              ;
               </div>
             </div>
           </div>
@@ -218,7 +232,15 @@ export default function Home() {
           </div>
           <div className="overlay position-absolute top-0">
             <div className="media-wrapper">
-              <img src="/images/overlay2.png" alt="" />
+              <Image
+                src="/images/overlay2.png"
+                width={150}
+                height={61.05}
+                alt="loading"
+                sizes="(max-height: 500px)"
+                priority="false"
+              />
+              ;
             </div>
           </div>
         </section>

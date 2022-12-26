@@ -42,7 +42,7 @@ const CourseSlider = (props) => {
     if (courses == null) {
       fetchCourses();
     }
-  });
+  }, []);
 
   return (
     <>

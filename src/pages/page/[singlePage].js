@@ -37,7 +37,7 @@ const SinglePage = () => {
     if (blogs == null){
         fetchBlogs();
     }
-  });
+  }, []);
 
   return (
     <>

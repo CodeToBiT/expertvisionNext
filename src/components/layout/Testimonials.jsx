@@ -15,7 +15,7 @@ const Testimonials = (props) => {
     if (testimonials == null) {
       fetchTestimonials();
     }
-  });
+  }, []);
   return (
     <>
       <div className="testimonials">

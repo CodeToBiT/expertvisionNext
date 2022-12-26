@@ -43,7 +43,7 @@ const CountriesSlider = (props) => {
     if (countries == null) {
       fetchCountries();
     }
-  });
+  }, []);
 
   return (
     <>
