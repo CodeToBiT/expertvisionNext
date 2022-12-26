@@ -7,7 +7,7 @@ import { useAppContext } from "../../context/state";
 import Image from "next/image";
 import Link from "next/link";
 
-const countryDetail = () => {
+const CountryDetail = () => {
   const router = useRouter();
   const context = useAppContext();
   const countryDetail = router.query.countryDetail;
@@ -102,4 +102,4 @@ const countryDetail = () => {
   );
 };
 
-export default countryDetail;
+export default CountryDetail;

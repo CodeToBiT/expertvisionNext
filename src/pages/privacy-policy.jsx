@@ -7,7 +7,7 @@ import { useAppContext } from '../context/state'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const privacyPolicy = () => {
+const PrivacyPolicy = () => {
     const context = useAppContext();
     
     const privacyDetail = router.query.privacyDetail;
@@ -94,4 +94,4 @@ const privacyPolicy = () => {
   )
 }
 
-export default privacyPolicy
+export default PrivacyPolicy

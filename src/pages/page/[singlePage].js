@@ -7,7 +7,7 @@ import { useAppContext } from "../../context/state";
 import Image from "next/image";
 import Link from "next/link";
 
-const singlePage = () => {
+const SinglePage = () => {
   const router = useRouter();
   const context = useAppContext();
   const singlePage = router.query.singlePage;
@@ -100,4 +100,4 @@ const singlePage = () => {
   );
 };
 
-export default singlePage;
+export default SinglePage;

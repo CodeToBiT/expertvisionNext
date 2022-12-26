@@ -1,18 +1,17 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
-import { useAppContext } from "../../context/state";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useAppContext } from "../../context/state";
 
-const blogDetail = () => {
-  const router = useRouter();
+
+const BlogDetail = () => {
   const context = useAppContext();
+  const { blogs, fetchBlogs } = context;
+  const router = useRouter();
   const blogDetail = router.query.blogDetail;
   const [blog, setBlog] = useState();
-  const { blogs, fetchBlogs } = context;
   const fetchBlog = async () => {
     const response = await fetch(
       [`https://admin.evc.edu.np/api/`, `blog/${blogDetail}`].join(""),
@@ -20,7 +19,7 @@ const blogDetail = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
         },
       }
     );
@@ -99,4 +98,4 @@ const blogDetail = () => {
   );
 };
 
-export default blogDetail;
+export default BlogDetail;
