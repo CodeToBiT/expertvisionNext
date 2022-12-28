@@ -7,18 +7,35 @@ import { useEffect } from "react";
 
 const Teams = () => {
   const context = useAppContext();
-  const { ourteams, fetchOurteams } = context;
+  const { ourteams, fetchOurteams, settings, fetchSettings } = context;
 
   useEffect(() => {
     if (ourteams == null) {
       fetchOurteams();
     }
+    if (settings == null) {
+      fetchSettings();
+    }
   }, []);
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
+
   return (
     <>
       <Head>
-        <title>Teams | Expert Vision</title>
-        <meta name="description" content="Home" />
+        <title>Our Team - Expert Vision</title>
+        {/* <title>{settings && settings.ourteams_seo_title}</title>
+        <meta
+          name="description"
+          content={settings && settings.ourteams_meta_description}
+        />
+        <meta
+          name="keywords"
+          content={settings && settings.ourteams_meta_keywords}
+        /> */}
+        <link rel="canonical" href={current_url} />
       </Head>
       <section className="teams">
         <div className="container">

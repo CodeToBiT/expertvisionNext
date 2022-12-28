@@ -8,18 +8,33 @@ import { useEffect } from "react";
 const Blog = () => {
   const context = useAppContext();
 
-  const { blogs, fetchBlogs } = context;
+  const { blogs, fetchBlogs, settings, fetchSettings } = context;
 
   useEffect(() => {
     if (blogs == null) {
       fetchBlogs();
     }
+    if (settings == null) {
+      fetchSettings();
+    }
   }, []);
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
   return (
     <>
       <Head>
-        <title>Blogs | Expert Vision</title>
-        <meta name="description" content="Blogs" />
+        <title>{settings && settings.blogs_seo_title}</title>
+        <meta
+          name="description"
+          content={settings && settings.blogs_meta_description}
+        />
+        <meta
+          name="keywords"
+          content={settings && settings.blogs_meta_keywords}
+        />
+        <link rel="canonical" href={current_url} />
       </Head>
       <section className="blogs my-5">
         <div className="container">
@@ -36,6 +51,7 @@ const Blog = () => {
               blogs.map((data, key) => {
                 return (
                   <BlogCard
+                    date={data.date}
                     slug={data.slug}
                     clsa="col-md-4 col-xs-12"
                     title={data.title}

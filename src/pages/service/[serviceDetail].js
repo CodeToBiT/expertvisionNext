@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { useAppContext } from "../../context/state";
 
@@ -20,7 +21,7 @@ const ServiceDetail = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Accept" : "application/json"
+          Accept: "application/json",
         },
       }
     );
@@ -39,8 +40,26 @@ const ServiceDetail = () => {
     }
   }, []);
 
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
+
   return (
     <>
+      <Head>
+        <title>
+          {service && service.seo_title
+            ? service && service.seo_title
+            : service && service.title}
+        </title>
+        <meta
+          name="description"
+          content={service && service.meta_description}
+        />
+        <meta name="keywords" content={service && service.meta_keywords} />
+        <link rel="canonical" href={current_url} />
+      </Head>
       <section className="single-banner">
         <div className="container">
           <div className="title">
@@ -50,7 +69,11 @@ const ServiceDetail = () => {
             <div className="col-md-9 col-sm-12 pe-5">
               <div className="media-wrapper position-relative">
                 <Image
-                  src={service && service.image?service.image:"/images/logo.png"}
+                  src={
+                    service && service.image
+                      ? service.image
+                      : "/images/logo.png"
+                  }
                   fill
                   alt="loading"
                   priority="false"
@@ -94,7 +117,6 @@ const ServiceDetail = () => {
                 ></div>
               </div>
             </div>
-            
           </div>
         </div>
       </section>

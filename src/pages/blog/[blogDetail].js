@@ -1,60 +1,80 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useAppContext } from "../../context/state";
-
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 const BlogDetail = () => {
   const context = useAppContext();
-  const { blogs, fetchBlogs } = context;
   const router = useRouter();
   const blogDetail = router.query.blogDetail;
-  const [blog, setBlog] = useState();
-  const fetchBlog = async () => {
-    const response = await fetch(
-      [`https://admin.evc.edu.np/api/`, `blog/${blogDetail}`].join(""),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-      }
-    );
-
-    const json = await response.json();
-
-    setBlog(json.data);
-  };
+  const { blogs, fetchBlogs } = context;
+  const [blog, setBlog] = useState([]);
 
   useEffect(() => {
-    if (blog == null) {
-      fetchBlog();
-    }
     if (blogs == null) {
       fetchBlogs();
     }
-  }, []);
+
+    blogs &&
+      blogs.map((item) => {
+        if (item.slug == blogDetail) {
+          setBlog(item);
+        }
+      });
+  }, [blogs]);
+  let current_url;
+
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
 
   return (
     <>
+      <Head>
+        <title>
+          {blog && blog.seo_title ? blog && blog.seo_title : blog && blog.title}
+        </title>
+        <meta name="description" content={blog && blog.meta_description} />
+        <meta name="keywords" content={blog && blog.meta_keywords} />
+        <link rel="canonical" href={current_url} />
+      </Head>
+
       <section className="single-banner">
         <div className="container">
           <div className="title">
             <h1>{blog && blog.title}</h1>
           </div>
           <div className="row">
-            <div className="col-md-9 col-sm-12 pe-5">
-              <div className="media-wrapper position-relative">
-                <Image
-                  src={blog && blog.image ? blog.image : "/images/logo.png"}
-                  fill
-                  alt="loading"
-                  priority="false"
-                  sized="(max-height: 445px)"
-                />
+            <div className="col-md-9 col-sm-12">
+              <div className="pe-5">
+                <div className="media-wrapper position-relative">
+                  <Image
+                    src={blog && blog.image ? blog.image : "/images/logo.png"}
+                    fill
+                    alt="loading"
+                    priority="false"
+                    sized="(max-height: 445px)"
+                  />
+                </div>
+              </div>
+              <div className="single-content">
+                <div className="sub">
+                  <div className="my-3">
+                    <h2 className="date d-flex gap-2 align-items-baseline">
+                      <FaRegCalendarAlt />
+                      {blog && blog.date}
+                    </h2>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: blog && blog.description,
+                      }}
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-md-3 col-sm-12">
@@ -62,12 +82,13 @@ const BlogDetail = () => {
                 <h3>More Blogs</h3>
                 <ul>
                   {blogs &&
-                    blogs.map((data, key) => {
+                    blogs.slice(0, 4).map((data, key) => {
                       return (
                         <li key={key}>
                           <Link
                             href={`/blog/${data.slug}`}
                             className="more-link"
+                            target="_blank"
                           >
                             {data.title}
                           </Link>
@@ -75,20 +96,6 @@ const BlogDetail = () => {
                       );
                     })}
                 </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="single-content">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9 col-sm-12 sub">
-              <div className="my-3">
-                <div
-                  dangerouslySetInnerHTML={{ __html: blog && blog.description }}
-                ></div>
               </div>
             </div>
           </div>

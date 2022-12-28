@@ -13,6 +13,14 @@ const NavigationBar = () => {
   const context = useAppContext();
   const { settings, fetchSettings } = context;
 
+  const [show, setShow] = useState(false);
+  const showDropdown = (e) => {
+    setShow(!show);
+  };
+  const hideDropdown = (e) => {
+    setShow(false);
+  };
+
   useEffect(() => {
     if (settings == null) {
       fetchSettings();
@@ -71,7 +79,13 @@ const NavigationBar = () => {
                 <Link href="/" className="nav-link">
                   Home
                 </Link>
-                <NavDropdown title="About Us" id="navbarScrollingDropdown">
+                <NavDropdown
+                  title="About Us"
+                  id="navbarScrollingDropdown"
+                  show={show}
+                  onMouseEnter={showDropdown}
+                  onMouseLeave={hideDropdown}
+                >
                   <Link href="/about" className="dropdown-item">
                     About Us
                   </Link>
@@ -96,9 +110,17 @@ const NavigationBar = () => {
                 </Link>
               </Nav>
 
-              <Link href="#action7" className="btn btn-secondary">
-                Apply now
-              </Link>
+              {settings && settings.apply_now ? (
+                <Link
+                  href={settings && settings.apply_now}
+                  className="btn btn-secondary"
+                  target="_blank"
+                >
+                  Apply Now
+                </Link>
+              ) : (
+                <></>
+              )}
             </Navbar.Collapse>
           </Container>
         </Navbar>

@@ -11674,11 +11674,16 @@ a {
 .single-content {
   font-family: "Poppins", sans-serif;
 }
-.single-content h2, .single-content .h2 {
-  font-size: 1.5rem;
+.single-content .date {
+  font-size: 1rem;
   font-weight: 500;
   line-height: 180%;
-  color: #414141;
+}
+.single-content .date svg {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 180%;
+  color: #025DB6;
 }
 .single-content p {
   font-size: 1rem;
@@ -11688,6 +11693,12 @@ a {
 }
 .single-content .sub {
   padding: 20px 70px;
+  word-wrap: break-word;
+}
+@media (max-width: 800px) {
+  .single-content .sub {
+    padding: 0 !important;
+  }
 }
 
 .contact-info {

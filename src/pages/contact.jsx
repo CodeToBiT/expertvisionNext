@@ -52,11 +52,21 @@ const Contact = () => {
     }
   }, []);
 
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
+
   return (
     <>
       <Head>
-        <title>Contact | Expert Vision</title>
-        <meta name="description" content="Home" />
+        <title>{settings && settings.contact_seo_title}</title>
+        <meta
+          name="description"
+          content={settings && settings.contact_meta_description}
+        />
+        <meta name="keywords" content={settings && settings.contact_meta_keywords} />
+        <link rel="canonical" href={current_url} />
       </Head>
       <section className="contact-info">
         <div className="container">
@@ -102,7 +112,7 @@ const Contact = () => {
                 cur
               </p>
 
-              <div className="text-grey heading-3">{success}</div>
+              <div className="text-secondary heading-3 ">{success}</div>
 
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicName">

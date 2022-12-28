@@ -7,19 +7,36 @@ import { useEffect } from "react";
 
 const Services = () => {
   const context = useAppContext();
-  const { services, fetchServices } = context;
+  const { services, fetchServices, settings, fetchSettings } = context;
 
   useEffect(() => {
     if (services == null) {
       fetchServices();
     }
+    if (settings == null) {
+      fetchSettings();
+    }
   }, []);
+
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
 
   return (
     <>
       <Head>
-        <title>Services | Expert Vision</title>
-        <meta name="description" content="Services" />
+        <title>Services - Expert Vision</title>
+        {/* <title>{settings && settings.services_seo_title}</title>
+        <meta
+          name="description"
+          content={settings && settings.services_meta_description}
+        />
+        <meta
+          name="keywords"
+          content={settings && settings.services_meta_keywords}
+        /> */}
+        <link rel="canonical" href={current_url} />
       </Head>
 
       <section className="services mb-5">

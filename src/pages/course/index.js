@@ -6,18 +6,35 @@ import { useAppContext } from "../../context/state";
 import { useEffect } from "react";
 const Courses = () => {
   const context = useAppContext();
-  const { courses, fetchCourses } = context;
+  const { courses, fetchCourses, settings, fetchSettings } = context;
 
   useEffect(() => {
     if (courses == null) {
       fetchCourses();
     }
+    if (courses == null) {
+      fetchSettings();
+    }
   }, []);
+
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
+
   return (
     <>
       <Head>
-        <title>Courses | Expert Vision</title>
-        <meta name="description" content="Courses" />
+        <title>{settings && settings.courses_seo_title}</title>
+        <meta
+          name="description"
+          content={settings && settings.courses_meta_description}
+        />
+        <meta
+          name="keywords"
+          content={settings && settings.courses_meta_keywords}
+        />
+        <link rel="canonical" href={current_url} />
       </Head>
       <section className="courses">
         <div className="container">

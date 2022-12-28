@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../../styles/Home.module.css";
-import { ViewButton } from "../components/buttons/ButtonBox";
 import ServiceCard from "../components/card/ServiceCard";
 import Link from "next/link";
 import Footer from "../components/footer/Footer";
@@ -48,12 +47,21 @@ export default function Home() {
       fetchSliders();
     }
   }, []);
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
 
   return (
     <>
       <Head>
-        <title>Home | Expert Vision</title>
-        <meta name="description" content="Home" />
+        <title>{settings && settings.homepage_seo_title}</title>
+        <meta
+          name="description"
+          content={settings && settings.homepage_meta_description}
+        />
+        <meta name="keywords" content={settings && settings.homepage_meta_keywords} />
+        <link rel="canonical" href={current_url} />
       </Head>
 
       <main>
@@ -83,7 +91,7 @@ export default function Home() {
                     <Link href="/" className="btn btn-explore">
                       Explore
                     </Link>
-                    <Link href="/" className="btn btn-contact">
+                    <Link href="/contact" className="btn btn-contact">
                       Contact Us
                     </Link>
                   </div>
@@ -109,15 +117,15 @@ export default function Home() {
             </div>
           </div>
           <div className="bannerimg position-absolute top-0">
-          <Image
-                src="/images/banner.png"
-                width={100}
-                height={750}
-                alt="loading"
-                sizes="(max-height: 750px)"
-                priority="false"
-              />
-              ;
+            <Image
+              src="/images/banner.png"
+              width={100}
+              height={750}
+              alt="loading"
+              sizes="(max-height: 750px)"
+              priority="false"
+            />
+            ;
           </div>
         </section>
 
@@ -136,7 +144,7 @@ export default function Home() {
                           className="media-wrapper position-relative"
                           key={key}
                         >
-                          <Link href="#">
+                          <Link href={data.link} target="_blank">
                             <Image
                               src={data.image}
                               alt="loading"
@@ -176,22 +184,27 @@ export default function Home() {
                       );
                     })}
                   <div className="col-md-4 col-sm-12 col-xs-12 d-flex align-items-center justify-content-center">
-                    <ViewButton name="View All" />
+                    <Link
+                      href="/service"
+                      className="btn btn-secondary py-2 px-5 br-0 text-white"
+                    >
+                      View All
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
             <div className="overlay position-absolute top-0">
               <div className="media-wrapper">
-              <Image
-                src="/images/overlay.png"
-                width={100}
-                height={450}
-                alt="loading"
-                sizes="(max-height: 500px)"
-                priority="false"
-              />
-              ;
+                <Image
+                  src="/images/overlay.png"
+                  width={100}
+                  height={450}
+                  alt="loading"
+                  sizes="(max-height: 500px)"
+                  priority="false"
+                />
+                ;
               </div>
             </div>
           </div>
@@ -205,7 +218,12 @@ export default function Home() {
             </div>
             <CountriesSlider />
             <div className="text-center mb-5">
-              <ViewButton name="View All" />
+              <Link
+                href="/country"
+                className="btn btn-secondary py-2 px-5 br-0 text-white"
+              >
+                View All
+              </Link>
             </div>
           </div>
         </section>
@@ -218,7 +236,12 @@ export default function Home() {
             </div>
             <CourseSlider />
             <div className="text-center mb-5">
-              <ViewButton name="View All" />
+              <Link
+                href="/course"
+                className="btn btn-secondary py-2 px-5 br-0 text-white"
+              >
+                View All
+              </Link>
             </div>
           </div>
         </section>
@@ -257,6 +280,7 @@ export default function Home() {
                   return (
                     <BlogCard
                       clsa="col-md-4 col-xs-12"
+                      date={data.date}
                       slug={data.slug}
                       title={data.title}
                       imagepath={data.image}
@@ -267,7 +291,12 @@ export default function Home() {
                 })}
             </div>
             <div className="text-center mb-5">
-              <ViewButton name="View All" />
+              <Link
+                href="/blog"
+                className="btn btn-secondary py-2 px-5 br-0 text-white"
+              >
+                View All
+              </Link>
             </div>
           </div>
         </section>

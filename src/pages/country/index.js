@@ -7,18 +7,31 @@ import { useEffect } from "react";
 
 const Countries = () => {
   const context = useAppContext();
-  const { countries, fetchCountries } = context;
+  const { countries, fetchCountries, settings, fetchSettings} = context;
 
   useEffect(() => {
     if (countries == null) {
       fetchCountries();
     }
+    if (countries == null) {
+      fetchSettings();
+    }
   }, []);
+
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
   return (
     <>
       <Head>
-        <title>Countries | Expert Vision</title>
-        <meta name="description" content="Home" />
+        <title>{settings && settings.countries_seo_title}</title>
+        <meta
+          name="description"
+          content={settings && settings.countries_meta_description}
+        />
+        <meta name="keywords" content={settings && settings.countires_meta_keywords} />
+        <link rel="canonical" href={current_url} />
       </Head>
       <section className="courses">
         <div className="container">

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { useAppContext } from "../../context/state";
 
@@ -13,50 +14,66 @@ const CourseDetail = () => {
   const courseDetail = router.query.courseDetail;
   const [course, setCourse] = useState();
   const { courses, fetchCourses } = context;
-  const fetchCourse = async () => {
-    const response = await fetch(
-      [`https://admin.evc.edu.np/api/`, `course/${courseDetail}`].join(""),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept" : "application/json"
-        },
-      }
-    );
-
-    const json = await response.json();
-
-    setCourse(json.data);
-  };
+  let current_url;
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
 
   useEffect(() => {
-    if (course == null) {
-      fetchCourse();
-    }
-
     if (courses == null) {
       fetchCourses();
     }
-  }, []);
+
+    courses &&
+      courses.map((item) => {
+        if (item.slug == courseDetail) {
+          setCourse(item);
+        }
+      });
+  }, [courses]);
 
   return (
     <>
+      <Head>
+        <title>
+          {course && course.seo_title
+            ? course && course.seo_title
+            : course && course.title}
+        </title>
+        <meta name="description" content={course && course.meta_description} />
+        <meta name="keywords" content={course && course.meta_keywords} />
+        <link rel="canonical" href={current_url} />
+      </Head>
       <section className="single-banner">
         <div className="container">
           <div className="title">
             <h1>{course && course.name}</h1>
           </div>
           <div className="row">
-            <div className="col-md-9 col-sm-12 pe-5">
-              <div className="media-wrapper position-relative">
-                <Image
-                  src={course && course.image?course.image:"/images/logo.png"}
-                  fill
-                  alt="loading"
-                  priority="false"
-                  sized="(max-height: 445px)"
-                />
+            <div className="col-md-9 col-sm-12">
+              <div className="pe-5">
+                <div className="media-wrapper position-relative">
+                  <Image
+                    src={
+                      course && course.image ? course.image : "/images/logo.png"
+                    }
+                    fill
+                    alt="loading"
+                    priority="false"
+                    sized="(max-height: 445px)"
+                  />
+                </div>
+              </div>
+              <div className="single-content">
+                <div className="sub">
+                  <div className="my-3">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: course && course.description,
+                      }}
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-md-3 col-sm-12">
@@ -70,6 +87,7 @@ const CourseDetail = () => {
                           <Link
                             href={`/course/${data.slug}`}
                             className="more-link"
+                            target="_blank"
                           >
                             {data.name}
                           </Link>
@@ -79,23 +97,6 @@ const CourseDetail = () => {
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="single-content">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9 col-sm-12 sub">
-              <div className="my-3">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: course && course.description,
-                  }}
-                ></div>
-              </div>
-            </div>
-            
           </div>
         </div>
       </section>

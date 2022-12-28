@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { useAppContext } from "../../context/state";
 
@@ -13,49 +14,72 @@ const CountryDetail = () => {
   const countryDetail = router.query.countryDetail;
   const [country, setCountry] = useState();
   const { countries, fetchCountries } = context;
-  const fetchCountry = async () => {
-    const response = await fetch(
-      [`https://admin.evc.edu.np/api/`, `country/${countryDetail}`].join(""),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept" : "application/json"
-        },
-      }
-    );
-
-    const json = await response.json();
-
-    setCountry(json.data);
-  };
 
   useEffect(() => {
     if (countries == null) {
       fetchCountries();
     }
-    if (country == null) {
-      fetchCountry();
-    }
-  }, []);
+    countries &&
+      countries.map((item) => {
+        if (item.slug == countryDetail) {
+          setCountry(item);
+        }
+      });
+  }, [countries]);
+
+  let current_url;
+
+  if (typeof window !== "undefined") {
+    current_url = window.location.href;
+  }
 
   return (
     <>
+      <Head>
+        <title>
+          {country && country.seo_title
+            ? country && country.seo_title
+            : country && country.title}
+        </title>
+        <meta
+          name="description"
+          content={country && country.meta_description}
+        />
+        <meta name="keywords" content={country && country.meta_keywords} />
+        <link rel="canonical" href={current_url} />
+      </Head>
       <section className="single-banner">
         <div className="container">
           <div className="title">
             <h1>{country && country.name}</h1>
           </div>
           <div className="row">
-            <div className="col-md-9 col-sm-12 pe-5">
-              <div className="media-wrapper position-relative">
-                <Image
-                  src={country && country.image?country.image:"/images/logo.png"}
-                  fill
-                  alt="loading"
-                  priority="false"
-                  sized="(max-height: 445px)"
-                />
+            <div className="col-md-9 col-sm-12">
+              <div className="pe-5">
+                <div className="media-wrapper position-relative">
+                  <Image
+                    src={
+                      country && country.image
+                        ? country.image
+                        : "/images/logo.png"
+                    }
+                    fill
+                    alt="loading"
+                    priority="false"
+                    sized="(max-height: 445px)"
+                  />
+                </div>
+              </div>
+              <div className="single-content">
+                <div className="sub">
+                  <div className="my-3">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: country && country.description,
+                      }}
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-md-3 col-sm-12">
@@ -69,6 +93,7 @@ const CountryDetail = () => {
                           <Link
                             href={`/country/${data.slug}`}
                             className="more-link"
+                            target="_blank"
                           >
                             {data.name}
                           </Link>
@@ -78,23 +103,6 @@ const CountryDetail = () => {
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="single-content">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9 col-sm-12 sub">
-              <div className="my-3">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: country && country.description,
-                  }}
-                ></div>
-              </div>
-            </div>
-            
           </div>
         </div>
       </section>

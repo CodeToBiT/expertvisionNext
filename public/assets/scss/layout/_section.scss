@@ -369,7 +369,6 @@
 }
 
 .single {
- 
   &-banner {
     .more {
       box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
@@ -379,11 +378,11 @@
         color: $primary;
         @include typography(1.5rem, 700, 150%);
       }
-  
+
       ul {
         padding: 0;
       }
-  
+
       li {
         list-style: none;
         padding: 10px 0;
@@ -403,7 +402,7 @@
         @include typography(1rem, 500, 150%);
         color: $grey;
       }
-  
+
       a:hover {
         color: $secondary;
       }
@@ -424,10 +423,15 @@
 
   &-content {
     font-family: "Poppins", sans-serif;
-    h2 {
-      @include typography(1.5rem, 500, 180%);
-      color: #414141;
+    .date {
+      svg {
+        @include typography(1.125rem, 500, 180%);
+        color: $primary;
+        
+      }
+      @include typography(1rem, 500, 180%);
     }
+
     p {
       @include typography(1rem, 500, 180%);
       color: $grey;
@@ -435,14 +439,15 @@
 
     .sub {
       padding: 20px 70px;
+      word-wrap: break-word;
     }
 
-    // @media (min-width: 800px) {
-    //   .more {
-    //     margin-top: -400px;
-    //   }
-    // }
-    
+
+    @media (max-width: 800px) {
+      .sub {
+        padding: 0 !important;
+      }
+    }
   }
 }
 
@@ -509,7 +514,7 @@
   @media (max-width: 767.98px) {
     &-image {
       .media-wrapper {
-        margin: 20px 0px 0 0!important;
+        margin: 20px 0px 0 0 !important;
       }
       padding: 0 !important;
       left: 0;
