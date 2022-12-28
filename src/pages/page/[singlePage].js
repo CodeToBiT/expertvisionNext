@@ -30,7 +30,7 @@ const SinglePage = () => {
           setSingle(item);
         }
       });
-  }, []);
+  }, [pages]);
 
   let current_url;
   if (typeof window !== "undefined") {

@@ -18,6 +18,7 @@ const ServiceDetail = () => {
   useEffect(() => {
    
     fetchServices();
+
     services &&
     services.map((item) => {
       if (item.slug == serviceDetail) {
@@ -25,7 +26,7 @@ const ServiceDetail = () => {
       }
     });
 
-  }, []);
+  }, [services]);
 
   let current_url;
   if (typeof window !== "undefined") {
