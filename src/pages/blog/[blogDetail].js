@@ -83,17 +83,19 @@ const BlogDetail = () => {
                 <ul>
                   {blogs &&
                     blogs.slice(0, 4).map((data, key) => {
-                      return (
-                        <li key={key}>
-                          <Link
-                            href={`/blog/${data.slug}`}
-                            className="more-link"
-                            target="_blank"
-                          >
-                            {data.title}
-                          </Link>
-                        </li>
-                      );
+                      if (data.slug != blogDetail) {
+                        return (
+                          <li key={key}>
+                            <Link
+                              href={`/blog/${data.slug}`}
+                              className="more-link"
+                              target="_blank"
+                            >
+                              {data.title}
+                            </Link>
+                          </li>
+                        );
+                      }
                     })}
                 </ul>
               </div>

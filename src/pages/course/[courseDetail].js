@@ -81,18 +81,20 @@ const CourseDetail = () => {
                 <h3>More Courses</h3>
                 <ul>
                   {courses &&
-                    courses.map((data, key) => {
-                      return (
-                        <li key={key}>
-                          <Link
-                            href={`/course/${data.slug}`}
-                            className="more-link"
-                            target="_blank"
-                          >
-                            {data.name}
-                          </Link>
-                        </li>
-                      );
+                    courses.slice(0, 4).map((data, key) => {
+                      if (data.slug != courseDetail) {
+                        return (
+                          <li key={key}>
+                            <Link
+                              href={`/course/${data.slug}`}
+                              className="more-link"
+                              target="_blank"
+                            >
+                              {data.name}
+                            </Link>
+                          </li>
+                        );
+                      }
                     })}
                 </ul>
               </div>

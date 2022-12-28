@@ -87,18 +87,20 @@ const CountryDetail = () => {
                 <h3>More Countries</h3>
                 <ul>
                   {countries &&
-                    countries.map((data, key) => {
-                      return (
-                        <li key={key}>
-                          <Link
-                            href={`/country/${data.slug}`}
-                            className="more-link"
-                            target="_blank"
-                          >
-                            {data.name}
-                          </Link>
-                        </li>
-                      );
+                    countries.slice(0, 4).map((data, key) => {
+                      if (data.slug != countryDetail) {
+                        return (
+                          <li key={key}>
+                            <Link
+                              href={`/country/${data.slug}`}
+                              className="more-link"
+                              target="_blank"
+                            >
+                              {data.name}
+                            </Link>
+                          </li>
+                        );
+                      }
                     })}
                 </ul>
               </div>

@@ -87,16 +87,18 @@ const ServiceDetail = () => {
                 <ul>
                   {services &&
                     services.map((data, key) => {
-                      return (
-                        <li key={key}>
-                          <Link
-                            href={`/service/${data.slug}`}
-                            className="more-link"
-                          >
-                            {data.title}
-                          </Link>
-                        </li>
-                      );
+                      if (data.slug != serviceDetail) {
+                        return (
+                          <li key={key}>
+                            <Link
+                              href={`/service/${data.slug}`}
+                              className="more-link"
+                            >
+                              {data.title}
+                            </Link>
+                          </li>
+                        );
+                      }
                     })}
                 </ul>
               </div>

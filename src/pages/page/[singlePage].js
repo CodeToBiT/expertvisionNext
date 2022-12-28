@@ -86,7 +86,7 @@ const SinglePage = () => {
                 <h3>Check our Blogs</h3>
                 <ul>
                   {blogs &&
-                    blogs.map((data, key) => {
+                    blogs.slice(0,4).map((data, key) => {
                       return (
                         <li key={key}>
                           <Link
