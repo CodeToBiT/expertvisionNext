@@ -8,16 +8,14 @@ import { useAppContext } from "../../context/state";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
 const BlogDetail = () => {
-  const context = useAppContext();
   const router = useRouter();
+  const context = useAppContext();
   const blogDetail = router.query.blogDetail;
   const { blogs, fetchBlogs } = context;
   const [blog, setBlog] = useState([]);
 
   useEffect(() => {
-    if (blogs == null) {
       fetchBlogs();
-    }
 
     blogs &&
       blogs.map((item) => {
@@ -89,7 +87,6 @@ const BlogDetail = () => {
                             <Link
                               href={`/blog/${data.slug}`}
                               className="more-link"
-                              target="_blank"
                             >
                               {data.title}
                             </Link>

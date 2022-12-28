@@ -20,9 +20,7 @@ const CourseDetail = () => {
   }
 
   useEffect(() => {
-    if (courses == null) {
       fetchCourses();
-    }
 
     courses &&
       courses.map((item) => {
@@ -88,7 +86,7 @@ const CourseDetail = () => {
                             <Link
                               href={`/course/${data.slug}`}
                               className="more-link"
-                              target="_blank"
+                      
                             >
                               {data.name}
                             </Link>

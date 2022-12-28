@@ -56,7 +56,7 @@ const CountriesSlider = (props) => {
                   slug={data.slug}
                   imagepath={data.image}
                   country={data.name}
-                />
+                /> 
               </div>
             );
           })}

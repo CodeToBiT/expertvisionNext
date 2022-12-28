@@ -14,30 +14,17 @@ const ServiceDetail = () => {
   const serviceDetail = router.query.serviceDetail;
   const [service, setService] = useState();
   const { services, fetchServices } = context;
-  const fetchService = async () => {
-    const response = await fetch(
-      [`https://admin.evc.edu.np/api/`, `service/${serviceDetail}`].join(""),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-
-    const json = await response.json();
-
-    setService(json.data);
-  };
 
   useEffect(() => {
-    if (service == null) {
-      fetchService();
-    }
-    if (services == null) {
-      fetchServices();
-    }
+   
+    fetchServices();
+    services &&
+    services.map((item) => {
+      if (item.slug == serviceDetail) {
+        setService(item);
+      }
+    });
+
   }, []);
 
   let current_url;

@@ -16,9 +16,8 @@ const CountryDetail = () => {
   const { countries, fetchCountries } = context;
 
   useEffect(() => {
-    if (countries == null) {
+  
       fetchCountries();
-    }
     countries &&
       countries.map((item) => {
         if (item.slug == countryDetail) {
@@ -94,7 +93,7 @@ const CountryDetail = () => {
                             <Link
                               href={`/country/${data.slug}`}
                               className="more-link"
-                              target="_blank"
+                        
                             >
                               {data.name}
                             </Link>

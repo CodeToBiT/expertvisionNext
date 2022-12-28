@@ -17,9 +17,9 @@ const SinglePage = () => {
   const { pages, fetchPages } = context;
 
   useEffect(() => {
-    if (pages == null) {
+
       fetchPages();
-    }
+
     if (blogs == null) {
       fetchBlogs();
     }
