@@ -37,11 +37,7 @@ const Countries = () => {
         <div className="container">
           <div className="courses-intro my-5">
             <h1>Over seven countries to choose from</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
-              cursus consectetur duis congue aenean vitae. Egestas vitae
-              dignissim vulputate at volutpat
-            </p>
+            <div dangerouslySetInnerHTML={{__html: settings && settings.homepage_country_section_description}}></div>
           </div>
           <div className="row">
             {countries &&

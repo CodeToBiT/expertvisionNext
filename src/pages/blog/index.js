@@ -40,11 +40,8 @@ const Blog = () => {
         <div className="container">
           <div className="blogs-intro my-5">
             <h1>Blogs and updates</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
-              cursus consectetur duis congue aenean vitae. Egestas vitae
-              dignissim vulputate at volutpat
-            </p>
+            <div dangerouslySetInnerHTML={{__html: settings && settings.homepage_blog_section_description}}>
+          </div>
           </div>
           <div className="row">
             {blogs &&

@@ -40,11 +40,8 @@ const Courses = () => {
         <div className="container">
           <div className="courses-intro my-5">
             <h1>Our Courses</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
-              cursus consectetur duis congue aenean vitae. Egestas vitae
-              dignissim vulputate at volutpat
-            </p>
+            <div dangerouslySetInnerHTML={{__html: settings && settings.homepage_course_section_description}}>
+          </div>
           </div>
           <div className="row">
             {courses &&

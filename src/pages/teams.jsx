@@ -41,11 +41,7 @@ const Teams = () => {
         <div className="container">
           <div className="teams-intro my-5">
             <h1>Our Team</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
-              cursus consectetur duis congue aenean vitae. Egestas vitae
-              dignissim vulputate at volutpat
-            </p>
+            <div dangerouslySetInnerHTML={{__html: settings && settings.ourteam_section_description}}></div>
           </div>
           <div className="row">
             {ourteams &&
