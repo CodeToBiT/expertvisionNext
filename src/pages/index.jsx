@@ -60,10 +60,7 @@ export default function Home() {
           name="description"
           content={settings && settings.homepage_meta_description}
         />
-        <meta
-          name="keywords"
-          content={settings && settings.homepage_meta_keywords}
-        />
+        <meta name="keywords" content={settings && settings.homepage_meta_keywords} />
         <link rel="canonical" href={current_url} />
       </Head>
 
@@ -141,13 +138,13 @@ export default function Home() {
               <div className="col-md-8 col-sm-12">
                 <div className="d-flex gap-4 justify-content-center">
                   {partners &&
-                    partners.slice(0, 5).map((data, key) => {
+                    partners.map((data, key) => {
                       return (
                         <div
                           className="media-wrapper position-relative"
                           key={key}
                         >
-                          <Link href={data.link} target="_blank">
+                          <Link href={data.link == null? "#" : data.link} target="_blank">
                             <Image
                               src={data.image}
                               alt="loading"
