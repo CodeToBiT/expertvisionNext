@@ -11259,7 +11259,7 @@ a {
 }
 .universities .media-wrapper {
   background: white;
-  width: 140px;
+  width: 150px;
   height: 120px;
 }
 .universities .media-wrapper img {
@@ -11834,7 +11834,7 @@ a {
   color: #FF5151;
 }
 .footer .media-wrapper {
-  width: 150px;
+  width: 120px !important;
   height: 61.05px;
 }
 .footer .follow {
@@ -11859,7 +11859,7 @@ a {
 
 .navbar .media-wrapper {
   position: relative;
-  width: 150px;
+  width: 130px;
   height: 61.05px;
 }
 .navbar .btn {

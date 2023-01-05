@@ -37,7 +37,7 @@ const Footer = () => {
     footerLogo = (
       <Image
         src={settings && settings.site_footer_logo}
-        width={150}
+        width={130}
         height={61.05}
         alt="loading"
         sizes="(max-height: 64.05px)"
@@ -48,7 +48,7 @@ const Footer = () => {
     footerLogo = (
       <Image
         src="/images/logo2.png"
-        width={150}
+        width={130}
         height={61.05}
         alt="loading"
         sizes="(max-height: 64.05px)"
@@ -114,9 +114,7 @@ const Footer = () => {
                     pages.slice(0, 3).map((data, key) => {
                       return (
                         <li className="nav-link" key={key}>
-                          <Link href={`/page/${data.slug}`}>
-                            {data.title}
-                          </Link>
+                          <Link href={`/page/${data.slug}`}>{data.title}</Link>
                         </li>
                       );
                     })}

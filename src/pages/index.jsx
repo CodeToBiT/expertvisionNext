@@ -12,6 +12,7 @@ import { Container } from "react-bootstrap";
 import CourseSlider from "../components/slider/CoursesSlider";
 import BlogCard from "../components/card/BlogCard";
 import Testimonials from "../components/layout/Testimonials";
+import PartnerSlider from "../components/slider/PartnerSlider";
 
 import { useAppContext } from "../context/state";
 import { useEffect } from "react";
@@ -52,6 +53,7 @@ export default function Home() {
     current_url = window.location.href;
   }
 
+
   return (
     <>
       <Head>
@@ -60,7 +62,10 @@ export default function Home() {
           name="description"
           content={settings && settings.homepage_meta_description}
         />
-        <meta name="keywords" content={settings && settings.homepage_meta_keywords} />
+        <meta
+          name="keywords"
+          content={settings && settings.homepage_meta_keywords}
+        />
         <link rel="canonical" href={current_url} />
       </Head>
 
@@ -134,31 +139,8 @@ export default function Home() {
             <div className="services-intro my-5">
               <h2>Our Partner Universities</h2>
             </div>
-            <div className="row justify-content-center">
-              <div className="col-md-8 col-sm-12">
-                <div className="d-flex gap-4 justify-content-center">
-                  {partners &&
-                    partners.map((data, key) => {
-                      return (
-                        <div
-                          className="media-wrapper position-relative"
-                          key={key}
-                        >
-                          <Link href={data.link == null? "#" : data.link} target="_blank">
-                            <Image
-                              src={data.image}
-                              alt="loading"
-                              priority="false"
-                              sizes="(max-height: 125px)"
-                              fill
-                            />
-                          </Link>
-                        </div>
-                      );
-                    })}
-                </div>
-              </div>
-            </div>
+            <PartnerSlider />
+            
           </div>
         </section>
 
