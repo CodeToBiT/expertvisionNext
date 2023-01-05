@@ -37,7 +37,7 @@ const NavigationBar = () => {
   if (isIcon) {
     favIcon = <link rel="shortcut icon" href={settings && settings.fav_icon} />;
   } else {
-    favIcon = <link rel="shortcut icon" href="/images/logo2.png" />;
+    favIcon = <link rel="shortcut icon" href="/images/logo2.webp" />;
   }
 
   let mainLogo;
@@ -55,7 +55,7 @@ const NavigationBar = () => {
   } else {
     mainLogo = (
       <Image
-        src="/images/logo.png"
+        src="/images/logo.webp"
         alt="loading"
         priority="false"
         fill
