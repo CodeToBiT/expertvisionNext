@@ -60,7 +60,10 @@ export default function Home() {
           name="description"
           content={settings && settings.homepage_meta_description}
         />
-        <meta name="keywords" content={settings && settings.homepage_meta_keywords} />
+        <meta
+          name="keywords"
+          content={settings && settings.homepage_meta_keywords}
+        />
         <link rel="canonical" href={current_url} />
       </Head>
 
