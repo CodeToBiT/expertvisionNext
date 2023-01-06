@@ -102,7 +102,7 @@ const CourseDetail = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href="" className="stretched-link"></a>
+                          <a href={`/course/${data.slug}`}  className="stretched-link"></a>
                         </div>
                       );
                     }
@@ -127,7 +127,7 @@ const CourseDetail = () => {
                             ></p>
                           </div>
                         </div>
-                        <a href="" className="stretched-link"></a>
+                        <a href={`/country/${data.slug}`}  className="stretched-link"></a>
                       </div>
                     );
                   })}

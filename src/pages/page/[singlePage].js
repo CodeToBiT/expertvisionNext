@@ -106,7 +106,7 @@ const SinglePage = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href="" className="stretched-link"></a>
+                          <a href={`/page/${data.slug}`}  className="stretched-link"></a>
                         </div>
                       );
                     

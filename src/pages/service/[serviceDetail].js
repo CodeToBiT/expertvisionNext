@@ -103,7 +103,7 @@ const ServiceDetail = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href="" className="stretched-link"></a>
+                          <a href={`/service/${data.slug}`}  className="stretched-link"></a>
                         </div>
                       );
                     }
@@ -128,7 +128,7 @@ const ServiceDetail = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href="" className="stretched-link"></a>
+                          <a href={`/country/${data.slug}`}  className="stretched-link"></a>
                         </div>
                       );
                     

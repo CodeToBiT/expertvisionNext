@@ -80,7 +80,7 @@ const BlogDetail = () => {
               </div>
             </div>
             <div className="col-md-4 col-sm-12">
-            <div className="more my-3">
+              <div className="more my-3">
                 <h3 className="mb-1">More Blogs</h3>
                 {blogs &&
                   blogs.slice(0, 4).map((data, key) => {
@@ -102,7 +102,10 @@ const BlogDetail = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href="" className="stretched-link"></a>
+                          <a
+                            href={`/blog/${data.slug}`}
+                            className="stretched-link"
+                          ></a>
                         </div>
                       );
                     }
@@ -110,27 +113,26 @@ const BlogDetail = () => {
                 <h3 className="mt-5">Featured Destinations</h3>
                 {countries &&
                   countries.slice(0, 4).map((data, key) => {
-                      return (
-                        <div className="card-more">
-                          <div className="row">
-                            <div className="col-md-4 col-sm-12">
-                              <div className="media-wrapper position-relative">
-                                <Image src={data.image} fill />
-                              </div>
-                            </div>
-                            <div className="col-md-8 col-sm-12">
-                              <h5>{data.name}</h5>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: data.short_description,
-                                }}
-                              ></p>
+                    return (
+                      <div className="card-more">
+                        <div className="row">
+                          <div className="col-md-4 col-sm-12">
+                            <div className="media-wrapper position-relative">
+                              <Image src={data.image} fill />
                             </div>
                           </div>
-                          <a href="" className="stretched-link"></a>
+                          <div className="col-md-8 col-sm-12">
+                            <h5>{data.name}</h5>
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: data.short_description,
+                              }}
+                            ></p>
+                          </div>
                         </div>
-                      );
-                    
+                        <a href={`/country/${data.slug}`} className="stretched-link"></a>
+                      </div>
+                    );
                   })}
               </div>
             </div>
