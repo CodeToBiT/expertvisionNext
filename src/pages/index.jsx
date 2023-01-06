@@ -13,6 +13,7 @@ import CourseSlider from "../components/slider/CoursesSlider";
 import BlogCard from "../components/card/BlogCard";
 import Testimonials from "../components/layout/Testimonials";
 import PartnerSlider from "../components/slider/PartnerSlider";
+import Slider from "react-slick";
 
 import { useAppContext } from "../context/state";
 import { useEffect } from "react";
@@ -48,11 +49,20 @@ export default function Home() {
       fetchSliders();
     }
   }, []);
+  const bannerslider = {
+    dots: false,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    arrows: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
   }
-
 
   return (
     <>
@@ -77,19 +87,23 @@ export default function Home() {
               <div className="col-md-6">
                 <div className="banner-content text-align-center">
                   {sliders &&
-                    sliders.slice(0, 1).map((data, key) => {
-                      return <h1 key={key}>{data.title}</h1>;
+                    sliders.map((data, key) => {
+                      if (data.id == "2") {
+                        return <h1 key={key}>{data.title}</h1>;
+                      }
                     })}
                   {sliders &&
-                    sliders.slice(0, 1).map((data, key) => {
-                      return (
-                        <div
-                          key={key}
-                          dangerouslySetInnerHTML={{
-                            __html: data.description,
-                          }}
-                        ></div>
-                      );
+                    sliders.map((data, key) => {
+                      if (data.id == "2") {
+                        return (
+                          <div
+                            key={key}
+                            dangerouslySetInnerHTML={{
+                              __html: data.description,
+                            }}
+                          ></div>
+                        );
+                      }
                     })}
 
                   <div className="explore my-4 d-flex gap-32">
@@ -103,21 +117,23 @@ export default function Home() {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="media-wrapper position-relative">
+                <Slider {...bannerslider}>
                   {sliders &&
-                    sliders.slice(0, 1).map((data, key) => {
+                    sliders.map((data, key) => {
                       return (
-                        <Image
-                          src={data.image}
-                          alt="loading"
-                          priority="false"
-                          fill
-                          sizes="(max-height: 664px)"
-                          key={key}
-                        />
+                        <div className="media-wrapper position-relative">
+                          <Image
+                            src={data.image}
+                            alt="loading"
+                            priority="false"
+                            fill
+                            sizes="(max-height: 664px)"
+                            key={key}
+                          />
+                        </div>
                       );
                     })}
-                </div>
+                </Slider>
               </div>
             </div>
           </div>
@@ -140,7 +156,6 @@ export default function Home() {
               <h2>Our Partner Universities</h2>
             </div>
             <PartnerSlider />
-            
           </div>
         </section>
 
