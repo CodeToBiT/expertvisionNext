@@ -16,6 +16,7 @@ export function AppWrapper({ children }) {
   const [sliders, setSliders] = useState();
   const [partners, setPartners] = useState();
   const [settings, setSettings] = useState();
+  const [downloads, setDownloads] = useState();
 
   const fetchCountries = async () => {
     const response = await fetch([url, "countries"].join(""), {
@@ -159,6 +160,17 @@ export function AppWrapper({ children }) {
     const json = await response.json();
     setSettings(json.data);
   };
+  const fetchDownloads = async () => {
+    const response = await fetch([url, "downloads"].join(""),{
+        method: "GET",
+        headers: {
+          "Content-Type": "applicaiton/json",
+          "Accept" : "application/json"
+        },
+    });
+    const json = await response.json();
+    setDownloads(json.data);
+  };
 
   return (
     <AppContext.Provider
@@ -187,6 +199,8 @@ export function AppWrapper({ children }) {
           fetchPartners,
           settings,
           fetchSettings,
+          downloads,
+          fetchDownloads,
         }}
     >
       {children}

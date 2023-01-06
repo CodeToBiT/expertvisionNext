@@ -20,8 +20,8 @@ const PartnerSlider = () => {
   var settings = {
     infinite: true,
     autoplay: true,
-    speech: 1000,
-    autoplaySpeed: 1500,
+    speech: 2000,
+    autoplaySpeed: 2000,
     slidesToShow: 6,
     slidesToScroll: 1,
     arrows: false,

@@ -11699,7 +11699,7 @@ a {
   color: #696969;
 }
 .single-content .sub {
-  padding: 20px 70px;
+  padding: 20px 0;
   word-wrap: break-word;
 }
 @media (max-width: 800px) {
@@ -11806,6 +11806,44 @@ a {
   margin: 0 30px;
 }
 
+.download {
+  margin: 30px 0;
+  text-align: center;
+}
+.download table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.download table thead tr {
+  color: white;
+}
+.download table td,
+.download #table th {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+.download table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.download table tr td:nth-child(1) {
+  width: 60%;
+}
+.download table tr:hover {
+  background-color: #ddd;
+}
+.download table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #FF5151;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 130%;
+}
+
 .footer {
   padding: 40px 0 20px 0;
   text-align: left;
@@ -11834,8 +11872,12 @@ a {
   color: #FF5151;
 }
 .footer .media-wrapper {
-  width: 120px !important;
-  height: 61.05px;
+  width: 130px !important;
+  height: 78px !important;
+}
+.footer .media-wrapper img {
+  height: 100%;
+  width: 100%;
 }
 .footer .follow {
   font-size: 1rem;
@@ -11857,10 +11899,13 @@ a {
   color: #F1F1F1;
 }
 
+.navbar {
+  padding: 10px 0;
+}
 .navbar .media-wrapper {
   position: relative;
   width: 130px;
-  height: 61.05px;
+  height: 78px;
 }
 .navbar .btn {
   color: #F1F1F1;
