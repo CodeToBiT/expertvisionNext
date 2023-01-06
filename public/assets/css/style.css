@@ -11253,6 +11253,25 @@ a {
   font-weight: 400;
   line-height: 120%;
 }
+.card-more {
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.13);
+  border-radius: 8px;
+  padding: 10px 20px 10px 10px;
+}
+.card-more .media-wrapper {
+  width: 100%;
+  height: 100px !important;
+}
+.card-more p {
+  position: relative;
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.5em;
+  line-height: 1.8em;
+}
 
 .universities {
   margin-bottom: 100px !important;
@@ -11628,8 +11647,8 @@ a {
 }
 
 .single-banner .more {
-  box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
+  position: sticky !important;
+  top: 0 !important;
   font-family: "DM Sans", sans-serif;
 }
 .single-banner .more h3, .single-banner .more .h3 {
@@ -11665,6 +11684,12 @@ a {
 .single-banner .more a:hover {
   color: #FF5151;
 }
+.single-banner .more h5, .single-banner .more .h5 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 120%;
+  color: #696969;
+}
 .single-banner h1, .single-banner .h1 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -11679,6 +11704,7 @@ a {
   border-radius: 16px;
 }
 .single-content {
+  padding: 0 20px;
   font-family: "Poppins", sans-serif;
 }
 .single-content .date {
@@ -11900,7 +11926,7 @@ a {
 }
 
 .navbar {
-  padding: 10px 0;
+  padding: 1px;
 }
 .navbar .media-wrapper {
   position: relative;

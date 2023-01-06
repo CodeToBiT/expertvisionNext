@@ -12,10 +12,14 @@ const BlogDetail = () => {
   const context = useAppContext();
   const blogDetail = router.query.blogDetail;
   const { blogs, fetchBlogs } = context;
+  const { countries, fetchCountries } = context;
   const [blog, setBlog] = useState([]);
 
   useEffect(() => {
-      fetchBlogs();
+    fetchBlogs();
+    if (countries == null) {
+      fetchCountries();
+    }
 
     blogs &&
       blogs.map((item) => {
@@ -41,13 +45,13 @@ const BlogDetail = () => {
         <link rel="canonical" href={current_url} />
       </Head>
 
-      <section className="single-banner">
+      <section className="single-banner mt-4">
         <div className="container">
           <div className="title">
             <h1>{blog && blog.title}</h1>
           </div>
           <div className="row">
-            <div className="col-md-9 col-sm-12">
+            <div className="col-md-8 col-sm-12">
               <div className="pe-5">
                 <div className="media-wrapper position-relative">
                   <Image
@@ -61,7 +65,7 @@ const BlogDetail = () => {
               </div>
               <div className="single-content">
                 <div className="sub">
-                  <div className="my-3">
+                  <div className="my-5">
                     <h2 className="date d-flex gap-2 align-items-baseline">
                       <FaRegCalendarAlt />
                       {blog && blog.date}
@@ -75,26 +79,59 @@ const BlogDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-12">
-              <div className="more p-4">
-                <h3>More Blogs</h3>
-                <ul>
-                  {blogs &&
-                    blogs.slice(0, 4).map((data, key) => {
-                      if (data.slug != blogDetail) {
-                        return (
-                          <li key={key}>
-                            <Link
-                              href={`/blog/${data.slug}`}
-                              className="more-link"
-                            >
-                              {data.title}
-                            </Link>
-                          </li>
-                        );
-                      }
-                    })}
-                </ul>
+            <div className="col-md-4 col-sm-12">
+            <div className="more my-3">
+                <h3 className="mb-1">More Blogs</h3>
+                {blogs &&
+                  blogs.slice(0, 4).map((data, key) => {
+                    if (data.slug != blogDetail) {
+                      return (
+                        <div className="card-more">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-12">
+                              <div className="media-wrapper position-relative">
+                                <Image src={data.image} fill />
+                              </div>
+                            </div>
+                            <div className="col-md-8 col-sm-12">
+                              <h5>{data.title}</h5>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: data.short_description,
+                                }}
+                              ></p>
+                            </div>
+                          </div>
+                          <a href="" className="stretched-link"></a>
+                        </div>
+                      );
+                    }
+                  })}
+                <h3 className="mt-5">Featured Destinations</h3>
+                {countries &&
+                  countries.slice(0, 4).map((data, key) => {
+                      return (
+                        <div className="card-more">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-12">
+                              <div className="media-wrapper position-relative">
+                                <Image src={data.image} fill />
+                              </div>
+                            </div>
+                            <div className="col-md-8 col-sm-12">
+                              <h5>{data.name}</h5>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: data.short_description,
+                                }}
+                              ></p>
+                            </div>
+                          </div>
+                          <a href="" className="stretched-link"></a>
+                        </div>
+                      );
+                    
+                  })}
               </div>
             </div>
           </div>

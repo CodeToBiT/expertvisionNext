@@ -15,15 +15,18 @@ const SinglePage = () => {
   const [single, setSingle] = useState();
   const { blogs, fetchBlogs } = context;
   const { pages, fetchPages } = context;
+  const { countries, fetchCountries } = context;
 
   useEffect(() => {
-
-      fetchPages();
+    fetchPages();
 
     if (blogs == null) {
       fetchBlogs();
     }
 
+    if (countries == null) {
+      fetchCountries();
+    }
     pages &&
       pages.map((item) => {
         if (item.slug == singlePage) {
@@ -55,7 +58,7 @@ const SinglePage = () => {
             <h1>{single && single.title}</h1>
           </div>
           <div className="row">
-            <div className="col-md-9 col-sm-12">
+            <div className="col-md-8 col-sm-12">
               <div className="pe-5">
                 <div className="media-wrapper position-relative">
                   <Image
@@ -81,24 +84,33 @@ const SinglePage = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-12">
-              <div className="more p-4">
-                <h3>Check our Blogs</h3>
-                <ul>
-                  {blogs &&
-                    blogs.slice(0,4).map((data, key) => {
+            <div className="col-md-4 col-sm-12">
+              <div className="more my-3">
+              <h3 className="mt-5">Featured Destinations</h3>
+                {countries &&
+                  countries.slice(0, 4).map((data, key) => {
                       return (
-                        <li key={key}>
-                          <Link
-                            href={`/blog/${data.slug}`}
-                            className="more-link"
-                          >
-                            {data.title}
-                          </Link>
-                        </li>
+                        <div className="card-more">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-12">
+                              <div className="media-wrapper position-relative">
+                                <Image src={data.image} fill />
+                              </div>
+                            </div>
+                            <div className="col-md-8 col-sm-12">
+                              <h5>{data.name}</h5>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: data.short_description,
+                                }}
+                              ></p>
+                            </div>
+                          </div>
+                          <a href="" className="stretched-link"></a>
+                        </div>
                       );
-                    })}
-                </ul>
+                    
+                  })}
               </div>
             </div>
           </div>

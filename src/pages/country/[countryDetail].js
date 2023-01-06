@@ -14,10 +14,13 @@ const CountryDetail = () => {
   const countryDetail = router.query.countryDetail;
   const [country, setCountry] = useState();
   const { countries, fetchCountries } = context;
+  const { blogs, fetchBlogs } = context;
 
   useEffect(() => {
-  
-      fetchCountries();
+    fetchCountries();
+    if (blogs == null) {
+      fetchBlogs();
+    }
     countries &&
       countries.map((item) => {
         if (item.slug == countryDetail) {
@@ -47,13 +50,13 @@ const CountryDetail = () => {
         <meta name="keywords" content={country && country.meta_keywords} />
         <link rel="canonical" href={current_url} />
       </Head>
-      <section className="single-banner">
+      <section className="single-banner mt-4">
         <div className="container">
           <div className="title">
             <h1>{country && country.name}</h1>
           </div>
           <div className="row">
-            <div className="col-md-9 col-sm-12">
+            <div className="col-md-8 col-sm-12">
               <div className="pe-5">
                 <div className="media-wrapper position-relative">
                   <Image
@@ -81,27 +84,61 @@ const CountryDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 col-sm-12">
-              <div className="more p-4">
-                <h3>More Countries</h3>
-                <ul>
-                  {countries &&
-                    countries.slice(0, 4).map((data, key) => {
-                      if (data.slug != countryDetail) {
-                        return (
-                          <li key={key}>
-                            <Link
-                              href={`/country/${data.slug}`}
-                              className="more-link"
-                        
-                            >
-                              {data.name}
-                            </Link>
-                          </li>
-                        );
-                      }
-                    })}
-                </ul>
+            <div className="col-md-4 col-sm-12">
+            <div className="more my-3">
+                
+                <h3 className="mt-5">Featured Destinations</h3>
+                {countries &&
+                  countries.slice(0, 4).map((data, key) => {
+                    if(data.slug != countryDetail){
+                      return (
+                        <div className="card-more">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-12">
+                              <div className="media-wrapper position-relative">
+                                <Image src={data.image} fill />
+                              </div>
+                            </div>
+                            <div className="col-md-8 col-sm-12">
+                              <h5>{data.name}</h5>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: data.short_description,
+                                }}
+                              ></p>
+                            </div>
+                          </div>
+                          <a href="" className="stretched-link"></a>
+                        </div>
+                      );
+                              }
+                  })}
+                  <h3 className="mb-1">Check Our Blogs</h3>
+                {blogs &&
+                  blogs.slice(0, 4).map((data, key) => {
+                 
+                      return (
+                        <div className="card-more">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-12">
+                              <div className="media-wrapper position-relative">
+                                <Image src={data.image} fill />
+                              </div>
+                            </div>
+                            <div className="col-md-8 col-sm-12">
+                              <h5>{data.title}</h5>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: data.short_description,
+                                }}
+                              ></p>
+                            </div>
+                          </div>
+                          <a href="" className="stretched-link"></a>
+                        </div>
+                      );
+                 
+                  })}
               </div>
             </div>
           </div>

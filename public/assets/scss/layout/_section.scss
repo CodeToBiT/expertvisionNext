@@ -371,9 +371,10 @@
 
 .single {
   &-banner {
+   
     .more {
-      box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
+      position: sticky !important;
+      top: 0 !important;
       font-family: "DM Sans", sans-serif;
       h3 {
         color: $primary;
@@ -407,6 +408,11 @@
       a:hover {
         color: $secondary;
       }
+
+      h5 {
+        @include typography(1.125rem, 500, 120%);
+        color: $grey;
+      }
     }
     h1 {
       @include typography(1.5rem, 700, 150%);
@@ -423,6 +429,7 @@
   }
 
   &-content {
+    padding: 0 20px;
     font-family: "Poppins", sans-serif;
     .date {
       svg {

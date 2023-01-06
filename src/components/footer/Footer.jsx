@@ -111,13 +111,16 @@ const Footer = () => {
                     <Link href="/teams">Teams</Link>{" "}
                   </li>
                   {pages &&
-                    pages.slice(0, 3).map((data, key) => {
+                    pages.slice(0, 2).map((data, key) => {
                       return (
                         <li className="nav-link" key={key}>
                           <Link href={`/page/${data.slug}`}>{data.title}</Link>
                         </li>
                       );
                     })}
+                  <li className="nav-link">
+                    <Link href="/download">Download</Link>{" "}
+                  </li>
                 </ul>
               </div>
 

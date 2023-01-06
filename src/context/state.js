@@ -113,7 +113,6 @@ export function AppWrapper({ children }) {
     const json = await response.json();
     setPages(json.data);
   };
-
   const fetchSocialmedias = async () => {
     const response = await fetch([url, "socialmedias"].join(""),{
       method: "GET",
@@ -125,7 +124,6 @@ export function AppWrapper({ children }) {
     const json = await response.json();
     setSocialmedias(json.data);
   };
-
   const fetchSliders = async () => {
     const response = await fetch([url, "sliders"].join(""),{
         method: "GET",
@@ -137,7 +135,6 @@ export function AppWrapper({ children }) {
     const json = await response.json();
     setSliders(json.data);
   }
-
   const fetchPartners = async () => {
     const response = await fetch([url, "partners"].join(""),{
         method: "GET",

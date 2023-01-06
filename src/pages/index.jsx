@@ -121,7 +121,10 @@ export default function Home() {
                   {sliders &&
                     sliders.map((data, key) => {
                       return (
-                        <div className="media-wrapper position-relative">
+                        <div
+                          className="media-wrapper position-relative"
+                          key={key}
+                        >
                           <Image
                             src={data.image}
                             alt="loading"

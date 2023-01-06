@@ -50,7 +50,7 @@ const PartnerSlider = () => {
         {partners &&
           partners.map((data, key) => {
             return (
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center" key={key}>
                 <div className="media-wrapper position-relative" key={key}>
                   <Link
                     href={data.link == null ? "#" : data.link}

@@ -13,19 +13,19 @@ const ServiceDetail = () => {
   const context = useAppContext();
   const serviceDetail = router.query.serviceDetail;
   const [service, setService] = useState();
+  const { countries, fetchCountries } = context;
   const { services, fetchServices } = context;
 
   useEffect(() => {
-   
     fetchServices();
+    fetchCountries();
 
     services &&
-    services.map((item) => {
-      if (item.slug == serviceDetail) {
-        setService(item);
-      }
-    });
-
+      services.map((item) => {
+        if (item.slug == serviceDetail) {
+          setService(item);
+        }
+      });
   }, [services]);
 
   let current_url;
@@ -48,13 +48,13 @@ const ServiceDetail = () => {
         <meta name="keywords" content={service && service.meta_keywords} />
         <link rel="canonical" href={current_url} />
       </Head>
-      <section className="single-banner">
+      <section className="single-banner mt-4">
         <div className="container">
           <div className="title">
             <h1>{service && service.title}</h1>
           </div>
           <div className="row">
-            <div className="col-md-9 col-sm-12 pe-5">
+            <div className="col-md-8 col-sm-12 pe-5">
               <div className="media-wrapper position-relative">
                 <Image
                   src={
@@ -68,43 +68,71 @@ const ServiceDetail = () => {
                   sized="(max-height: 445px)"
                 />
               </div>
-            </div>
-            <div className="col-md-3 col-sm-12">
-              <div className="more p-4">
-                <h3>More Content</h3>
-                <ul>
-                  {services &&
-                    services.map((data, key) => {
-                      if (data.slug != serviceDetail) {
-                        return (
-                          <li key={key}>
-                            <Link
-                              href={`/service/${data.slug}`}
-                              className="more-link"
-                            >
-                              {data.title}
-                            </Link>
-                          </li>
-                        );
-                      }
-                    })}
-                </ul>
+              <div className="single-content">
+                <div className="sub">
+                  <div className="my-3">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: service && service.description,
+                      }}
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="single-content">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9 col-sm-12 sub">
-              <div className="my-3">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: service && service.description,
-                  }}
-                ></div>
+            <div className="col-md-4 col-sm-12 side">
+              <div className="more my-3">
+                <h3 className="mb-1">More Services</h3>
+                {services &&
+                  services.slice(0, 4).map((data, key) => {
+                    if (data.slug != serviceDetail) {
+                      return (
+                        <div className="card-more">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-12">
+                              <div className="media-wrapper position-relative">
+                                <Image src={data.image} fill />
+                              </div>
+                            </div>
+                            <div className="col-md-8 col-sm-12">
+                              <h5>{data.title}</h5>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: data.short_description,
+                                }}
+                              ></p>
+                            </div>
+                          </div>
+                          <a href="" className="stretched-link"></a>
+                        </div>
+                      );
+                    }
+                  })}
+                <h3 className="mt-5">Featured Destinations</h3>
+                {countries &&
+                  countries.slice(0, 4).map((data, key) => {
+                      return (
+                        <div className="card-more">
+                          <div className="row">
+                            <div className="col-md-4 col-sm-12">
+                              <div className="media-wrapper position-relative">
+                                <Image src={data.image} fill />
+                              </div>
+                            </div>
+                            <div className="col-md-8 col-sm-12">
+                              <h5>{data.name}</h5>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: data.short_description,
+                                }}
+                              ></p>
+                            </div>
+                          </div>
+                          <a href="" className="stretched-link"></a>
+                        </div>
+                      );
+                    
+                  })}
               </div>
             </div>
           </div>
