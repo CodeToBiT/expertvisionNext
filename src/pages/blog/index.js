@@ -2,22 +2,26 @@ import Image from "next/image";
 import Head from "next/head";
 import BlogCard from "../../components/card/BlogCard";
 
-import { useAppContext } from "../../context/state";
+
 import { useEffect } from "react";
 
-const Blog = () => {
-  const context = useAppContext();
+const url = "https://admin.evc.edu.np/api/";
 
-  const { blogs, fetchBlogs, settings, fetchSettings } = context;
+export async function getServerSideProps() {
+  const responseBlogs = await fetch([url, "blogs"].join(""));
+  const blogs = await responseBlogs.json();
+  const responseSettings = await fetch([url, "settings"].join(""));
+  const settings = await responseSettings.json();
 
-  useEffect(() => {
-    if (blogs == null) {
-      fetchBlogs();
-    }
-    if (settings == null) {
-      fetchSettings();
-    }
-  }, []);
+  return {
+    props: {
+      blogs,
+      settings,
+    },
+  };
+}
+
+const Blog = ({ blogs, settings }) => {
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
@@ -25,14 +29,14 @@ const Blog = () => {
   return (
     <>
       <Head>
-        <title>{settings && settings.blogs_seo_title}</title>
+        <title>{settings && settings.data.blogs_seo_title}</title>
         <meta
           name="description"
-          content={settings && settings.blogs_meta_description}
+          content={settings && settings.data.blogs_meta_description}
         />
         <meta
           name="keywords"
-          content={settings && settings.blogs_meta_keywords}
+          content={settings && settings.data.blogs_meta_keywords}
         />
         <link rel="canonical" href={current_url} />
       </Head>
@@ -40,12 +44,16 @@ const Blog = () => {
         <div className="container">
           <div className="blogs-intro my-5">
             <h1>Blogs and updates</h1>
-            <div dangerouslySetInnerHTML={{__html: settings && settings.homepage_blog_section_description}}>
-          </div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html:
+                  settings && settings.data.homepage_blog_section_description,
+              }}
+            ></div>
           </div>
           <div className="row">
             {blogs &&
-              blogs.map((data, key) => {
+              blogs.data.map((data, key) => {
                 return (
                   <BlogCard
                     date={data.date}

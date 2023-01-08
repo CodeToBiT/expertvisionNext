@@ -6,7 +6,7 @@ const CountriesCard = (props) => {
     <>
       <div className="card-countries br-24">
         <div className="media-wrapper position-relative">
-          <Link href={`/country/${props.slug}`}>
+          <Link href={`/country/${props.slug}`} className="stretched-link">
             <Image
               src={props.imagepath}
               alt="loading"

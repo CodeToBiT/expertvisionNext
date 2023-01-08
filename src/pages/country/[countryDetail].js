@@ -3,26 +3,33 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { useAppContext } from "../../context/state";
-
 import Image from "next/image";
 import Link from "next/link";
 
-const CountryDetail = () => {
+const url = "https://admin.evc.edu.np/api/";
+
+export async function getServerSideProps() {
+  const responseBlogs = await fetch([url, "blogs"].join(""));
+  const blogs = await responseBlogs.json();
+  const responseCountries = await fetch([url, "countries"].join(""));
+  const countries = await responseCountries.json();
+
+  return {
+    props: {
+      blogs,
+      countries,
+    },
+  };
+}
+
+const CountryDetail = ({ countries, blogs }) => {
   const router = useRouter();
-  const context = useAppContext();
   const countryDetail = router.query.countryDetail;
-  const [country, setCountry] = useState();
-  const { countries, fetchCountries } = context;
-  const { blogs, fetchBlogs } = context;
+  const [country, setCountry] = useState([]);
 
   useEffect(() => {
-    fetchCountries();
-    if (blogs == null) {
-      fetchBlogs();
-    }
     countries &&
-      countries.map((item) => {
+      countries.data.map((item) => {
         if (item.slug == countryDetail) {
           setCountry(item);
         }
@@ -37,7 +44,7 @@ const CountryDetail = () => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>
           {country && country.seo_title
             ? country && country.seo_title
@@ -49,7 +56,7 @@ const CountryDetail = () => {
         />
         <meta name="keywords" content={country && country.meta_keywords} />
         <link rel="canonical" href={current_url} />
-      </Head>
+      </Head> */}
       <section className="single-banner mt-4">
         <div className="container">
           <div className="title">
@@ -85,18 +92,22 @@ const CountryDetail = () => {
               </div>
             </div>
             <div className="col-md-4 col-sm-12">
-            <div className="more my-3">
-                
+              <div className="more my-3">
                 <h3 className="mt-5">Featured Destinations</h3>
                 {countries &&
-                  countries.slice(0, 4).map((data, key) => {
-                    if(data.slug != countryDetail){
+                  countries.data.slice(0, 4).map((data, key) => {
+                    if (data.slug != countryDetail) {
                       return (
                         <div className="card-more">
                           <div className="row">
                             <div className="col-md-4 col-sm-12">
                               <div className="media-wrapper position-relative">
-                                <Image src={data.image} fill />
+                                <Link
+                                  href={`/country/${data.slug}`}
+                                  className="stretched-link"
+                                >
+                                  <Image src={data.image} fill />
+                                </Link>
                               </div>
                             </div>
                             <div className="col-md-8 col-sm-12">
@@ -108,36 +119,37 @@ const CountryDetail = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href={`/country/${data.slug}`}  className="stretched-link"></a>
                         </div>
                       );
-                              }
+                    }
                   })}
-                  <h3 className="mb-1">Check Our Blogs</h3>
+                <h3 className="mb-1">Check Our Blogs</h3>
                 {blogs &&
-                  blogs.slice(0, 4).map((data, key) => {
-                 
-                      return (
-                        <div className="card-more">
-                          <div className="row">
-                            <div className="col-md-4 col-sm-12">
-                              <div className="media-wrapper position-relative">
+                  blogs.data.slice(0, 4).map((data, key) => {
+                    return (
+                      <div className="card-more">
+                        <div className="row">
+                          <div className="col-md-4 col-sm-12">
+                            <div className="media-wrapper position-relative">
+                              <Link
+                                href={`/blog/${data.slug}`}
+                                className="stretched-link"
+                              >
                                 <Image src={data.image} fill />
-                              </div>
-                            </div>
-                            <div className="col-md-8 col-sm-12">
-                              <h5>{data.title}</h5>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: data.short_description,
-                                }}
-                              ></p>
+                              </Link>
                             </div>
                           </div>
-                          <a href={`/blog/${data.slug}`}  className="stretched-link"></a>
+                          <div className="col-md-8 col-sm-12">
+                            <h5>{data.title}</h5>
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: data.short_description,
+                              }}
+                            ></p>
+                          </div>
                         </div>
-                      );
-                 
+                      </div>
+                    );
                   })}
               </div>
             </div>

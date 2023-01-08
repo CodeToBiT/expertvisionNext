@@ -5,21 +5,24 @@ import Footer from "../components/footer/Footer";
 import NavigationBar from "../components/header/NavigationBar";
 import Testimonails from "../components/layout/Testimonials";
 
-import { useAppContext } from "../context/state";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+const url = "https://admin.evc.edu.np/api/";
 
-const About = () => {
-  const context = useAppContext();
-  const { ourteams, fetchOurteams, settings, fetchSettings } = context;
+export async function getServerSideProps() {
+  const responseOurteams = await fetch([url, "ourteams"].join(""));
+  const ourteams = await responseOurteams.json();
+  const responseSettings = await fetch([url, "settings"].join(""));
+  const settings = await responseSettings.json();
 
-  useEffect(() => {
-    if (ourteams == null) {
-      fetchOurteams();
-    }
-    if (settings == null) {
-      fetchSettings();
-    }
-  }, []);
+  return {
+    props: {
+      ourteams,
+      settings,
+    },
+  };
+}
+
+const About = ({ ourteams, settings }) => {
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
@@ -28,15 +31,15 @@ const About = () => {
   return (
     <>
       <Head>
-        {/* <title>{settings && settings.about_seo_title}</title>
+        <title>{settings && settings.data.about_seo_title}</title>
         <meta
           name="description"
-          content={settings && settings.about_meta_description}
+          content={settings && settings.data.about_meta_description}
         />
         <meta
           name="keywords"
-          content={settings && settings.about_meta_keywords}
-        /> */}
+          content={settings && settings.data.about_meta_keywords}
+        />
         <title>About Us - ExpertVision</title>
         <link rel="canonical" href={current_url} />
       </Head>
@@ -127,7 +130,7 @@ const About = () => {
             </div>
             <div className="row">
               {ourteams &&
-                ourteams.map((data, key) => {
+                ourteams.data.map((data, key) => {
                   return (
                     <TeamsCard
                       clsa="col-md-4 col-xs-12"

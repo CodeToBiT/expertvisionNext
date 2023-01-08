@@ -3,32 +3,38 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { useAppContext } from "../../context/state";
-
 import Image from "next/image";
 import Link from "next/link";
 
-const CourseDetail = () => {
+const url = "https://admin.evc.edu.np/api/";
+
+export async function getServerSideProps() {
+  const responseCourses = await fetch([url, "courses"].join(""));
+  const courses = await responseCourses.json();
+  const responseCountries = await fetch([url, "countries"].join(""));
+  const countries = await responseCountries.json();
+
+  return {
+    props: {
+      courses,
+      countries,
+    },
+  };
+}
+
+const CourseDetail = ({ courses, countries }) => {
   const router = useRouter();
-  const context = useAppContext();
+
   const courseDetail = router.query.courseDetail;
   const [course, setCourse] = useState();
-  const { courses, fetchCourses } = context;
-  const { countries, fetchCountries } = context;
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
   }
 
   useEffect(() => {
-    fetchCourses();
-
-    if (countries == null) {
-      fetchCountries();
-    }
-
     courses &&
-      courses.map((item) => {
+      courses.data.map((item) => {
         if (item.slug == courseDetail) {
           setCourse(item);
         }
@@ -83,14 +89,19 @@ const CourseDetail = () => {
               <div className="more my-3">
                 <h3 className="mb-1">More Courses</h3>
                 {courses &&
-                  courses.slice(0, 4).map((data, key) => {
+                  courses.data.slice(0, 4).map((data, key) => {
                     if (data.slug != courseDetail) {
                       return (
                         <div className="card-more">
                           <div className="row">
                             <div className="col-md-4 col-sm-12">
                               <div className="media-wrapper position-relative">
-                                <Image src={data.image} fill />
+                                <Link
+                                  href={`/course/${data.slug}`}
+                                  className="stretched-link"
+                                >
+                                  <Image src={data.image} fill />
+                                </Link>
                               </div>
                             </div>
                             <div className="col-md-8 col-sm-12">
@@ -102,20 +113,24 @@ const CourseDetail = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href={`/course/${data.slug}`}  className="stretched-link"></a>
                         </div>
                       );
                     }
                   })}
                 <h3 className="mt-5">Featured Destinations</h3>
                 {countries &&
-                  countries.slice(0, 4).map((data, key) => {
+                  countries.data.slice(0, 4).map((data, key) => {
                     return (
                       <div className="card-more">
                         <div className="row">
                           <div className="col-md-4 col-sm-12">
                             <div className="media-wrapper position-relative">
-                              <Image src={data.image} fill />
+                              <Link
+                                href={`/country/${data.slug}`}
+                                className="stretched-link"
+                              >
+                                <Image src={data.image} fill />
+                              </Link>
                             </div>
                           </div>
                           <div className="col-md-8 col-sm-12">
@@ -127,7 +142,6 @@ const CourseDetail = () => {
                             ></p>
                           </div>
                         </div>
-                        <a href={`/country/${data.slug}`}  className="stretched-link"></a>
                       </div>
                     );
                   })}

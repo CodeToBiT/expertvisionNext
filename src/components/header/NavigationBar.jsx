@@ -5,13 +5,26 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useAppContext } from "../../context/state";
+
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
+
+
 const NavigationBar = () => {
-  const context = useAppContext();
-  const { settings, fetchSettings } = context;
+  const [settings, setSettings] = useState([]);
+  const fetchSettings = () => {
+    fetch("https://admin.evc.edu.np/api/settings")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setSettings(data);
+      });
+  };
+  useEffect(() => {
+    fetchSettings();
+  }, []);
 
   const [show, setShow] = useState(false);
   const showDropdown = (e) => {
@@ -21,21 +34,17 @@ const NavigationBar = () => {
     setShow(false);
   };
 
-  useEffect(() => {
-    if (settings == null) {
-      fetchSettings();
-    }
-  }, []);
-  // console.log(settings.site_main_logo)
 
-  const isImage = settings && settings.site_main_logo;
 
-  const isIcon = settings && settings.fav_icon;
+  const isImage = settings && settings.data?.site_main_logo;
+
+  const isIcon = settings && settings.data?.fav_icon;
+
 
   let favIcon;
 
   if (isIcon) {
-    favIcon = <link rel="shortcut icon" href={settings && settings.fav_icon} />;
+    favIcon = <link rel="shortcut icon" href={settings && settings.data?.fav_icon} />;
   } else {
     favIcon = <link rel="shortcut icon" href="/images/logo2.webp" />;
   }
@@ -45,7 +54,7 @@ const NavigationBar = () => {
   if (isImage) {
     mainLogo = (
       <Image
-        src={settings && settings.site_main_logo}
+        src={settings && settings.data?.site_main_logo}
         alt="loading"
         priority="false"
         fill
@@ -112,7 +121,7 @@ const NavigationBar = () => {
 
               {settings && settings.apply_now ? (
                 <Link
-                  href={settings && settings.apply_now}
+                  href={settings && settings.data?.apply_now}
                   className="btn btn-secondary"
                   target="_blank"
                 >

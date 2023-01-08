@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useState } from "react";
 
-import { useAppContext } from "../../context/state";
 import { useEffect } from "react";
 
 import CourseCard from "../card/CourseCard";
 
 const CourseSlider = (props) => {
-  var settings = {
+  var coursesSettings = {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -19,14 +19,14 @@ const CourseSlider = (props) => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
+        coursesSettings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 850,
-        settings: {
+        coursesSettings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
@@ -35,20 +35,25 @@ const CourseSlider = (props) => {
       },
     ],
   };
-  const context = useAppContext();
-  const { courses, fetchCourses } = context;
-
+  const [courses, setCourses] = useState([]);
+  const fetchCourses = () => {
+    fetch("https://admin.evc.edu.np/api/courses")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCourses(data);
+      });
+  };
   useEffect(() => {
-    if (courses == null) {
-      fetchCourses();
-    }
+    fetchCourses();
   }, []);
 
   return (
     <>
-      <Slider {...settings}>
+      <Slider {...coursesSettings}>
         {courses &&
-          courses.map((data, key) => {
+          courses.data?.map((data, key) => {
             return (
               <div key={key}>
                 <CourseCard

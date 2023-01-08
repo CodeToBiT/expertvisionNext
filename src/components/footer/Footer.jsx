@@ -1,42 +1,61 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { useAppContext } from "../../context/state";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
-  const context = useAppContext();
-  const {
-    settings,
-    fetchSettings,
-    socialmedias,
-    fetchSocialmedias,
-    countries,
-    fetchCountries,
-    pages,
-    fetchPages,
-  } = context;
-
+  const [settings, setSettings] = useState([]);
+  const [socialmedias, setSocialmedias] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [pages, setPages] = useState([]);
+  const fetchSettings = () => {
+    fetch("https://admin.evc.edu.np/api/settings")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setSettings(data);
+      });
+  };
+  const fetchSocialmedias = () => {
+    fetch("https://admin.evc.edu.np/api/socialmedias")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setSocialmedias(data);
+      });
+  };
+  const fetchCountries = () => {
+    fetch("https://admin.evc.edu.np/api/countries")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCountries(data);
+      });
+  };
+  const fetchPages = () => {
+    fetch("https://admin.evc.edu.np/api/pages")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPages(data);
+      });
+  };
   useEffect(() => {
-    if (settings == null) {
-      fetchSettings();
-    }
-    if (socialmedias == null) {
-      fetchSocialmedias();
-    }
-    if (countries == null) {
-      fetchCountries();
-    }
-    if (pages == null) {
-      fetchPages();
-    }
+    fetchSettings();
+    fetchSocialmedias();
+    fetchCountries();
+    fetchPages();
   }, []);
-  const isFooterImage = settings && settings.site_footer_logo;
+  const isFooterImage = settings && settings.data?.site_footer_logo;
   let footerLogo;
   if (isFooterImage) {
     footerLogo = (
       <Image
-        src={settings && settings.site_footer_logo}
+        src={settings && settings.data?.site_footer_logo}
         width={130}
         height={61.05}
         alt="loading"
@@ -89,7 +108,7 @@ const Footer = () => {
 
                 <ul className="links">
                   {countries &&
-                    countries.slice(0, 5).map((data, key) => {
+                    countries.data?.slice(0, 5).map((data, key) => {
                       return (
                         <li className="nav-link" key={key}>
                           <Link href={`/country/${data.slug}`}>
@@ -111,7 +130,7 @@ const Footer = () => {
                     <Link href="/teams">Teams</Link>{" "}
                   </li>
                   {pages &&
-                    pages.slice(0, 2).map((data, key) => {
+                    pages.data?.slice(0, 2).map((data, key) => {
                       return (
                         <li className="nav-link" key={key}>
                           <Link href={`/page/${data.slug}`}>{data.title}</Link>
@@ -126,7 +145,7 @@ const Footer = () => {
 
               <div className="col-md-6 col-sm-12">
                 <iframe
-                  src={settings && settings.map}
+                  src={settings && settings.data?.map}
                   width="100%"
                   height="268"
                   allowFullScreen=""
@@ -143,8 +162,9 @@ const Footer = () => {
               <div className="follow d-flex gap-16 align-items-center pt-3">
                 <h5>Follow us</h5>
                 <div className="social d-flex gap-16 pb-2">
+               
                   {socialmedias &&
-                    socialmedias.map((data, key) => {
+                    socialmedias.data?.map((data, key) => {
                       return (
                         <a href={data.link} key={key}>
                           <i className={data.icon}></i>
@@ -156,7 +176,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="copyright text-center">
-            <p>&copy; {settings && settings.site_copyright}</p>
+            <p>&copy; {settings && settings.data?.site_copyright}</p>
           </div>
         </section>
       </footer>

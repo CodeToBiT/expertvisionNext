@@ -2,21 +2,26 @@ import Image from "next/image";
 import Head from "next/head";
 import TeamsCard from "../components/card/TeamsCard";
 
-import { useAppContext } from "../context/state";
+
 import { useEffect } from "react";
+const url = "https://admin.evc.edu.np/api/";
 
-const Teams = () => {
-  const context = useAppContext();
-  const { ourteams, fetchOurteams, settings, fetchSettings } = context;
+export async function getServerSideProps() {
+  const responseOurteams = await fetch([url, "ourteams"].join(""));
+  const ourteams = await responseOurteams.json();
+  const responseSettings = await fetch([url, "settings"].join(""));
+  const settings = await responseSettings.json();
 
-  useEffect(() => {
-    if (ourteams == null) {
-      fetchOurteams();
-    }
-    if (settings == null) {
-      fetchSettings();
-    }
-  }, []);
+  return {
+    props: {
+      ourteams,
+      settings,
+    },
+  };
+}
+
+const Teams = ({ourteams, settings}) => {
+
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
@@ -26,14 +31,14 @@ const Teams = () => {
     <>
       <Head>
         <title>Our Team - Expert Vision</title>
-        {/* <title>{settings && settings.ourteams_seo_title}</title>
+        {/* <title>{settings && settings.data.ourteams_seo_title}</title>
         <meta
           name="description"
-          content={settings && settings.ourteams_meta_description}
+          content={settings && settings.data.ourteams_meta_description}
         />
         <meta
           name="keywords"
-          content={settings && settings.ourteams_meta_keywords}
+          content={settings && settings.data.ourteams_meta_keywords}
         /> */}
         <link rel="canonical" href={current_url} />
       </Head>
@@ -45,7 +50,7 @@ const Teams = () => {
           </div>
           <div className="row">
             {ourteams &&
-              ourteams.slice(0, 12).map((data, key) => {
+              ourteams.data.slice(0, 12).map((data, key) => {
                 return (
                   <TeamsCard
                     clsa="col-md-4 col-xs-12"

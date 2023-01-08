@@ -3,32 +3,37 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { useAppContext } from "../../context/state";
-
 import Image from "next/image";
 import Link from "next/link";
 
-const SinglePage = () => {
+const url = "https://admin.evc.edu.np/api/";
+
+export async function getServerSideProps() {
+  const responseBlogs = await fetch([url, "blogs"].join(""));
+  const blogs = await responseBlogs.json();
+  const responseCountries = await fetch([url, "countries"].join(""));
+  const countries = await responseCountries.json();
+  const responsePages = await fetch([url, "pages"].join(""));
+  const pages = await responsePages.json();
+
+  return {
+    props: {
+      blogs,
+      countries,
+      pages,
+    },
+  };
+}
+
+const SinglePage = ({ blogs, countries, pages }) => {
   const router = useRouter();
-  const context = useAppContext();
+
   const singlePage = router.query.singlePage;
   const [single, setSingle] = useState();
-  const { blogs, fetchBlogs } = context;
-  const { pages, fetchPages } = context;
-  const { countries, fetchCountries } = context;
 
   useEffect(() => {
-    fetchPages();
-
-    if (blogs == null) {
-      fetchBlogs();
-    }
-
-    if (countries == null) {
-      fetchCountries();
-    }
     pages &&
-      pages.map((item) => {
+      pages.data.map((item) => {
         if (item.slug == singlePage) {
           setSingle(item);
         }
@@ -86,30 +91,33 @@ const SinglePage = () => {
             </div>
             <div className="col-md-4 col-sm-12">
               <div className="more my-3">
-              <h3 className="mt-5">Featured Destinations</h3>
+                <h3 className="mt-5">Featured Destinations</h3>
                 {countries &&
-                  countries.slice(0, 4).map((data, key) => {
-                      return (
-                        <div className="card-more">
-                          <div className="row">
-                            <div className="col-md-4 col-sm-12">
-                              <div className="media-wrapper position-relative">
+                  countries.data.slice(0, 4).map((data, key) => {
+                    return (
+                      <div className="card-more">
+                        <div className="row">
+                          <div className="col-md-4 col-sm-12">
+                            <div className="media-wrapper position-relative">
+                              <Link
+                                href={`/country/${data.slug}`}
+                                className="stretched-link"
+                              >
                                 <Image src={data.image} fill />
-                              </div>
-                            </div>
-                            <div className="col-md-8 col-sm-12">
-                              <h5>{data.name}</h5>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: data.short_description,
-                                }}
-                              ></p>
+                              </Link>
                             </div>
                           </div>
-                          <a href={`/page/${data.slug}`}  className="stretched-link"></a>
+                          <div className="col-md-8 col-sm-12">
+                            <h5>{data.name}</h5>
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: data.short_description,
+                              }}
+                            ></p>
+                          </div>
                         </div>
-                      );
-                    
+                      </div>
+                    );
                   })}
               </div>
             </div>

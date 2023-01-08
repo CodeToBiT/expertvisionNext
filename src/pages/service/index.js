@@ -2,21 +2,26 @@ import Head from "next/head";
 import Image from "next/image";
 import ServiceCard from "../../components/card/ServiceCard";
 
-import { useAppContext } from "../../context/state";
+
 import { useEffect } from "react";
+const url = "https://admin.evc.edu.np/api/";
 
-const Services = () => {
-  const context = useAppContext();
-  const { services, fetchServices, settings, fetchSettings } = context;
+export async function getServerSideProps() {
+  const responseServices = await fetch([url, "services"].join(""));
+  const services = await responseServices.json();
+  const responseSettings = await fetch([url, "settings"].join(""));
+  const settings = await responseSettings.json();
 
-  useEffect(() => {
-    if (services == null) {
-      fetchServices();
-    }
-    if (settings == null) {
-      fetchSettings();
-    }
-  }, []);
+  return {
+    props: {
+      services,
+      settings,
+    },
+  };
+}
+
+const Services = ({services, settings}) => {
+
 
   let current_url;
   if (typeof window !== "undefined") {
@@ -43,14 +48,14 @@ const Services = () => {
         <div className="container">
           <div className="services-intro my-5">
             <h2>Here we provide the services you need</h2>
-            <div dangerouslySetInnerHTML={{__html: settings && settings.service_section_description}}>
+            <div dangerouslySetInnerHTML={{__html: settings && settings.data.service_section_description}}>
           </div>
           </div>
           <div className="row">
             <div className="col-md-10 m-auto col-sm-12 col-xs-12 shadow px-0">
               <div className="row">
                 {services &&
-                  services.slice(0, 9).map((data) => {
+                  services.data.slice(0, 9).map((data) => {
                     return (
                       <ServiceCard
                         slug={data.slug}

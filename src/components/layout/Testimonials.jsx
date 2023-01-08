@@ -4,18 +4,23 @@ import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import Image from "next/image";
 
-import { useAppContext } from "../../context/state";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Testimonials = (props) => {
-  const context = useAppContext();
-  const { testimonials, fetchTestimonials } = context;
-
+  const [testimonials, setTestimonials] = useState([]);
+  const fetchTestimonials = () => {
+    fetch("https://admin.evc.edu.np/api/testimonials")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setTestimonials(data);
+      });
+  };
   useEffect(() => {
-    if (testimonials == null) {
-      fetchTestimonials();
-    }
+    fetchTestimonials();
   }, []);
+
   return (
     <>
       <div className="testimonials">
@@ -23,12 +28,11 @@ const Testimonials = (props) => {
           <Row>
             <Col sm={1} className="order">
               <Nav variant="pills" className="flex-column">
-                {
-                testimonials &&
-                  testimonials.slice(0, 4).map((data, key) => {
+                {testimonials &&
+                  testimonials.data?.slice(0, 4).map((data, key) => {
                     return (
                       <Nav.Item key={key}>
-                        <Nav.Link eventKey={data.id}>0{key+1}</Nav.Link>
+                        <Nav.Link eventKey={data.id}>0{key + 1}</Nav.Link>
                       </Nav.Item>
                     );
                   })}
@@ -48,7 +52,7 @@ const Testimonials = (props) => {
                 <Col sm={11}>
                   <Tab.Content>
                     {testimonials &&
-                      testimonials.slice(0, 4).map((data, key) => {
+                      testimonials.data?.slice(0, 4).map((data, key) => {
                         return (
                           <Tab.Pane eventKey={data.id} key={key}>
                             <Row className="align-items-center">

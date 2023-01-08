@@ -3,25 +3,34 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { useAppContext } from "../../context/state";
-
 import Image from "next/image";
 import Link from "next/link";
 
-const ServiceDetail = () => {
+const url = "https://admin.evc.edu.np/api/";
+
+export async function getServerSideProps() {
+  const responseServices = await fetch([url, "services"].join(""));
+  const services = await responseServices.json();
+  const responseCountries = await fetch([url, "countries"].join(""));
+  const countries = await responseCountries.json();
+
+  return {
+    props: {
+      services,
+      countries,
+    },
+  };
+}
+
+const ServiceDetail = ({ services, countries }) => {
   const router = useRouter();
-  const context = useAppContext();
+
   const serviceDetail = router.query.serviceDetail;
   const [service, setService] = useState();
-  const { countries, fetchCountries } = context;
-  const { services, fetchServices } = context;
 
   useEffect(() => {
-    fetchServices();
-    fetchCountries();
-
     services &&
-      services.map((item) => {
+      services.data.map((item) => {
         if (item.slug == serviceDetail) {
           setService(item);
         }
@@ -84,14 +93,19 @@ const ServiceDetail = () => {
               <div className="more my-3">
                 <h3 className="mb-1">More Services</h3>
                 {services &&
-                  services.slice(0, 4).map((data, key) => {
+                  services.data.slice(0, 4).map((data, key) => {
                     if (data.slug != serviceDetail) {
                       return (
                         <div className="card-more">
                           <div className="row">
                             <div className="col-md-4 col-sm-12">
                               <div className="media-wrapper position-relative">
-                                <Image src={data.image} fill />
+                                <Link
+                                  href={`/service/${data.slug}`}
+                                  className="stretched-link"
+                                >
+                                  <Image src={data.image} fill />
+                                </Link>
                               </div>
                             </div>
                             <div className="col-md-8 col-sm-12">
@@ -103,35 +117,37 @@ const ServiceDetail = () => {
                               ></p>
                             </div>
                           </div>
-                          <a href={`/service/${data.slug}`}  className="stretched-link"></a>
                         </div>
                       );
                     }
                   })}
                 <h3 className="mt-5">Featured Destinations</h3>
                 {countries &&
-                  countries.slice(0, 4).map((data, key) => {
-                      return (
-                        <div className="card-more">
-                          <div className="row">
-                            <div className="col-md-4 col-sm-12">
-                              <div className="media-wrapper position-relative">
+                  countries.data.slice(0, 4).map((data, key) => {
+                    return (
+                      <div className="card-more">
+                        <div className="row">
+                          <div className="col-md-4 col-sm-12">
+                            <div className="media-wrapper position-relative">
+                              <Link
+                                href={`/country/${data.slug}`}
+                                className="stretched-link"
+                              >
                                 <Image src={data.image} fill />
-                              </div>
-                            </div>
-                            <div className="col-md-8 col-sm-12">
-                              <h5>{data.name}</h5>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: data.short_description,
-                                }}
-                              ></p>
+                              </Link>
                             </div>
                           </div>
-                          <a href={`/country/${data.slug}`}  className="stretched-link"></a>
+                          <div className="col-md-8 col-sm-12">
+                            <h5>{data.name}</h5>
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: data.short_description,
+                              }}
+                            ></p>
+                          </div>
                         </div>
-                      );
-                    
+                      </div>
+                    );
                   })}
               </div>
             </div>

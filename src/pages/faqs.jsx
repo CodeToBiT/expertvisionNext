@@ -1,16 +1,20 @@
-import { useAppContext } from "../context/state";
 import { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 
-const Faqs = () => {
-  const context = useAppContext();
-  const { faqs, fetchFaqs } = context;
-  useEffect(() => {
-    if (faqs == null) {
-      fetchFaqs();
-    }
-  }, []);
+const url = "https://admin.evc.edu.np/api/";
 
+export async function getServerSideProps() {
+  const responseFaqs = await fetch([url, "faqs"].join(""));
+  const faqs = await responseFaqs.json();
+
+  return {
+    props: {
+      faqs,
+    },
+  };
+}
+
+const Faqs = ({ faqs }) => {
   return (
     <>
       <div className="container mt-4">
@@ -20,7 +24,7 @@ const Faqs = () => {
         <div className="row my-4">
           <Accordion>
             {faqs &&
-              faqs.map((data, key) => {
+              faqs.data.map((data, key) => {
                 return (
                   <Accordion.Item eventKey={data.id} key={key}>
                     <Accordion.Header>{data.title}</Accordion.Header>

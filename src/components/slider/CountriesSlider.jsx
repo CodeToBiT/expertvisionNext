@@ -4,12 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import CountriesCard from "../card/CountriesCard";
+import { useState } from "react";
 
-import { useAppContext } from "../../context/state";
+import { GetServerSideProps } from "next";
+
 import { useEffect } from "react";
 
 const CountriesSlider = (props) => {
-  var settings = {
+  var countriesSettings = {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -19,14 +21,14 @@ const CountriesSlider = (props) => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
+        countriesSettings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 850,
-        settings: {
+        countriesSettings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
@@ -35,28 +37,32 @@ const CountriesSlider = (props) => {
       },
     ],
   };
-
-  const context = useAppContext();
-  const { countries, fetchCountries } = context;
-
+  const [countries, setCountries] = useState([]);
+  const fetchCountries = () => {
+    fetch("https://admin.evc.edu.np/api/countries")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCountries(data);
+      });
+  };
   useEffect(() => {
-    if (countries == null) {
-      fetchCountries();
-    }
+    fetchCountries();
   }, []);
 
   return (
     <>
-      <Slider {...settings}>
+      <Slider {...countriesSettings}>
         {countries &&
-          countries.map((data) => {
+          countries.data?.map((data) => {
             return (
               <div key={data.id}>
                 <CountriesCard
                   slug={data.slug}
                   imagepath={data.image}
                   country={data.name}
-                /> 
+                />
               </div>
             );
           })}
@@ -64,5 +70,7 @@ const CountriesSlider = (props) => {
     </>
   );
 };
+
+
 
 export default CountriesSlider;

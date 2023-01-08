@@ -7,9 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-
-import { useAppContext } from "../context/state";
 import { useEffect, useState, Suspense } from "react";
+
+const url = "https://admin.evc.edu.np/api/";
 
 const initialState = {
   full_name: "",
@@ -18,9 +18,18 @@ const initialState = {
   message: "",
 };
 
-const Contact = () => {
-  const context = useAppContext();
-  const { settings, fetchSettings } = context;
+export async function getServerSideProps() {
+  const responseSettings = await fetch([url, "settings"].join(""));
+  const settings = await responseSettings.json();
+
+  return {
+    props: {
+      settings,
+    },
+  };
+}
+
+const Contact = ({ settings }) => {
   const [formData, setFormData] = useState(initialState);
   const [success, setSuccess] = useState("");
 
@@ -43,14 +52,7 @@ const Contact = () => {
       .catch((err) => {
         console.log(err);
       });
-    console.log(formData);
   };
-
-  useEffect(()=>{
-    if(settings == null){
-      fetchSettings();
-    }
-  }, []);
 
   let current_url;
   if (typeof window !== "undefined") {
@@ -60,12 +62,15 @@ const Contact = () => {
   return (
     <>
       <Head>
-        <title>{settings && settings.contact_seo_title}</title>
+        <title>{settings && settings.data.contact_seo_title}</title>
         <meta
           name="description"
-          content={settings && settings.contact_meta_description}
+          content={settings && settings.data.contact_meta_description}
         />
-        <meta name="keywords" content={settings && settings.contact_meta_keywords} />
+        <meta
+          name="keywords"
+          content={settings && settings.data.contact_meta_keywords}
+        />
         <link rel="canonical" href={current_url} />
       </Head>
       <section className="contact-info">
@@ -73,27 +78,27 @@ const Contact = () => {
           <div className="row justify-content-center">
             <div className="col-md-7 col-sm-12 my-4">
               <h1>Get in touch!</h1>
-              <p>{settings && settings.contact_section_description}</p>
+              <p>{settings && settings.data.contact_section_description}</p>
             </div>
             <div className="col-md-8 col-sm-12 my-4">
               <div className="row ">
                 <div className="col-md-4 col-sm-12">
                   <Link href="/">
                     <MdLocationOn />
-                    <h5>{settings && settings.site_location}</h5>
+                    <h5>{settings && settings.data.site_location}</h5>
                   </Link>
                 </div>
                 <div className="col-md-4 col-sm-12">
                   <Link href="/">
                     <FaEnvelope />
-                    <h5>{settings && settings.site_email}</h5>
+                    <h5>{settings && settings.data.site_email}</h5>
                   </Link>
                 </div>
                 <div className="col-md-4 col-sm-12">
                   <Link href="/">
                     <FaPhoneAlt />
 
-                    <h5>{settings && settings.site_contact}</h5>
+                    <h5>{settings && settings.data.site_contact}</h5>
                   </Link>
                 </div>
               </div>
@@ -173,7 +178,7 @@ const Contact = () => {
             <div className="col-md-5 col-sm-12 contact-image position-relative">
               <div className="overlay">
                 <div className="overlay-right position-absolute">
-                <Image
+                  <Image
                     src="/images/contactblue.png"
                     width={250}
                     height={150}
@@ -193,14 +198,13 @@ const Contact = () => {
                     priority="false"
                   />
                   ;
-                 
                 </div>
               </div>
               <div className="media-wrapper position-relative">
                 <Image
                   src={
-                    settings && settings.contact_image
-                      ? settings.contact_image
+                    settings && settings.data.contact_image
+                      ? settings.data.contact_image
                       : "/images/logo.png"
                   }
                   alt="loading"

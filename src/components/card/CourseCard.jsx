@@ -6,7 +6,7 @@ const CourseCard = (props) => {
     <>
       <div className="card-courses br-24">
         <div className="media-wrapper position-relative">
-          <Link href={`/course/${props.slug}`}>
+          <Link href={`/course/${props.slug}`} className="stretched-link">
           <Image src={props.imagepath} alt="loading" priority="false" sizes="(max-height: 324px)" fill/>
           </Link>
         </div>

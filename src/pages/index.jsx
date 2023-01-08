@@ -9,46 +9,60 @@ import NavigationBar from "../components/header/NavigationBar";
 import CountriesCard from "../components/card/CountriesCard";
 import CountriesSlider from "../components/slider/CountriesSlider";
 import { Container } from "react-bootstrap";
+import CourseCard from "../components/card/CourseCard";
 import CourseSlider from "../components/slider/CoursesSlider";
 import BlogCard from "../components/card/BlogCard";
 import Testimonials from "../components/layout/Testimonials";
 import PartnerSlider from "../components/slider/PartnerSlider";
 import Slider from "react-slick";
 
-import { useAppContext } from "../context/state";
+
 import { useEffect } from "react";
 
-export default function Home() {
-  const context = useAppContext();
-  const {
-    services,
-    fetchServices,
-    blogs,
-    fetchBlogs,
-    partners,
-    fetchPartners,
-    settings,
-    fetchSettings,
-    sliders,
-    fetchSliders,
-  } = context;
-  useEffect(() => {
-    if (services == null) {
-      fetchServices();
-    }
-    if (blogs == null) {
-      fetchBlogs();
-    }
-    if (partners == null) {
-      fetchPartners();
-    }
-    if (settings == null) {
-      fetchSettings();
-    }
-    if (sliders == null) {
-      fetchSliders();
-    }
-  }, []);
+const url = "https://admin.evc.edu.np/api/";
+
+export async function getServerSideProps() {
+  const responseCountries = await fetch([url, "countries"].join(""));
+  const countries = await responseCountries.json();
+  const responseBlogs = await fetch([url, "blogs"].join(""));
+  const blogs = await responseBlogs.json();
+  const responseCourses = await fetch([url, "courses"].join(""));
+  const courses = await responseCourses.json();
+  const responseTestimonials = await fetch([url, "testimonials"].join(""));
+  const testimonials = await responseTestimonials.json();
+  const responseServices = await fetch([url, "services"].join(""));
+  const services = await responseServices.json();
+  const responsePartners = await fetch([url, "partners"].join(""));
+  const partners = await responsePartners.json();
+  const responseSliders = await fetch([url, "sliders"].join(""));
+  const sliders = await responseSliders.json();
+  const responseSettings = await fetch([url, "settings"].join(""));
+  const settings = await responseSettings.json();
+
+  return {
+    props: {
+      countries,
+      blogs,
+      courses,
+      testimonials,
+      services,
+      partners,
+      sliders,
+      settings,
+    },
+  };
+}
+
+export default function Home({
+  countries,
+  blogs,
+  courses,
+  testimonials,
+  services,
+  partners,
+  sliders,
+  settings,
+}) {
   const bannerslider = {
     dots: false,
     autoplay: true,
@@ -63,18 +77,99 @@ export default function Home() {
   if (typeof window !== "undefined") {
     current_url = window.location.href;
   }
+  var partnerSettings = {
+    infinite: true,
+    autoplay: true,
+    speech: 2000,
+    autoplaySpeed: 2000,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        partnerSettings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 850,
+        partnerSettings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 3000,
+        },
+      },
+    ],
+  };
+
+  var countriesSettings = {
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        countriesSettings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 850,
+        countriesSettings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 3000,
+        },
+      },
+    ],
+  };
+
+  var coursesSettings = {
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        coursesSettings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 850,
+        coursesSettings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 3000,
+        },
+      },
+    ],
+  };
 
   return (
     <>
       <Head>
-        <title>{settings && settings.homepage_seo_title}</title>
+        <title>{settings && settings.data.homepage_seo_title}</title>
         <meta
           name="description"
-          content={settings && settings.homepage_meta_description}
+          content={settings && settings.data.homepage_meta_description}
         />
         <meta
           name="keywords"
-          content={settings && settings.homepage_meta_keywords}
+          content={settings && settings.data.homepage_meta_keywords}
         />
         <link rel="canonical" href={current_url} />
       </Head>
@@ -87,13 +182,13 @@ export default function Home() {
               <div className="col-md-6">
                 <div className="banner-content text-align-center">
                   {sliders &&
-                    sliders.map((data, key) => {
+                    sliders.data.map((data, key) => {
                       if (data.id == "2") {
                         return <h1 key={key}>{data.title}</h1>;
                       }
                     })}
                   {sliders &&
-                    sliders.map((data, key) => {
+                    sliders.data.map((data, key) => {
                       if (data.id == "2") {
                         return (
                           <div
@@ -119,7 +214,7 @@ export default function Home() {
               <div className="col-md-6">
                 <Slider {...bannerslider}>
                   {sliders &&
-                    sliders.map((data, key) => {
+                    sliders.data.map((data, key) => {
                       return (
                         <div
                           className="media-wrapper position-relative"
@@ -165,14 +260,14 @@ export default function Home() {
         <section className="services position-relative">
           <div className="services-intro my-5">
             <h2>Here we provide the services you need</h2>
-            <p>{settings && settings.service_section_description}</p>
+            <p>{settings && settings.data.service_section_description}</p>
           </div>
           <div className="container">
             <div className="row">
               <div className="col-md-10 m-auto col-sm-12 col-xs-12 shadow position-relative px-0">
                 <div className="row">
                   {services &&
-                    services.slice(0, 5).map((data) => {
+                    services.data.slice(0, 5).map((data) => {
                       return (
                         <ServiceCard
                           clsa="col-md-4 col-sm-6 col-xs-12"
@@ -216,7 +311,9 @@ export default function Home() {
               <h2>Over seven countries to choose from</h2>
               <p>{settings && settings.homepage_country_section_description}</p>
             </div>
+
             <CountriesSlider />
+
             <div className="text-center mb-5">
               <Link
                 href="/country"
@@ -245,6 +342,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        
 
         <section className="testimonial position-relative">
           <div className="testimonial-intro">
@@ -268,27 +366,28 @@ export default function Home() {
           </div>
         </section>
 
+       
+
         <section className="blogs my-5">
           <div className="container">
             <div className="blogs-intro my-5">
               <h2>Blogs and updates</h2>
-              <p>{settings && settings.homepage_blog_section_description}</p>
+              <p>{settings.data.homepage_blog_section_description}</p>
             </div>
             <div className="row">
-              {blogs &&
-                blogs.slice(0, 3).map((data) => {
-                  return (
-                    <BlogCard
-                      clsa="col-md-4 col-xs-12"
-                      date={data.date}
-                      slug={data.slug}
-                      title={data.title}
-                      imagepath={data.image}
-                      content={data.short_description}
-                      key={data.id}
-                    />
-                  );
-                })}
+              {blogs.data.slice(0, 3).map((data) => {
+                return (
+                  <BlogCard
+                    clsa="col-md-4 col-xs-12"
+                    date={data.date}
+                    slug={data.slug}
+                    title={data.title}
+                    imagepath={data.image}
+                    content={data.short_description}
+                    key={data.id}
+                  />
+                );
+              })}
             </div>
             <div className="text-center mb-5">
               <Link

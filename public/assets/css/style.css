@@ -11110,15 +11110,21 @@ a {
 .card-countries .media-wrapper {
   width: 100%;
   height: 324px;
+  border-radius: 24px;
+  background: #000000;
 }
 .card-countries .media-wrapper img {
   border-radius: 24px;
+}
+.card-countries .media-wrapper:hover img {
+  opacity: 0.8;
 }
 .card-countries .overlay {
   position: absolute;
   bottom: 0;
 }
 .card-countries .overlay h4, .card-countries .overlay .h4 {
+  text-shadow: 5px 5px 10px black;
   font-size: 1rem;
   font-weight: 700;
   line-height: 100%;
@@ -11131,9 +11137,14 @@ a {
 .card-courses .media-wrapper {
   width: 100%;
   height: 324px;
+  border-radius: 24px;
+  background: black;
 }
 .card-courses .media-wrapper img {
   border-radius: 24px;
+}
+.card-courses .media-wrapper:hover img {
+  opacity: 0.7;
 }
 .card-courses .overlay {
   position: absolute;
@@ -11146,12 +11157,18 @@ a {
   color: #025DB6;
   padding: 15px 10px;
   background-color: #F1F1F1;
-  width: 90px;
+  max-width: 120px;
 }
 .card-courses .overlay p {
   margin-right: 30px;
   padding: 0px 20px;
   color: #F1F1F1;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 2em;
+  line-height: 1em;
+  text-shadow: 5px 5px 10px black;
 }
 .card-blog {
   margin: 0px 20px 40px 20px;

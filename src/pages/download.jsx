@@ -1,19 +1,23 @@
 import React, { use } from "react";
 import Head from "next/head";
-import { useAppContext } from "../context/state";
+
 import { useEffect } from "react";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox.css";
+const url = "https://admin.evc.edu.np/api/";
 
-const Download = () => {
-  const context = useAppContext();
-  const { downloads, fetchDownloads } = context;
+export async function getServerSideProps() {
+  const responseDownloads = await fetch([url, "downloads"].join(""));
+  const downloads = await responseDownloads.json();
 
-  useEffect(() => {
-    if (downloads == null) {
-      fetchDownloads();
-    }
-  }, [downloads]);
+  return {
+    props: {
+      downloads,
+    },
+  };
+}
+
+const Download = ({ downloads }) => {
   return (
     <>
       <section className="download">
@@ -27,7 +31,7 @@ const Download = () => {
             </thead>
             <tbody class="download-body">
               {downloads &&
-                downloads.map((data, key) => {
+                downloads.data.map((data, key) => {
                   return (
                     <tr key={key}>
                       <td>{data.name}</td>

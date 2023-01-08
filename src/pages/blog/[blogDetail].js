@@ -4,25 +4,32 @@ import Head from "next/head";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useAppContext } from "../../context/state";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
-const BlogDetail = () => {
+const url = "https://admin.evc.edu.np/api/";
+
+export async function getServerSideProps() {
+  const responseBlogs = await fetch([url, "blogs"].join(""));
+  const blogs = await responseBlogs.json();
+  const responseCountries = await fetch([url, "countries"].join(""));
+  const countries = await responseCountries.json();
+
+  return {
+    props: {
+      blogs,
+      countries,
+    },
+  };
+}
+
+const BlogDetail = ({ blogs, countries }) => {
   const router = useRouter();
-  const context = useAppContext();
   const blogDetail = router.query.blogDetail;
-  const { blogs, fetchBlogs } = context;
-  const { countries, fetchCountries } = context;
   const [blog, setBlog] = useState([]);
 
   useEffect(() => {
-    fetchBlogs();
-    if (countries == null) {
-      fetchCountries();
-    }
-
     blogs &&
-      blogs.map((item) => {
+      blogs.data.map((item) => {
         if (item.slug == blogDetail) {
           setBlog(item);
         }
@@ -36,14 +43,14 @@ const BlogDetail = () => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>
-          {blog && blog.seo_title ? blog && blog.seo_title : blog && blog.title}
+          {blog && blog.data.seo_title ? blog && blog.data.seo_title : blog && blog.data.title}
         </title>
         <meta name="description" content={blog && blog.meta_description} />
         <meta name="keywords" content={blog && blog.meta_keywords} />
         <link rel="canonical" href={current_url} />
-      </Head>
+      </Head> */}
 
       <section className="single-banner mt-4">
         <div className="container">
@@ -82,8 +89,9 @@ const BlogDetail = () => {
             <div className="col-md-4 col-sm-12">
               <div className="more my-3">
                 <h3 className="mb-1">More Blogs</h3>
+                {console.log(blogs)}
                 {blogs &&
-                  blogs.slice(0, 4).map((data, key) => {
+                  blogs.data.slice(0, 4).map((data, key) => {
                     if (data.slug != blogDetail) {
                       return (
                         <div className="card-more">
@@ -101,24 +109,29 @@ const BlogDetail = () => {
                                 }}
                               ></p>
                             </div>
+                            <Link
+                              href={`/blog/${data.slug}`}
+                              className="stretched-link"
+                            ></Link>
                           </div>
-                          <a
-                            href={`/blog/${data.slug}`}
-                            className="stretched-link"
-                          ></a>
                         </div>
                       );
                     }
                   })}
                 <h3 className="mt-5">Featured Destinations</h3>
                 {countries &&
-                  countries.slice(0, 4).map((data, key) => {
+                  countries.data.slice(0, 4).map((data, key) => {
                     return (
                       <div className="card-more">
                         <div className="row">
                           <div className="col-md-4 col-sm-12">
                             <div className="media-wrapper position-relative">
-                              <Image src={data.image} fill />
+                              <Link
+                                href={`/country/${data.slug}`}
+                                className="stretched-link"
+                              >
+                                <Image src={data.image} fill />
+                              </Link>
                             </div>
                           </div>
                           <div className="col-md-8 col-sm-12">
@@ -130,7 +143,6 @@ const BlogDetail = () => {
                             ></p>
                           </div>
                         </div>
-                        <a href={`/country/${data.slug}`} className="stretched-link"></a>
                       </div>
                     );
                   })}

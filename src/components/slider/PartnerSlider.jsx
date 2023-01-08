@@ -1,23 +1,24 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
 import Image from "next/image";
-
-import { useAppContext } from "../../context/state";
 import { useEffect } from "react";
 
-const PartnerSlider = () => {
-  const context = useAppContext();
-  const { partners, fetchPartners } = context;
+// export async function getServerSideProps() {
+//   const responsePartners = await fetch([url, "partners"].join(""));
+//   const partners = await responsePartners.json();
 
-  useEffect(() => {
-    if (partners == null) {
-      fetchPartners();
-    }
-  }, [partners]);
-  var settings = {
+//   return {
+//     props: {
+//       partners,
+//     },
+//   };
+// }
+
+const PartnerSlider = () => {
+  var partnerSettings = {
     infinite: true,
     autoplay: true,
     speech: 2000,
@@ -28,14 +29,14 @@ const PartnerSlider = () => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
+        partnerSettings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 850,
-        settings: {
+        partnerSettings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
@@ -44,30 +45,44 @@ const PartnerSlider = () => {
       },
     ],
   };
+
+  const [partners, setPartners] = useState([]);
+  const fetchPartners = () => {
+    fetch("https://admin.evc.edu.np/api/partners")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPartners(data);
+      });
+  };
+  useEffect(() => {
+    fetchPartners();
+  }, []);
   return (
     <>
-      <Slider {...settings}>
-        {partners &&
-          partners.map((data, key) => {
-            return (
-              <div className="d-flex justify-content-center" key={key}>
-                <div className="media-wrapper position-relative" key={key}>
-                  <Link
-                    href={data.link == null ? "#" : data.link}
-                    target="_blank"
-                  >
-                    <Image
-                      src={data.image}
-                      alt="loading"
-                      priority="false"
-                      sizes="(max-height: 125px)"
-                      fill
-                    />
-                  </Link>
-                </div>
+      <Slider {...partnerSettings}>
+        
+        {partners.data?.map((data, key) => {
+          return (
+            <div className="d-flex justify-content-center" key={key}>
+              <div className="media-wrapper position-relative" key={key}>
+                <Link
+                  href={data.link == null ? "#" : data.link}
+                  target="_blank"
+                >
+                  <Image
+                    src={data.image}
+                    alt="loading"
+                    priority="false"
+                    sizes="(max-height: 125px)"
+                    fill
+                  />
+                </Link>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
       </Slider>
     </>
   );
