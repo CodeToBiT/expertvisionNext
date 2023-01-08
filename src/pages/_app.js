@@ -8,19 +8,16 @@ import Head from "next/head";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
-  
+
   return (
     <>
-      <SSRProvider>
-        <AppWrapper>
-          <NavigationBar />
-          <Component {...pageProps} />
-          <Footer />
-        </AppWrapper>
-      </SSRProvider>
+      <AppWrapper>
+        <NavigationBar />
+        <Component {...pageProps} />
+        <Footer />
+      </AppWrapper>
     </>
   );
 }
