@@ -1,4 +1,8 @@
 .navbar {
+  @include typography(1.02rem, 500, 130%);
+  .navbar-nav .show > .nav-link, .navbar-nav .nav-link.active{
+    color: $grey-100;
+  }
   padding: 1px;
   .media-wrapper {
     position: relative;
@@ -17,4 +21,50 @@
   .nav-link:hover {
     color: $primary;
   }
+  .dropdown {
+    cursor: pointer;
+    position: relative;
+
+    text-decoration: none;
+    z-index: 1;
+    transform: perspective(1000px);
+  }
+  
+  .dropdown-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    text-align: center;
+    top: 40px;
+    visibility: hidden;
+  }
+
+
+  
+  .dropdown-menu a {
+  padding: 10px 0;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+  }
+  
+  .dropdown-menu a:hover {
+    background: $primary;
+    color: #fff;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    -webkit-transition: all .5s, background, 2s .5s linear;
+    transition: all .5s, background 2s .5s linear;
+  }
+  
+
+
 }

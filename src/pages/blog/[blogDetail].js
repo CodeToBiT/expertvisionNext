@@ -13,6 +13,12 @@ export async function getServerSideProps() {
   const blogs = await responseBlogs.json();
   const responseCountries = await fetch([url, "countries"].join(""));
   const countries = await responseCountries.json();
+  // const responseBlog = await fetch(
+  //   [`https://admin.evc.edu.np/api/`, `blog/${BlogDetail}`].join(
+  //     ""
+  //   )
+  // );
+  // const blog = await responseBlog.json();
 
   return {
     props: {
@@ -43,14 +49,14 @@ const BlogDetail = ({ blogs, countries }) => {
 
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>
-          {blog && blog.data.seo_title ? blog && blog.data.seo_title : blog && blog.data.title}
+          {blog && blog.seo_title ? blog && blog.seo_title : blog && blog.title}
         </title>
         <meta name="description" content={blog && blog.meta_description} />
         <meta name="keywords" content={blog && blog.meta_keywords} />
         <link rel="canonical" href={current_url} />
-      </Head> */}
+      </Head>
 
       <section className="single-banner mt-4">
         <div className="container">

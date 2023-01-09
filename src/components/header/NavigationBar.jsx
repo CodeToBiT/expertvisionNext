@@ -5,11 +5,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 import Link from "next/link";
 
-
 import { useEffect, useState } from "react";
 import Head from "next/head";
-
-
 
 const NavigationBar = () => {
   const [settings, setSettings] = useState([]);
@@ -34,17 +31,16 @@ const NavigationBar = () => {
     setShow(false);
   };
 
-
-
   const isImage = settings && settings.data?.site_main_logo;
 
   const isIcon = settings && settings.data?.fav_icon;
 
-
   let favIcon;
 
   if (isIcon) {
-    favIcon = <link rel="shortcut icon" href={settings && settings.data?.fav_icon} />;
+    favIcon = (
+      <link rel="shortcut icon" href={settings && settings.data?.fav_icon} />
+    );
   } else {
     favIcon = <link rel="shortcut icon" href="/images/logo2.webp" />;
   }
@@ -88,12 +84,10 @@ const NavigationBar = () => {
                 <Link href="/" className="nav-link">
                   Home
                 </Link>
-                <NavDropdown
+                {/* <NavDropdown
                   title="About Us"
                   id="navbarScrollingDropdown"
-                  show={show}
-                  onMouseEnter={showDropdown}
-                  onMouseLeave={hideDropdown}
+                
                 >
                   <Link href="/about" className="dropdown-item">
                     About Us
@@ -101,7 +95,32 @@ const NavigationBar = () => {
                   <Link href="/teams" className="dropdown-item">
                     Our Team
                   </Link>
-                </NavDropdown>
+                </NavDropdown> */}
+                <div class="nav-item show dropdown">
+                  <Link
+                    id="navbarScrollingDropdown"
+                    aria-expanded="true"
+                    role="button"
+                    class="dropdown-toggle show nav-link"
+                    tabindex="0"
+                    href="/about"
+                  >
+                    About Us
+                  </Link>
+                  <div
+                    aria-labelledby="navbarScrollingDropdown"
+                    data-bs-popper="static"
+                    class="dropdown-menu show"
+                  >
+                    <Link class="dropdown-item" href="/about">
+                      About Us
+                    </Link>
+                    <a class="dropdown-item" href="/teams">
+                      Our Team
+                    </a>
+                  </div>
+                </div>
+
                 <Link className="nav-link" href="/service">
                   Services
                 </Link>

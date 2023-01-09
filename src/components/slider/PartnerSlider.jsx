@@ -62,14 +62,13 @@ const PartnerSlider = () => {
   return (
     <>
       <Slider {...partnerSettings}>
-        
         {partners.data?.map((data, key) => {
           return (
             <div className="d-flex justify-content-center" key={key}>
               <div className="media-wrapper position-relative" key={key}>
                 <Link
-                  href={data.link == null ? "#" : data.link}
-                  target="_blank"
+                  href={data.link == null || data.link == "/"  ? "javascript:void(0)" : data.link}
+                  target={data.link == null || data.link == "/"  ? "_self" : "_blank"}
                 >
                   <Image
                     src={data.image}

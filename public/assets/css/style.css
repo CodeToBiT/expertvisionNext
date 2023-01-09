@@ -11943,7 +11943,13 @@ a {
 }
 
 .navbar {
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 130%;
   padding: 1px;
+}
+.navbar .navbar-nav .show > .nav-link, .navbar .navbar-nav .nav-link.active {
+  color: #938F8E;
 }
 .navbar .media-wrapper {
   position: relative;
@@ -11962,6 +11968,42 @@ a {
 }
 .navbar .nav-link:hover {
   color: #025DB6;
+}
+.navbar .dropdown {
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  z-index: 1;
+  transform: perspective(1000px);
+}
+.navbar .dropdown-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  text-align: center;
+  top: 40px;
+  visibility: hidden;
+}
+.navbar .dropdown-menu a {
+  padding: 10px 0;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+.navbar .dropdown-menu a:hover {
+  background: #025DB6;
+  color: #fff;
+}
+.navbar .dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  top: 100%;
+  -webkit-transition: all 0.5s, background, 2s 0.5s linear;
+  transition: all 0.5s, background 2s 0.5s linear;
 }
 
 .banner {
