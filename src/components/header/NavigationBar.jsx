@@ -96,13 +96,13 @@ const NavigationBar = () => {
                     Our Team
                   </Link>
                 </NavDropdown> */}
-                <div class="nav-item show dropdown">
+                <div className="nav-item show dropdown">
                   <Link
                     id="navbarScrollingDropdown"
                     aria-expanded="true"
                     role="button"
-                    class="dropdown-toggle show nav-link"
-                    tabindex="0"
+                    className="dropdown-toggle show nav-link"
+                    tabIndex="0"
                     href="/about"
                   >
                     About Us
@@ -110,12 +110,12 @@ const NavigationBar = () => {
                   <div
                     aria-labelledby="navbarScrollingDropdown"
                     data-bs-popper="static"
-                    class="dropdown-menu show"
+                    className="dropdown-menu show"
                   >
-                    <Link class="dropdown-item" href="/about">
+                    <Link className="dropdown-item" href="/about">
                       About Us
                     </Link>
-                    <a class="dropdown-item" href="/teams">
+                    <a className="dropdown-item" href="/teams">
                       Our Team
                     </a>
                   </div>

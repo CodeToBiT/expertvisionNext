@@ -82,7 +82,7 @@ const Footer = () => {
         <section className="footer">
           <div className="container">
             <div className="row">
-              <div className="col-md-2 col-sm-12 py-4">
+              <div className="col-md-2 col-6 py-4">
                 <h2>Quick Links</h2>
 
                 <ul className="links">
@@ -103,7 +103,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-2 col-sm-12 py-4">
+              <div className="col-md-2 col-6 py-4">
                 <h2>Countries</h2>
 
                 <ul className="links">
@@ -119,7 +119,7 @@ const Footer = () => {
                     })}
                 </ul>
               </div>
-              <div className="col-md-2 col-sm-12 py-4">
+              <div className="col-md-2 col-6 py-4">
                 <h2>Company</h2>
 
                 <ul className="links">
@@ -143,7 +143,7 @@ const Footer = () => {
                 </ul>
               </div>
 
-              <div className="col-md-6 col-sm-12">
+              <div className="col-md-6 col-6">
                 <iframe
                   src={settings && settings.data?.map}
                   width="100%"
