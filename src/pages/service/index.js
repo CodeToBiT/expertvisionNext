@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import ServiceCard from "../../components/card/ServiceCard";
 
-
 import { useEffect } from "react";
 const url = "https://admin.evc.edu.np/api/";
 
@@ -20,9 +19,7 @@ export async function getServerSideProps() {
   };
 }
 
-const Services = ({services, settings}) => {
-
-
+const Services = ({ services, settings }) => {
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
@@ -32,15 +29,19 @@ const Services = ({services, settings}) => {
     <>
       <Head>
         <title>Services - Expert Vision</title>
-        {/* <title>{settings && settings.services_seo_title}</title>
+        <title>
+          {settings && settings.data?.services_seo_title
+            ? settings && settings.data?.services_seo_title
+            : "Expertvision - services"}
+        </title>
         <meta
           name="description"
-          content={settings && settings.services_meta_description}
+          content={settings && settings.data.services_meta_description}
         />
         <meta
           name="keywords"
-          content={settings && settings.services_meta_keywords}
-        /> */}
+          content={settings && settings.data.services_meta_keywords}
+        />
         <link rel="canonical" href={current_url} />
       </Head>
 
@@ -48,8 +49,11 @@ const Services = ({services, settings}) => {
         <div className="container">
           <div className="services-intro my-5">
             <h2>Here we provide the services you need</h2>
-            <div dangerouslySetInnerHTML={{__html: settings && settings.data.service_section_description}}>
-          </div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: settings && settings.data.service_section_description,
+              }}
+            ></div>
           </div>
           <div className="row">
             <div className="col-md-10 m-auto col-sm-12 col-xs-12 shadow px-0">

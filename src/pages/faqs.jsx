@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
+import Head from "next/head";
 
 const url = "https://admin.evc.edu.np/api/";
 
@@ -17,6 +18,9 @@ export async function getServerSideProps() {
 const Faqs = ({ faqs }) => {
   return (
     <>
+    <Head>
+      <title>Expertvision - FAQs</title>
+    </Head>
       <div className="container mt-4">
         <div className="row">
           <h1 className="text-center heading-1">FAQs</h1>

@@ -20,6 +20,9 @@ export async function getServerSideProps() {
 const Download = ({ downloads }) => {
   return (
     <>
+      <Head>
+        <title>Epertvision - downloads</title>
+      </Head>
       <section className="download">
         <div className="container">
           <table class="download-table col-lg-12 col-md-12">
