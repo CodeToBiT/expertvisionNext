@@ -13,16 +13,19 @@ export async function getServerSideProps() {
   const ourteams = await responseOurteams.json();
   const responseSettings = await fetch([url, "settings"].join(""));
   const settings = await responseSettings.json();
+  const responsePages = await fetch([url, "pages"].join(""));
+  const pages = await responsePages.json();
 
   return {
     props: {
       ourteams,
       settings,
+      pages,
     },
   };
 }
 
-const About = ({ ourteams, settings }) => {
+const About = ({ ourteams, settings, pages }) => {
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
@@ -52,30 +55,38 @@ const About = ({ ourteams, settings }) => {
                 <div className="h-100 d-flex align-items-center">
                   <div className="content">
                     <h1>About Us</h1>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur. Quis est lectus
-                      vitae cursus consectetur duis congue aenean vitae. Egestas
-                      vitae dignissim vulputate at volutpat odio purus tellus.
-                      Scelerisque leo in et quisque sit lacus molestie massa.
-                      Aliquet ut felis velit interdum auctor quam. Lorem ipsum
-                      dolor sit amet consectetur. Quis est lectus vitae cursus
-                      consectetur duis congue aenean vitae. Egestas vitae
-                      dignissim vulputate at volutpat odio purus tellus.
-                      Scelerisque leo in et quisque sit lacus molestie massa.
-                      Aliquet ut felis velit interdum auctor quam.
-                    </p>
+
+                    {pages &&
+                      pages.data.map((data, key) => {
+                        if (data.id == "6") {
+                          return (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: data.description,
+                              }}
+                            ></div>
+                          );
+                        }
+                      })}
                   </div>
                 </div>
               </div>
               <div className="col-md-6 col-sm-12">
                 <div className="media-wrapper position-relative">
-                  <Image
-                    src="/images/about.png"
-                    alt="loading"
-                    priority="false"
-                    sizes="(max-height: 629px)"
-                    fill
-                  />
+                  {pages &&
+                    pages.data.map((data, key) => {
+                      if (data.id == "6") {
+                        return (
+                          <Image
+                            src={data.image}
+                            alt="loading"
+                            priority="false"
+                            sizes="(max-height: 629px)"
+                            fill
+                          />
+                        );
+                      }
+                    })}
                 </div>
               </div>
             </div>
@@ -87,30 +98,39 @@ const About = ({ ourteams, settings }) => {
             <div className="row">
               <div className="col-sm-12 col-md-5">
                 <div className="media-wrapper position-relative">
-                  <Image
-                    src="/images/vision.png"
-                    alt="loading"
-                    priority="false"
-                    sizes="(max-height: 576px)"
-                    fill
-                  />
+                  {pages &&
+                    pages.data.map((data, key) => {
+                      if (data.id == "7") {
+                        return (
+                          <Image
+                            src={data.image}
+                            alt="loading"
+                            priority="false"
+                            sizes="(max-height: 576px)"
+                            fill
+                          />
+                        );
+                      }
+                    })}
                 </div>
               </div>
 
               <div className="col-sm-12 col-md-6">
                 <div className="d-flex align-items-center h-100">
                   <div className="content">
-                    <h2>Our Vision</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur. Id lectus quis
-                      feugiat suscipit venenatis. Lacus tristique auctor feugiat
-                      diam tellus et amet. Gravida consectetur feugiat turpis
-                      porta erat cursus fames velit turpis. Dictumst pharetra
-                      scelerisque vitae sed pharetra.tristique auctor feugiat
-                      diam tellus et amet. Gravida consectetur feugiat turpis
-                      porta erat cursus fames velit turpis. Dictumst pharetra
-                      scelerisque vitae sed pharetra.
-                    </p>
+                    <h2 className="mb-4">Our Vision</h2>
+                    {pages &&
+                      pages.data.map((data, key) => {
+                        if (data.id == "7") {
+                          return (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: data.description,
+                              }}
+                            ></div>
+                          );
+                        }
+                      })}
                   </div>
                 </div>
               </div>
@@ -122,11 +142,12 @@ const About = ({ ourteams, settings }) => {
           <div className="container">
             <div className="teams-intro my-5">
               <h2>Our Team</h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
-                cursus consectetur duis congue aenean vitae. Egestas vitae
-                dignissim vulputate at volutpat
-              </p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html:
+                    settings && settings.data?.ourteam_section_description,
+                }}
+              ></p>
             </div>
             <div className="row">
               {ourteams &&

@@ -130,10 +130,10 @@ const Footer = () => {
                     <Link href="/teams">Teams</Link>{" "}
                   </li>
                   {pages &&
-                    pages.data?.slice(0, 2).map((data, key) => {
+                    pages.data?.slice(-2).map((data, key) => {
                       return (
                         <li className="nav-link" key={key}>
-                          <Link href={`/page/${data.slug}`}>{data.title}</Link>
+                          <Link href={`/${data.slug}`}>{data.title}</Link>
                         </li>
                       );
                     })}
@@ -162,7 +162,6 @@ const Footer = () => {
               <div className="follow d-flex gap-16 align-items-center pt-3">
                 <h5>Follow us</h5>
                 <div className="social d-flex gap-16 pb-2">
-               
                   {socialmedias &&
                     socialmedias.data?.map((data, key) => {
                       return (
