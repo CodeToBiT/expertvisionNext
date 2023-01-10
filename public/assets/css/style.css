@@ -11142,7 +11142,6 @@ a {
 }
 .card-courses .media-wrapper img {
   border-radius: 24px;
-  object-fit: cover;
 }
 .card-courses .media-wrapper:hover img {
   opacity: 0.7;
@@ -11716,6 +11715,11 @@ a {
 }
 .single-banner .media-wrapper img {
   border-radius: 16px;
+}
+@media (min-width: 780px) {
+  .single-banner .pad {
+    padding-right: 60px !important;
+  }
 }
 .single-content {
   padding: 0 20px;

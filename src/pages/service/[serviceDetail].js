@@ -64,7 +64,7 @@ const ServiceDetail = ({ services, countries }) => {
           </div>
           <div className="row">
             <div className="col-md-8 col-sm-12">
-              <div className="pe-5">
+              <div className="pad">
                 <div className="media-wrapper position-relative">
                   <Image
                     src={

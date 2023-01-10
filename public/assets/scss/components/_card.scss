@@ -35,8 +35,8 @@
         border-radius: 24px;
       }
     }
-    .media-wrapper:hover{
-      img{
+    .media-wrapper:hover {
+      img {
         opacity: 0.8;
       }
     }
@@ -60,11 +60,10 @@
       background: black;
       img {
         border-radius: 24px;
-        object-fit: cover;
       }
     }
-    .media-wrapper:hover{
-      img{
+    .media-wrapper:hover {
+      img {
         opacity: 0.7;
       }
     }
@@ -219,5 +218,4 @@
       line-height: 1.8em;
     }
   }
-
 }

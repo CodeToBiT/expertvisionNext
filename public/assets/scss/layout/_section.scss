@@ -426,6 +426,12 @@
         border-radius: 16px;
       }
     }
+
+    @media (min-width: 780px) {
+      .pad{
+        padding-right: 60px !important;
+      }
+    }
   }
 
   &-content {

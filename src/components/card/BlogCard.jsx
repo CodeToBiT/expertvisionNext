@@ -19,7 +19,7 @@ const BlogCard = (props) => {
               src={props.imagepath}
               alt="loading"
               priority="false"
-              sizes="(max-height: 208px)"
+              sizes="(max-height: 324px)"
               fill
             />
           </div>
