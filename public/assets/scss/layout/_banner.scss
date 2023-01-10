@@ -1,6 +1,6 @@
 .banner {
   &-content {
-    padding: 100px 150px 100px 0;
+    padding: 100px 120px 100px 0;
     h1 {
       @include typography(2.25rem, 700, 120%);
       color: $grey-500;
@@ -12,6 +12,7 @@
       @extend .paragraph;
       color: $grey-400;
       margin-bottom: 30px;
+      text-align: justify;
     }
     .btn-explore {
       background-color: $secondary;

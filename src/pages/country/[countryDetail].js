@@ -5,6 +5,8 @@ import Head from "next/head";
 
 import Image from "next/image";
 import Link from "next/link";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 const url = "https://admin.evc.edu.np/api/";
 
@@ -82,11 +84,26 @@ const CountryDetail = ({ countries, blogs }) => {
               <div className="single-content">
                 <div className="sub">
                   <div className="my-3">
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: country && country.description,
-                      }}
-                    ></div>
+                    <Tabs
+                      defaultActiveKey="overview"
+                      id="justify-tab-example"
+                      className="mb-3"
+                      justify
+                    >
+                      <Tab eventKey="overview" title="Overview">
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: country && country.description,
+                          }}
+                        ></div>
+                      </Tab>
+                      <Tab eventKey="requirements" title="Requirements"></Tab>
+                      <Tab
+                        eventKey="terms"
+                        title="Terms and Conditions"
+                      ></Tab>
+                      <Tab eventKey="sucess" title="Sucess Story"></Tab>
+                    </Tabs>
                   </div>
                 </div>
               </div>

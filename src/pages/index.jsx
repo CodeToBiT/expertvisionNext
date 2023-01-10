@@ -77,87 +77,7 @@ export default function Home({
   if (typeof window !== "undefined") {
     current_url = window.location.href;
   }
-  var partnerSettings = {
-    infinite: true,
-    autoplay: true,
-    speech: 2000,
-    autoplaySpeed: 2000,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        partnerSettings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 850,
-        partnerSettings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 3000,
-        },
-      },
-    ],
-  };
-
-  var countriesSettings = {
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        countriesSettings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 850,
-        countriesSettings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 3000,
-        },
-      },
-    ],
-  };
-
-  var coursesSettings = {
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        coursesSettings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 850,
-        coursesSettings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 3000,
-        },
-      },
-    ],
-  };
+ 
 
   return (
     <>
@@ -180,7 +100,7 @@ export default function Home({
           <div className="container">
             <div className="row align-items-center">
               <div className="col-md-6">
-                <div className="banner-content text-align-center">
+                <div className="banner-content text-align-center ">
                   {sliders &&
                     sliders.data.map((data, key) => {
                       if (data.id == "2") {
@@ -195,7 +115,7 @@ export default function Home({
                             key={key}
                             dangerouslySetInnerHTML={{
                               __html: data.description,
-                            }}
+                            }} className="text-justify"
                           ></div>
                         );
                       }

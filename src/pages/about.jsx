@@ -151,7 +151,7 @@ const About = ({ ourteams, settings, pages }) => {
             </div>
             <div className="row">
               {ourteams &&
-                ourteams.data.map((data, key) => {
+                ourteams.data.slice(0,3).map((data, key) => {
                   return (
                     <TeamsCard
                       clsa="col-md-4 col-xs-12"

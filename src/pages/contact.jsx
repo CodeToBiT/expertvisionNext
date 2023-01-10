@@ -112,12 +112,8 @@ const Contact = ({ settings }) => {
           <div className="row contact-card justify-content-center">
             <div className="col-md-5 col-sm-12">
               <h3>Contact Us</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur. Quis est lectus vitae
-                cur
-              </p>
 
-              <div className="text-secondary heading-3 ">{success}</div>
+              <div className="text-secondary heading-3 mt-4 ">{success}</div>
 
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicName">

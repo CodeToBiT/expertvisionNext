@@ -11102,6 +11102,9 @@ a {
 }
 .card-service p {
   color: #696969;
+  text-align: justify !important;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 .card-countries {
   margin-bottom: 60px;
@@ -11197,6 +11200,8 @@ a {
 }
 .card-blog p {
   color: #696969;
+  text-align: justify;
+  word-break: break-all;
 }
 .card-blog:hover {
   cursor: pointer;
@@ -11285,6 +11290,8 @@ a {
   overflow: hidden;
   max-height: 3.5em;
   line-height: 1.8em;
+  text-align: justify;
+  word-break: break-all;
 }
 
 .universities {
@@ -11480,6 +11487,8 @@ a {
   font-weight: 400;
   line-height: 180%;
   color: #5f5f5f;
+  text-align: justify;
+  word-break: break-all;
 }
 .about .media-wrapper {
   width: 100%;
@@ -11528,6 +11537,8 @@ a {
   font-weight: 500;
   line-height: 180%;
   color: #F1F1F1;
+  text-align: justify;
+  word-break: break-all;
 }
 .vision .overlay-right {
   position: absolute;
@@ -11575,6 +11586,8 @@ a {
 }
 .teams-intro p {
   color: #696969;
+  text-align: justify;
+  word-break: break-all;
 }
 
 @media (max-width: 780px) {
@@ -11622,10 +11635,12 @@ a {
   width: 100%;
 }
 .testimonials-content p {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 400;
   line-height: 200%;
   color: #0a0505;
+  text-align: justify;
+  word-break: break-all;
 }
 .testimonials-content h5, .testimonials-content .h5 {
   font-size: 1rem;
@@ -11742,6 +11757,7 @@ a {
   font-weight: 500;
   line-height: 180%;
   color: #696969;
+  text-align: justify;
 }
 .single-content .sub {
   padding: 20px 0;
@@ -11774,7 +11790,7 @@ a {
 }
 .contact-info h5, .contact-info .h5 {
   margin-top: 10px;
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 500;
   line-height: 120%;
   color: #696969;
@@ -11852,6 +11868,7 @@ a {
 }
 
 .download {
+  min-height: 330px;
   margin: 30px 0;
   text-align: center;
 }
@@ -12012,7 +12029,7 @@ a {
   padding: 30px 0;
 }
 .banner-content {
-  padding: 100px 150px 100px 0;
+  padding: 100px 120px 100px 0;
 }
 .banner-content h1, .banner-content .h1 {
   font-size: 2.25rem;
@@ -12025,6 +12042,7 @@ a {
 .banner-content p {
   color: #F4F4F4;
   margin-bottom: 30px;
+  text-align: justify;
 }
 .banner-content .btn-explore {
   background-color: #FF5151;

@@ -20,6 +20,9 @@
     p {
       @extend .paragraph;
       color: $grey;
+      text-align: justify !important;
+      word-wrap: break-word;
+      word-break: break-all;
     }
   }
 
@@ -127,6 +130,8 @@
     p {
       @extend .paragraph;
       color: $grey;
+      text-align: justify;
+      word-break: break-all;
     }
   }
 
@@ -217,6 +222,8 @@
       overflow: hidden;
       max-height: 3.5em;
       line-height: 1.8em;
+      text-align: justify;
+      word-break: break-all;
     }
   }
 }
