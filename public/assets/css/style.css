@@ -11142,6 +11142,7 @@ a {
 }
 .card-courses .media-wrapper img {
   border-radius: 24px;
+  object-fit: cover;
 }
 .card-courses .media-wrapper:hover img {
   opacity: 0.7;
