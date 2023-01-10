@@ -14,7 +14,8 @@ const CountriesSlider = (props) => {
   var countriesSettings = {
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 1500,
+    speed: 1500,
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,

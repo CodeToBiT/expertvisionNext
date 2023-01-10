@@ -12,6 +12,7 @@ const CourseSlider = (props) => {
   var coursesSettings = {
     infinite: true,
     autoplay: true,
+    speed: 2000,
     autoplaySpeed: 2000,
     slidesToShow: 4,
     slidesToScroll: 1,
