@@ -10,6 +10,8 @@ import Head from "next/head";
 
 const NavigationBar = () => {
   const [settings, setSettings] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [countries, setCountries] = useState([]);
   const fetchSettings = () => {
     fetch("https://admin.evc.edu.np/api/settings")
       .then((response) => {
@@ -19,8 +21,28 @@ const NavigationBar = () => {
         setSettings(data);
       });
   };
+  const fetchCourses = () => {
+    fetch("https://admin.evc.edu.np/api/courses")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCourses(data);
+      });
+  };
+  const fetchCountries = () => {
+    fetch("https://admin.evc.edu.np/api/countries")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCountries(data);
+      });
+  };
   useEffect(() => {
     fetchSettings();
+    fetchCourses();
+    fetchCountries();
   }, []);
 
   const [show, setShow] = useState(false);
@@ -124,15 +146,71 @@ const NavigationBar = () => {
                 <Link className="nav-link" href="/service">
                   Services
                 </Link>
-                <Link className="nav-link" href="/course">
-                  Courses
-                </Link>
+
+                <div className="nav-item show dropdown">
+                  <Link
+                    id="navbarScrollingDropdown"
+                    aria-expanded="true"
+                    role="button"
+                    className="dropdown-toggle show nav-link"
+                    tabIndex="0"
+                    href="/course"
+                  >
+                    Courses
+                  </Link>
+                  <div
+                    aria-labelledby="navbarScrollingDropdown"
+                    data-bs-popper="static"
+                    className="dropdown-menu show"
+                  >
+                    {courses &&
+                      courses.data?.slice(0, 4).map((data, key) => {
+                        return (
+                          <Link
+                            className="dropdown-item px-4"
+                            href={`/course/${data.slug}`}
+                            key={key}
+                          >
+                            {data.name}
+                          </Link>
+                        );
+                      })}
+                  </div>
+                </div>
+                <div className="nav-item show dropdown">
+                  <Link
+                    id="navbarScrollingDropdown"
+                    aria-expanded="true"
+                    role="button"
+                    className="dropdown-toggle show nav-link"
+                    tabIndex="0"
+                    href="/country"
+                  >
+                    Countries
+                  </Link>
+                  <div
+                    aria-labelledby="navbarScrollingDropdown"
+                    data-bs-popper="static"
+                    className="dropdown-menu show"
+                  >
+                    {countries &&
+                      countries.data?.slice(0, 4).map((data, key) => {
+                        return (
+                          <Link
+                            className="dropdown-item"
+                            href={`/country/${data.slug}`}
+                            key={key}
+                          >
+                            {data.name}
+                          </Link>
+                        );
+                      })}
+                  </div>
+                </div>
                 <Link className="nav-link" href="/blog">
                   Blog
                 </Link>
-                <Link className="nav-link" href="/country">
-                  Countries
-                </Link>
+
                 <Link className="nav-link" href="/contact">
                   Contact
                 </Link>

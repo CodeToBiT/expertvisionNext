@@ -107,7 +107,7 @@ const Contact = ({ settings }) => {
         </div>
       </section>
 
-      <section className="contact-form">
+      <section className="contact-form mb-4">
         <div className="container">
           <div className="row contact-card justify-content-center">
             <div className="col-md-5 col-sm-12">

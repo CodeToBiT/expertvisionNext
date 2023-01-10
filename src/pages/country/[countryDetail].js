@@ -97,12 +97,15 @@ const CountryDetail = ({ countries, blogs }) => {
                           }}
                         ></div>
                       </Tab>
-                      <Tab eventKey="requirements" title="Requirements"></Tab>
                       <Tab
-                        eventKey="terms"
-                        title="Terms and Conditions"
+                        eventKey="requirements"
+                        title="Required Documents"
                       ></Tab>
                       <Tab eventKey="sucess" title="Sucess Story"></Tab>
+                      {/* <Tab
+                        eventKey="terms"
+                        title="Terms and Conditions"
+                      ></Tab> */}
                     </Tabs>
                   </div>
                 </div>
