@@ -95,16 +95,11 @@ const SinglePage = ({ blogs, countries, pages }) => {
                 {countries &&
                   countries.data.slice(0, 4).map((data, key) => {
                     return (
-                      <div className="card-more">
+                      <div className="card-more position-relative">
                         <div className="row">
                           <div className="col-md-4 col-sm-12">
                             <div className="media-wrapper position-relative">
-                              <Link
-                                href={`/country/${data.slug}`}
-                                className="stretched-link"
-                              >
-                                <Image src={data.image} fill />
-                              </Link>
+                              <Image src={data.image} fill />
                             </div>
                           </div>
                           <div className="col-md-8 col-sm-12">
@@ -115,6 +110,10 @@ const SinglePage = ({ blogs, countries, pages }) => {
                               }}
                             ></p>
                           </div>
+                          <Link
+                            href={`/country/${data.slug}`}
+                            className="stretched-link"
+                          ></Link>
                         </div>
                       </div>
                     );

@@ -92,19 +92,14 @@ const CourseDetail = ({ courses, countries }) => {
                   courses.data.slice(0, 4).map((data, key) => {
                     if (data.slug != courseDetail) {
                       return (
-                        <div className="card-more">
+                        <div className="card-more position-relative">
                           <div className="row">
-                            <div className="col-md-4 col-sm-12">
+                            <div className="col-md-4 col-5">
                               <div className="media-wrapper position-relative">
-                                <Link
-                                  href={`/course/${data.slug}`}
-                                  className="stretched-link"
-                                >
-                                  <Image src={data.image} fill />
-                                </Link>
+                                <Image src={data.image} fill />
                               </div>
                             </div>
-                            <div className="col-md-8 col-sm-12">
+                            <div className="col-md-8 col-7">
                               <h5>{data.name}</h5>
                               <p
                                 dangerouslySetInnerHTML={{
@@ -112,6 +107,10 @@ const CourseDetail = ({ courses, countries }) => {
                                 }}
                               ></p>
                             </div>
+                            <Link
+                              href={`/course/${data.slug}`}
+                              className="stretched-link"
+                            ></Link>
                           </div>
                         </div>
                       );
@@ -121,19 +120,14 @@ const CourseDetail = ({ courses, countries }) => {
                 {countries &&
                   countries.data.slice(0, 4).map((data, key) => {
                     return (
-                      <div className="card-more">
+                      <div className="card-more position-relative">
                         <div className="row">
-                          <div className="col-md-4 col-sm-12">
+                          <div className="col-md-4 col-5">
                             <div className="media-wrapper position-relative">
-                              <Link
-                                href={`/country/${data.slug}`}
-                                className="stretched-link"
-                              >
-                                <Image src={data.image} fill />
-                              </Link>
+                              <Image src={data.image} fill />
                             </div>
                           </div>
-                          <div className="col-md-8 col-sm-12">
+                          <div className="col-md-8 col-7">
                             <h5>{data.name}</h5>
                             <p
                               dangerouslySetInnerHTML={{
@@ -141,6 +135,10 @@ const CourseDetail = ({ courses, countries }) => {
                               }}
                             ></p>
                           </div>
+                          <Link
+                            href={`/country/${data.slug}`}
+                            className="stretched-link"
+                          ></Link>
                         </div>
                       </div>
                     );

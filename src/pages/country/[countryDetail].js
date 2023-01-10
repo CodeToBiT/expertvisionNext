@@ -44,7 +44,7 @@ const CountryDetail = ({ countries, blogs }) => {
 
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>
           {country && country.seo_title
             ? country && country.seo_title
@@ -56,7 +56,7 @@ const CountryDetail = ({ countries, blogs }) => {
         />
         <meta name="keywords" content={country && country.meta_keywords} />
         <link rel="canonical" href={current_url} />
-      </Head> */}
+      </Head>
       <section className="single-banner mt-4">
         <div className="container">
           <div className="title">
@@ -98,19 +98,14 @@ const CountryDetail = ({ countries, blogs }) => {
                   countries.data.slice(0, 4).map((data, key) => {
                     if (data.slug != countryDetail) {
                       return (
-                        <div className="card-more">
+                        <div className="card-more position-relative">
                           <div className="row">
-                            <div className="col-md-4 col-sm-12">
+                            <div className="col-md-4 col-5">
                               <div className="media-wrapper position-relative">
-                                <Link
-                                  href={`/country/${data.slug}`}
-                                  className="stretched-link"
-                                >
-                                  <Image src={data.image} fill />
-                                </Link>
+                                <Image src={data.image} fill />
                               </div>
                             </div>
-                            <div className="col-md-8 col-sm-12">
+                            <div className="col-md-8 col-7">
                               <h5>{data.name}</h5>
                               <p
                                 dangerouslySetInnerHTML={{
@@ -118,6 +113,10 @@ const CountryDetail = ({ countries, blogs }) => {
                                 }}
                               ></p>
                             </div>
+                            <Link
+                              href={`/country/${data.slug}`}
+                              className="stretched-link"
+                            ></Link>
                           </div>
                         </div>
                       );
@@ -127,19 +126,14 @@ const CountryDetail = ({ countries, blogs }) => {
                 {blogs &&
                   blogs.data.slice(0, 4).map((data, key) => {
                     return (
-                      <div className="card-more">
+                      <div className="card-more position-relative">
                         <div className="row">
-                          <div className="col-md-4 col-sm-12">
+                          <div className="col-md-4 col-5">
                             <div className="media-wrapper position-relative">
-                              <Link
-                                href={`/blog/${data.slug}`}
-                                className="stretched-link"
-                              >
-                                <Image src={data.image} fill />
-                              </Link>
+                              <Image src={data.image} fill />
                             </div>
                           </div>
-                          <div className="col-md-8 col-sm-12">
+                          <div className="col-md-8 col-7">
                             <h5>{data.title}</h5>
                             <p
                               dangerouslySetInnerHTML={{
@@ -147,6 +141,10 @@ const CountryDetail = ({ countries, blogs }) => {
                               }}
                             ></p>
                           </div>
+                          <Link
+                            href={`/blog/${data.slug}`}
+                            className="stretched-link"
+                          ></Link>
                         </div>
                       </div>
                     );

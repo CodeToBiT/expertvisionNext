@@ -11142,6 +11142,7 @@ a {
 }
 .card-courses .media-wrapper img {
   border-radius: 24px;
+  object-fit: cover;
 }
 .card-courses .media-wrapper:hover img {
   opacity: 0.7;
@@ -11175,16 +11176,12 @@ a {
   padding: 15px 30px;
   box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.12);
 }
-.card-blog .date {
-  margin-left: -60px;
-}
 .card-blog .date .btn {
   padding: 10px 40px !important;
 }
 .card-blog .media-wrapper {
   height: 208px;
   width: 100%;
-  right: -50px;
 }
 @media (max-width: 767.98px) {
   .card-blog .date {

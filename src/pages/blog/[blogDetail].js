@@ -94,20 +94,20 @@ const BlogDetail = ({ blogs, countries }) => {
             </div>
             <div className="col-md-4 col-sm-12">
               <div className="more my-3">
-                <h3 className="mb-1">More Blogs</h3>
+                <h3 className="mb-3">More Blogs</h3>
                 {console.log(blogs)}
                 {blogs &&
                   blogs.data.slice(0, 4).map((data, key) => {
                     if (data.slug != blogDetail) {
                       return (
-                        <div className="card-more">
+                        <div className="card-more position-relative">
                           <div className="row">
-                            <div className="col-md-4 col-sm-12">
+                            <div className="col-md-4 col-5">
                               <div className="media-wrapper position-relative">
                                 <Image src={data.image} fill />
                               </div>
                             </div>
-                            <div className="col-md-8 col-sm-12">
+                            <div className="col-md-8 col-7">
                               <h5>{data.title}</h5>
                               <p
                                 dangerouslySetInnerHTML={{
@@ -128,19 +128,14 @@ const BlogDetail = ({ blogs, countries }) => {
                 {countries &&
                   countries.data.slice(0, 4).map((data, key) => {
                     return (
-                      <div className="card-more">
+                      <div className="card-more position-relative">
                         <div className="row">
-                          <div className="col-md-4 col-sm-12">
+                          <div className="col-md-4 col-5">
                             <div className="media-wrapper position-relative">
-                              <Link
-                                href={`/country/${data.slug}`}
-                                className="stretched-link"
-                              >
-                                <Image src={data.image} fill />
-                              </Link>
+                              <Image src={data.image} fill />
                             </div>
                           </div>
-                          <div className="col-md-8 col-sm-12">
+                          <div className="col-md-8 col-7">
                             <h5>{data.name}</h5>
                             <p
                               dangerouslySetInnerHTML={{
@@ -148,6 +143,10 @@ const BlogDetail = ({ blogs, countries }) => {
                               }}
                             ></p>
                           </div>
+                          <Link
+                            href={`/country/${data.slug}`}
+                            className="stretched-link"
+                          ></Link>
                         </div>
                       </div>
                     );

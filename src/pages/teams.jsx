@@ -2,7 +2,6 @@ import Image from "next/image";
 import Head from "next/head";
 import TeamsCard from "../components/card/TeamsCard";
 
-
 import { useEffect } from "react";
 const url = "https://admin.evc.edu.np/api/";
 
@@ -20,8 +19,7 @@ export async function getServerSideProps() {
   };
 }
 
-const Teams = ({ourteams, settings}) => {
-
+const Teams = ({ ourteams, settings }) => {
   let current_url;
   if (typeof window !== "undefined") {
     current_url = window.location.href;
@@ -30,27 +28,34 @@ const Teams = ({ourteams, settings}) => {
   return (
     <>
       <Head>
-        <title>Our Team - Expert Vision</title>
-        {/* <title>{settings && settings.data.ourteams_seo_title}</title>
+        <title>
+          {settings && settings.data?.ourteams_seo_title
+            ? settings && settings.data?.ourteams_seo_title
+            : "Our Team - Expert Vision"}
+        </title>
         <meta
           name="description"
-          content={settings && settings.data.ourteams_meta_description}
+          content={settings && settings.data?.ourteams_meta_description}
         />
         <meta
           name="keywords"
-          content={settings && settings.data.ourteams_meta_keywords}
-        /> */}
+          content={settings && settings.data?.ourteams_meta_keywords}
+        />
         <link rel="canonical" href={current_url} />
       </Head>
       <section className="teams">
         <div className="container">
           <div className="teams-intro my-5">
             <h1>Our Team</h1>
-            <div dangerouslySetInnerHTML={{__html: settings && settings.ourteam_section_description}}></div>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: settings && settings.data?.ourteam_section_description,
+              }}
+            ></p>
           </div>
           <div className="row">
             {ourteams &&
-              ourteams.data.slice(0, 12).map((data, key) => {
+              ourteams.data?.slice(0, 12).map((data, key) => {
                 return (
                   <TeamsCard
                     clsa="col-md-4 col-xs-12"

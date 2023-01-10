@@ -19,14 +19,14 @@ const CourseSlider = (props) => {
     responsive: [
       {
         breakpoint: 1024,
-        coursesSettings: {
+        settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 850,
-        coursesSettings: {
+        settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,

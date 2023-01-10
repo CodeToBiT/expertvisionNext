@@ -115,9 +115,9 @@ const NavigationBar = () => {
                     <Link className="dropdown-item" href="/about">
                       About Us
                     </Link>
-                    <a className="dropdown-item" href="/teams">
+                    <Link className="dropdown-item" href="/teams">
                       Our Team
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -138,7 +138,7 @@ const NavigationBar = () => {
                 </Link>
               </Nav>
 
-              {settings && settings.apply_now ? (
+              {settings && settings.data?.apply_now ? (
                 <Link
                   href={settings && settings.data?.apply_now}
                   className="btn btn-secondary"

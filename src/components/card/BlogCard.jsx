@@ -7,12 +7,10 @@ const BlogCard = (props) => {
   return (
     <>
       <div className={["d-grid align-self-stretch", props.clsa].join(" ")}>
-        <div className="card-blog d-grid align-self-stretch">
+        <div className="card-blog d-grid align-self-stretch position-relative">
           <div className="date">
-            <button
-              className="btn btn-secondary py-2 px-5 br-0 text-white"
-            >
-             {props.date}
+            <button className="btn btn-secondary py-2 px-5 br-0 text-white">
+              {props.date}
             </button>
           </div>
 
@@ -30,7 +28,10 @@ const BlogCard = (props) => {
 
           <p dangerouslySetInnerHTML={{ __html: props.content }}></p>
 
-          <Link href={`/blog/${props.slug}`} className="text-primary-200">
+          <Link
+            href={`/blog/${props.slug}`}
+            className="text-primary-200 stretched-link"
+          >
             Read More
           </Link>
         </div>

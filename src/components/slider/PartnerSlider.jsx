@@ -29,15 +29,15 @@ const PartnerSlider = () => {
     responsive: [
       {
         breakpoint: 1024,
-        partnerSettings: {
+        settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 850,
-        partnerSettings: {
-          slidesToShow: 1,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
           autoplay: true,
           autoplaySpeed: 3000,

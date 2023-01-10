@@ -21,14 +21,14 @@ const CountriesSlider = (props) => {
     responsive: [
       {
         breakpoint: 1024,
-        countriesSettings: {
+        settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 850,
-        countriesSettings: {
+        settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
@@ -70,7 +70,5 @@ const CountriesSlider = (props) => {
     </>
   );
 };
-
-
 
 export default CountriesSlider;

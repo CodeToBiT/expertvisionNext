@@ -32,7 +32,7 @@ const TeamsCard = (props) => {
             </div>
             <div className="description">
               <h4>Description</h4>
-              <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
+              <div dangerouslySetInnerHTML={{ __html: props.description }}></div>
             </div>
           </div>
         </div>

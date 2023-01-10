@@ -60,6 +60,7 @@
       background: black;
       img {
         border-radius: 24px;
+        object-fit: cover;
       }
     }
     .media-wrapper:hover{
@@ -96,7 +97,7 @@
     margin: 0px 20px 40px 20px;
     padding: 15px 30px;
     .date {
-      margin-left: -60px;
+      // margin-left: -60px;
       .btn {
         padding: 10px 40px !important;
       }
@@ -105,7 +106,7 @@
     .media-wrapper {
       height: 208px;
       width: 100%;
-      right: -50px;
+      // right: -50px;
     }
     @media (max-width: 767.98px) {
       .date {
