@@ -16,7 +16,6 @@ import Testimonials from "../components/layout/Testimonials";
 import PartnerSlider from "../components/slider/PartnerSlider";
 import Slider from "react-slick";
 
-
 import { useEffect } from "react";
 
 const url = "https://admin.evc.edu.np/api/";
@@ -77,7 +76,6 @@ export default function Home({
   if (typeof window !== "undefined") {
     current_url = window.location.href;
   }
- 
 
   return (
     <>
@@ -115,7 +113,8 @@ export default function Home({
                             key={key}
                             dangerouslySetInnerHTML={{
                               __html: data.description,
-                            }} className="text-justify"
+                            }}
+                            className="text-justify"
                           ></div>
                         );
                       }
@@ -262,7 +261,6 @@ export default function Home({
             </div>
           </div>
         </section>
-        
 
         <section className="testimonial position-relative">
           <div className="testimonial-intro">
@@ -281,12 +279,9 @@ export default function Home({
                 sizes="(max-height: 500px)"
                 priority="false"
               />
-              ;
             </div>
           </div>
         </section>
-
-       
 
         <section className="blogs my-5">
           <div className="container">

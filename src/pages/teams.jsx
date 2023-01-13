@@ -51,7 +51,7 @@ const Teams = ({ ourteams, settings }) => {
               dangerouslySetInnerHTML={{
                 __html: settings && settings.data?.ourteam_section_description,
               }}
-            ></p>
+             className="text-center"></p>
           </div>
           <div className="row">
             {ourteams &&
