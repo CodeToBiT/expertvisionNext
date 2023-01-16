@@ -11293,6 +11293,67 @@ a {
   text-align: justify;
   word-break: break-all;
 }
+.card-testimonial {
+  display: grid !important;
+  background-color: #F1F1F1;
+  border-radius: 8px;
+  height: 100%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.12);
+}
+.card-testimonial .media-wrapper {
+  width: 100% !important;
+  height: 200px !important;
+  overflow: hidden !important;
+}
+.card-testimonial .media-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-testimonial .media-wrapper img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  z-index: 2;
+}
+.card-testimonial .icon {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  background-color: #025DB6;
+  border-radius: 50%;
+  margin-top: -25px;
+  margin-left: 30px;
+  z-index: 9 !important;
+}
+.card-testimonial .icon svg {
+  font-size: 2rem;
+  color: #F1F1F1;
+}
+.card-testimonial-content {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 15px 30px;
+}
+.card-testimonial-content p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 150%;
+  word-wrap: break-word;
+  text-align: justify;
+  word-break: break-all;
+  min-height: 240px;
+}
+.card-testimonial-content h6, .card-testimonial-content .h6 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 120%;
+}
+.card-testimonial-content h7 {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 120%;
+  font-style: italic;
+}
 
 .universities {
   margin-bottom: 100px !important;
@@ -11418,7 +11479,7 @@ a {
 }
 
 .testimonial {
-  margin-bottom: 180px !important;
+  margin-bottom: 120px !important;
 }
 .testimonial .media-wrapper {
   position: absolute;

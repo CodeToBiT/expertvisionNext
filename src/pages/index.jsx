@@ -13,7 +13,9 @@ import CourseCard from "../components/card/CourseCard";
 import CourseSlider from "../components/slider/CoursesSlider";
 import BlogCard from "../components/card/BlogCard";
 import Testimonials from "../components/layout/Testimonials";
+import TestimonailCard from "../components/card/TestimonailCard";
 import PartnerSlider from "../components/slider/PartnerSlider";
+import TestimonialSlider from "../components/slider/TestimonialSlider";
 import Slider from "react-slick";
 
 import { useEffect } from "react";
@@ -266,8 +268,9 @@ export default function Home({
           <div className="testimonial-intro">
             <h2>Testimonials</h2>
           </div>
-          <div className="container ">
-            <Testimonials />
+          <div className="container">
+            {/* <Testimonials /> */}
+            <TestimonialSlider />
           </div>
           <div className="overlay position-absolute top-0">
             <div className="media-wrapper">
