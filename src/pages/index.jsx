@@ -271,6 +271,14 @@ export default function Home({
           <div className="container">
             {/* <Testimonials /> */}
             <TestimonialSlider />
+            <div className="text-center mt-5 mb-5">
+              <Link
+                href="/testimonials"
+                className="btn btn-secondary py-2 px-5 br-0 text-white"
+              >
+                View All
+              </Link>
+            </div>
           </div>
           <div className="overlay position-absolute top-0">
             <div className="media-wrapper">

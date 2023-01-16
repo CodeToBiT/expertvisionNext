@@ -28,7 +28,6 @@ const Services = ({ services, settings }) => {
   return (
     <>
       <Head>
-        <title>Services - Expert Vision</title>
         <title>
           {settings && settings.data?.services_seo_title
             ? settings && settings.data?.services_seo_title
