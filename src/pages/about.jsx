@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Head from "next/head";
+import Link from "next/link";
 import TeamsCard from "../components/card/TeamsCard";
 import Footer from "../components/footer/Footer";
 import NavigationBar from "../components/header/NavigationBar";
 import Testimonails from "../components/layout/Testimonials";
+import TestimonialSlider from "../components/slider/TestimonialSlider";
 
 import { useEffect, useState } from "react";
 const url = "https://admin.evc.edu.np/api/";
@@ -151,7 +153,7 @@ const About = ({ ourteams, settings, pages }) => {
             </div>
             <div className="row">
               {ourteams &&
-                ourteams.data.slice(0,3).map((data, key) => {
+                ourteams.data.slice(0, 3).map((data, key) => {
                   return (
                     <TeamsCard
                       clsa="col-md-4 col-xs-12"
@@ -171,8 +173,17 @@ const About = ({ ourteams, settings, pages }) => {
           <div className="testimonial-intro">
             <h2>Testimonials</h2>
           </div>
-          <div className="container position-relative">
-            <Testimonails />
+          <div className="container">
+            {/* <Testimonials /> */}
+            <TestimonialSlider />
+            <div className="text-center mt-5 mb-5">
+              <Link
+                href="/testimonials"
+                className="btn btn-secondary py-2 px-5 br-0 text-white"
+              >
+                View All
+              </Link>
+            </div>
           </div>
           <div className="overlay position-absolute top-0">
             <div className="media-wrapper">
@@ -184,7 +195,6 @@ const About = ({ ourteams, settings, pages }) => {
                 sizes="(max-height: 500px)"
                 priority="false"
               />
-              ;
             </div>
           </div>
         </section>
