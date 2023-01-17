@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox.css";
 
 const url = "https://admin.evc.edu.np/api/";
 
@@ -15,16 +17,22 @@ export async function getServerSideProps() {
   const blogs = await responseBlogs.json();
   const responseCountries = await fetch([url, "countries"].join(""));
   const countries = await responseCountries.json();
+  const responseRequirement = await fetch([url, "requirement"].join(""));
+  const requirement = await responseRequirement.json();
+  const responseSuccessgallery = await fetch([url, "successgallery"].join(""));
+  const successgallery = await responseSuccessgallery.json();
 
   return {
     props: {
       blogs,
       countries,
+      requirement,
+      successgallery,
     },
   };
 }
 
-const CountryDetail = ({ countries, blogs }) => {
+const CountryDetail = ({ countries, blogs, requirement, successgallery }) => {
   const router = useRouter();
   const countryDetail = router.query.countryDetail;
   const [country, setCountry] = useState([]);
@@ -97,15 +105,63 @@ const CountryDetail = ({ countries, blogs }) => {
                           }}
                         ></div>
                       </Tab>
-                      <Tab
-                        eventKey="requirements"
-                        title="Required Documents"
-                      ></Tab>
-                      <Tab eventKey="sucess" title="Sucess Story"></Tab>
-                      {/* <Tab
-                        eventKey="terms"
-                        title="Terms and Conditions"
-                      ></Tab> */}
+                      <Tab eventKey="requirements" title="Required Documents">
+                        <div className="download">
+                          <table class="download-table col-lg-12 col-md-12">
+                            <thead class="download-head">
+                              <tr>
+                                <th rowSpan="4">Name</th>
+                                <th>Control</th>
+                              </tr>
+                            </thead>
+                            <tbody class="download-body">
+                              {requirement.data.map((data, key) => {
+                                if (data.country_id == country.id) {
+                                  return (
+                                    <tr key={key}>
+                                      <td>{data.name}</td>
+                                      <td>
+                                        <a
+                                          className="btn btn-primary"
+                                          data-fancybox="gallery"
+                                          data-src={data.file}
+                                          download={data.name}
+                                        >
+                                          Download
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  );
+                                }
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </Tab>
+                      <Tab eventKey="sucess" title="Sucess Story">
+                        <div className="row success mt-4">
+                          {successgallery.data.map((data, key) => {
+                            if (data.country_id == country.id) {
+                              return (
+                                <div className="col-md-4 col-xs-12 mb-3">
+                                  <div className="media-wrapper position-relative">
+                                    <a
+                                      data-fancybox="gallery"
+                                      data-src={data.image}
+                                    >
+                                      <Image
+                                        src={data.image}
+                                        priority={false}
+                                        fill
+                                      />
+                                    </a>
+                                  </div>
+                                </div>
+                              );
+                            }
+                          })}
+                        </div>
+                      </Tab>
                     </Tabs>
                   </div>
                 </div>

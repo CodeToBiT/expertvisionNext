@@ -13,12 +13,7 @@ export async function getServerSideProps() {
   const blogs = await responseBlogs.json();
   const responseCountries = await fetch([url, "countries"].join(""));
   const countries = await responseCountries.json();
-  // const responseBlog = await fetch(
-  //   [`https://admin.evc.edu.np/api/`, `blog/${BlogDetail}`].join(
-  //     ""
-  //   )
-  // );
-  // const blog = await responseBlog.json();
+
 
   return {
     props: {

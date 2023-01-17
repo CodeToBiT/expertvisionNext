@@ -5,7 +5,7 @@ import { RiDoubleQuotesL, RiStarSFill } from "react-icons/ri";
 const TestimonailCard = (props) => {
   return (
     <>
-      <div className="card-testimonial align-self-stretch my-2">
+      <div className="card-testimonial d-grid align-self-stretch my-2">
         <div className="media-wrapper position-relative">
           <Image
             src={props.image}

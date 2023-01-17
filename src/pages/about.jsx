@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
-import Link from "next/link";
+import Link from "next/link";6
 import TeamsCard from "../components/card/TeamsCard";
 import Footer from "../components/footer/Footer";
 import NavigationBar from "../components/header/NavigationBar";
