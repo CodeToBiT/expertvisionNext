@@ -11,11 +11,11 @@ import TestimonailCard from "../card/TestimonailCard";
 
 const TestimonialSlider = (props) => {
   var testimonialSettings = {
-    infinite: false,
+    infinite: true,
     autoplay: true,
     speed: 1000,
     autoplaySpeed: 2000,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
     responsive: [
@@ -57,12 +57,13 @@ const TestimonialSlider = (props) => {
         {testimonials &&
           testimonials.data?.map((data, key) => {
             return (
-              <div key={key}>
+              <div className="h-100" key={key}>
                 <TestimonailCard
                   image={data.image}
                   description={data.description}
                   name={data.name}
                   position={data.position}
+                  
                 />
               </div>
             );

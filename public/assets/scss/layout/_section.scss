@@ -148,6 +148,10 @@
       display: none;
     }
   }
+
+  .slick-slide{
+    height: 100% !important;
+  }
 }
 
 .blogs {
@@ -469,11 +473,11 @@
       }
     }
 
-    .success{
-      .media-wrapper{
+    .success {
+      .media-wrapper {
         width: 100%;
         height: 280px;
-        img{
+        img {
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -483,7 +487,6 @@
       }
     }
   }
- 
 }
 
 .contact {

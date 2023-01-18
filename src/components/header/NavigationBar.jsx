@@ -140,6 +140,9 @@ const NavigationBar = () => {
                     <Link className="dropdown-item" href="/teams">
                       Our Team
                     </Link>
+                    <Link className="dropdown-item" href="/testimonials">
+                     Testimonials
+                    </Link>
                   </div>
                 </div>
 

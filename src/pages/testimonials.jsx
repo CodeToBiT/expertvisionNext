@@ -31,7 +31,10 @@ const testimonials = ({ testimonials }) => {
             {testimonials &&
               testimonials.data?.map((data, key) => {
                 return (
-                  <div className="col-md-3 col-sm-12 col-xs-12" key={key}>
+                  <div
+                    className="col-md-3 col-sm-12 col-xs-12 d-grid align-self-stretch"
+                    key={key}
+                  >
                     <TestimonailCard
                       image={data.image}
                       description={data.description}
