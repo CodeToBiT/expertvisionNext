@@ -103,21 +103,7 @@ const NavigationBar = () => {
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav className="me-auto my-2 my-lg-0 gap-2" navbarScroll>
-                <Link href="/" className="nav-link">
-                  Home
-                </Link>
-                {/* <NavDropdown
-                  title="About Us"
-                  id="navbarScrollingDropdown"
-                
-                >
-                  <Link href="/about" className="dropdown-item">
-                    About Us
-                  </Link>
-                  <Link href="/teams" className="dropdown-item">
-                    Our Team
-                  </Link>
-                </NavDropdown> */}
+                <Nav.Link href="/">Home</Nav.Link>
                 <div className="nav-item show dropdown">
                   <Link
                     id="navbarScrollingDropdown"
@@ -134,21 +120,15 @@ const NavigationBar = () => {
                     data-bs-popper="static"
                     className="dropdown-menu show"
                   >
-                    <Link className="dropdown-item" href="/about">
-                      About Us
-                    </Link>
-                    <Link className="dropdown-item" href="/teams">
-                      Our Team
-                    </Link>
-                    <Link className="dropdown-item" href="/testimonials">
-                     Testimonials
-                    </Link>
+                    <NavDropdown.Item href="/about">About Us</NavDropdown.Item>
+                    <NavDropdown.Item href="/teams">Our Team</NavDropdown.Item>
+                    <NavDropdown.Item href="/testimonials">
+                      Testimonials
+                    </NavDropdown.Item>
                   </div>
                 </div>
 
-                <Link className="nav-link" href="/service">
-                  Services
-                </Link>
+                <Nav.Link href="/service">Services</Nav.Link>
 
                 <div className="nav-item show dropdown">
                   <Link
@@ -169,13 +149,13 @@ const NavigationBar = () => {
                     {courses &&
                       courses.data?.slice(0, 4).map((data, key) => {
                         return (
-                          <Link
-                            className="dropdown-item px-4"
+                          <NavDropdown.Item
+                            className="px-4"
                             href={`/course/${data.slug}`}
                             key={key}
                           >
                             {data.name}
-                          </Link>
+                          </NavDropdown.Item>
                         );
                       })}
                   </div>
@@ -199,24 +179,18 @@ const NavigationBar = () => {
                     {countries &&
                       countries.data?.slice(0, 4).map((data, key) => {
                         return (
-                          <Link
-                            className="dropdown-item"
+                          <NavDropdown.Item
                             href={`/country/${data.slug}`}
                             key={key}
                           >
                             {data.name}
-                          </Link>
+                          </NavDropdown.Item>
                         );
                       })}
                   </div>
                 </div>
-                <Link className="nav-link" href="/blog">
-                  Blog
-                </Link>
-
-                <Link className="nav-link" href="/contact">
-                  Contact
-                </Link>
+                <Nav.Link href="/blog">Blogs</Nav.Link>
+                <Nav.Link href="/contact">Contact</Nav.Link>
               </Nav>
 
               {settings && settings.data?.apply_now ? (

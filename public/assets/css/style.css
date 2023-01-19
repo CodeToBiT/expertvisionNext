@@ -11592,8 +11592,12 @@ a {
 .vision .media-wrapper {
   width: 100%;
   height: 576px;
-  bottom: -80px;
   overflow: visible !important;
+}
+@media (min-width: 560px) {
+  .vision .media-wrapper {
+    bottom: -80px;
+  }
 }
 .vision .content {
   padding: 0 0 0 60px;
@@ -11626,7 +11630,6 @@ a {
     display: none;
   }
   .vision .media-wrapper {
-    top: 30px;
     height: 550px;
   }
 }
