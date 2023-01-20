@@ -12053,7 +12053,8 @@ a {
   line-height: 130%;
   padding: 1px;
 }
-.navbar .navbar-nav .show > .nav-link, .navbar .navbar-nav .nav-link.active {
+.navbar .navbar-nav .show > .nav-link,
+.navbar .navbar-nav .nav-link.active {
   color: #938F8E;
 }
 .navbar .media-wrapper {
@@ -12102,6 +12103,12 @@ a {
 .navbar .dropdown-menu a:hover {
   background: #025DB6;
   color: #fff;
+}
+@media (max-width: 560px) {
+  .navbar .dropdown:hover .dropdown-menu {
+    position: relative;
+    display: block;
+  }
 }
 .navbar .dropdown:hover .dropdown-menu {
   opacity: 1;
