@@ -11294,11 +11294,11 @@ a {
   word-break: break-all;
 }
 .card-testimonial {
-  height: 100%;
   background-color: #F1F1F1;
   min-height: 562px;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.12);
+  margin-bottom: 20px !important;
 }
 .card-testimonial .media-wrapper {
   position: relative;
